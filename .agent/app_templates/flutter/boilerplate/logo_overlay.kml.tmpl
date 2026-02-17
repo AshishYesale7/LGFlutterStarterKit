@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Logo ScreenOverlay KML Template for Liquid Galaxy
+  Task 2 Requirement: Send a logo to the left slave screen.
+  
+  Usage: Replace {{LOGO_URL}} with the actual logo image URL.
+  The logo is positioned at the bottom-left of the slave screen.
+  
+  For a 3-screen rig: Send this to slave_3.kml (left screen).
+  The logo URL can be:
+    - Hosted on LG rig: http://lg-master:81/assets/logo.png
+    - External URL: https://example.com/logo.png
+    - Local file referenced by NetworkLink
+-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>LG App Logo</name>
+    <description>Logo overlay for LG slave screen</description>
+    
+    <ScreenOverlay>
+      <name>App Logo</name>
+      <Icon>
+        <href>{{LOGO_URL}}</href>
+      </Icon>
+      <!-- Position: bottom-left corner -->
+      <overlayXY x="0" y="1" xunits="fraction" yunits="fraction"/>
+      <screenXY x="0.02" y="0.95" xunits="fraction" yunits="fraction"/>
+      <!-- Size: ~15% of screen width, auto height -->
+      <rotationXY x="0" y="0" xunits="fraction" yunits="fraction"/>
+      <size x="0.15" y="0" xunits="fraction" yunits="fraction"/>
+    </ScreenOverlay>
+    
+  </Document>
+</kml>

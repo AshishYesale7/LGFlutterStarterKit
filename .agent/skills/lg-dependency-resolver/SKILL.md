@@ -1,38 +1,291 @@
+````skill
 ---
 name: lg-dependency-resolver
-description: Diagnose and fix dependency resolution failures
+description: Resolves Flutter/Dart package conflicts, pub get failures, Gradle errors, CocoaPods issues, and version mismatches. Diagnoses the specific error and walks the student through the fix.
 ---
 
-# LG Dependency Resolver
+# Dependency Resolver
 
-Targeted diagnosis and fix for dependency resolution failures.
+## Overview
 
-## Error Classification
-| Error Type | Detection | Fix |
-|-----------|-----------|-----|
-| `pub get` failure | "version solving failed" | Check version constraints, try `flutter pub upgrade` |
-| Gradle build failure | "Could not resolve" | Check `android/build.gradle`, sync SDK versions |
-| CocoaPods failure | "pod install failed" | `cd ios && pod install --repo-update` |
-| SDK mismatch | "requires SDK version" | Update `pubspec.yaml` environment constraint |
-| Dependency conflict | "incompatible versions" | Use dependency_overrides or update constraints |
+This skill activates when `flutter pub get` fails, Gradle builds break, or package version conflicts arise. It reads the actual error output, classifies the problem, and provides the targeted fix — not a generic "try flutter clean."
 
-## Resolution Protocol
-1. Read the exact error message
-2. Classify the error type
-3. Apply the targeted fix (NOT just "flutter clean")
-4. Verify with `flutter pub get` + `flutter analyze`
+**Announce at start:** "Dependency issue detected. Let me analyze the error and find the right fix."
 
-## Common Fixes
-```bash
-# Clear all caches and rebuild
-flutter clean
-flutter pub cache repair
-flutter pub get
+**GUARDRAIL**: The **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md) is active. Students should understand what dependency resolution means and why version constraints matter.
 
-# Gradle specific
-cd android && ./gradlew clean && cd ..
-flutter build apk
+## Diagnostic Flow
 
-# CocoaPods specific  
-cd ios && rm Podfile.lock && pod install --repo-update && cd ..
 ```
+Error Output → Classify → Targeted Fix → Verify → Resume
+```
+
+---
+
+## Category 1: Flutter Pub Get Failures
+
+### 1.1 Version Conflict (Incompatible Constraints)
+**Symptom**: `Because X depends on Y >=2.0.0 and Z depends on Y <2.0.0, version solving failed.`
+
+**Fix Steps:**
+1. Read the conflict message carefully — identify the two packages in conflict.
+2. Check which package is outdated:
+   ```bash
+   flutter pub outdated
+   ```
+3. Try upgrading to latest compatible versions:
+   ```bash
+   flutter pub upgrade --major-versions
+   ```
+4. If still failing, use dependency_overrides (TEMPORARY — never ship with overrides):
+   ```yaml
+   # pubspec.yaml — TEMPORARY FIX, remove before release
+   dependency_overrides:
+     conflicting_package: ^2.0.0
+   ```
+5. Best fix: update both packages to versions that agree on the shared dependency.
+
+### 1.2 Package Not Found
+**Symptom**: `Could not find package "xxx" on pub.dev`
+
+**Fix Steps:**
+1. Check spelling in `pubspec.yaml`.
+2. Verify package exists: `https://pub.dev/packages/xxx`
+3. Check if it's a git dependency that needs a URL:
+   ```yaml
+   dependencies:
+     custom_package:
+       git:
+         url: https://github.com/user/package.git
+         ref: main
+   ```
+4. For private packages, check authentication.
+
+### 1.3 SDK Constraint Mismatch
+**Symptom**: `The current Dart SDK version is X. Because Y requires SDK version >=Z, version solving failed.`
+
+**Fix Steps:**
+1. Check your Dart/Flutter version:
+   ```bash
+   dart --version
+   flutter --version
+   ```
+2. Option A — Upgrade Flutter:
+   ```bash
+   flutter upgrade
+   ```
+3. Option B — Relax the constraint in `pubspec.yaml`:
+   ```yaml
+   environment:
+     sdk: '>=3.0.0 <4.0.0'
+   ```
+4. Option C — Use an older version of the package that supports your SDK.
+
+### 1.4 Network / Proxy Issues
+**Symptom**: `Connection refused`, `SocketException`, `Could not resolve host pub.dev`
+
+**Fix Steps:**
+1. Check internet: `ping pub.dev`
+2. If behind a proxy:
+   ```bash
+   export HTTP_PROXY=http://proxy:port
+   export HTTPS_PROXY=http://proxy:port
+   export NO_PROXY=localhost,127.0.0.1
+   ```
+3. If using a VPN, try disconnecting temporarily.
+4. Try a different DNS: `8.8.8.8` or `1.1.1.1`.
+5. Use pub cache if offline:
+   ```bash
+   flutter pub get --offline
+   ```
+
+---
+
+## Category 2: Gradle / Android Build Failures
+
+### 2.1 Gradle Version Mismatch
+**Symptom**: `Could not determine the dependencies of task ':app:compileDebugJavaWithJavac'` or `Unsupported class file major version`
+
+**Fix Steps:**
+1. Check `android/build.gradle` for the AGP (Android Gradle Plugin) version.
+2. Check `android/gradle/wrapper/gradle-wrapper.properties` for the Gradle version.
+3. Compatibility matrix:
+   | AGP Version | Required Gradle | Required JDK |
+   |-------------|----------------|--------------|
+   | 8.1+        | 8.0+           | JDK 17       |
+   | 7.4         | 7.5+           | JDK 11-17    |
+   | 7.0-7.3     | 7.0+           | JDK 11       |
+4. Update `gradle-wrapper.properties`:
+   ```properties
+   distributionUrl=https\://services.gradle.org/distributions/gradle-8.4-all.zip
+   ```
+5. Ensure `JAVA_HOME` points to the correct JDK:
+   ```bash
+   echo $JAVA_HOME
+   java -version
+   ```
+
+### 2.2 Android SDK Not Found
+**Symptom**: `SDK location not found. Define location with sdk.dir in local.properties`
+
+**Fix Steps:**
+1. Create/update `android/local.properties`:
+   ```properties
+   # macOS (typical)
+   sdk.dir=/Users/<username>/Library/Android/sdk
+   # Linux
+   sdk.dir=/home/<username>/Android/Sdk
+   # Windows
+   sdk.dir=C:\\Users\\<username>\\AppData\\Local\\Android\\sdk
+   ```
+2. Or set environment variable:
+   ```bash
+   export ANDROID_HOME="$HOME/Library/Android/sdk"   # macOS
+   export ANDROID_HOME="$HOME/Android/Sdk"            # Linux
+   ```
+
+### 2.3 Missing Android Platform / Build Tools
+**Symptom**: `Failed to find target with hash string 'android-34'`
+
+**Fix Steps:**
+```bash
+# Install the missing platform
+sdkmanager "platforms;android-34"
+sdkmanager "build-tools;34.0.0"
+
+# Or via Android Studio: SDK Manager → SDK Platforms → check the required API level
+```
+
+### 2.4 License Not Accepted
+**Symptom**: `Android license status unknown` or `You have not accepted the license agreements`
+
+**Fix Steps:**
+```bash
+flutter doctor --android-licenses
+# Press 'y' for each license prompt
+```
+
+### 2.5 minSdkVersion Too Low
+**Symptom**: `uses-sdk:minSdkVersion 16 cannot be smaller than version 21 declared in library`
+
+**Fix Steps:**
+Update `android/app/build.gradle`:
+```groovy
+defaultConfig {
+    minSdkVersion 21    // Required for many Flutter plugins
+    targetSdkVersion 34
+}
+```
+
+---
+
+## Category 3: iOS / CocoaPods Failures
+
+### 3.1 CocoaPods Not Installed
+**Symptom**: `CocoaPods not installed`
+
+**Fix Steps:**
+```bash
+# macOS
+sudo gem install cocoapods
+# Or via Homebrew:
+brew install cocoapods
+
+# Then:
+cd ios && pod install && cd ..
+```
+
+### 3.2 Pod Install Fails
+**Symptom**: `CDN: trunk URL couldn't be downloaded` or dependency conflicts
+
+**Fix Steps:**
+```bash
+cd ios
+pod deintegrate
+pod cache clean --all
+rm Podfile.lock
+pod repo update
+pod install
+cd ..
+```
+
+### 3.3 Xcode Build Signing
+**Symptom**: `No signing certificate` or `Provisioning profile` errors
+
+**Fix Steps:**
+1. Open `ios/Runner.xcworkspace` in Xcode.
+2. Select Runner target → Signing & Capabilities.
+3. Set Team to your Apple Developer account (free or paid).
+4. For development, enable "Automatically manage signing."
+
+---
+
+## Category 4: Flutter Clean & Nuclear Options
+
+When targeted fixes don't work, escalate through these levels:
+
+### Level 1: Soft Reset
+```bash
+flutter clean
+flutter pub get
+```
+
+### Level 2: Cache Clear
+```bash
+flutter clean
+flutter pub cache clean
+flutter pub get
+```
+
+### Level 3: Full Reset
+```bash
+flutter clean
+rm -rf .dart_tool/
+rm -rf build/
+rm pubspec.lock
+flutter pub get
+```
+
+### Level 4: Android Nuclear
+```bash
+flutter clean
+cd android
+./gradlew clean
+rm -rf .gradle/
+rm -rf build/
+cd ..
+flutter pub get
+```
+
+### Level 5: iOS Nuclear
+```bash
+flutter clean
+cd ios
+rm -rf Pods/
+rm Podfile.lock
+rm -rf .symlinks/
+pod cache clean --all
+pod install
+cd ..
+flutter pub get
+```
+
+---
+
+## Post-Fix Verification
+
+After applying any fix, always run:
+```bash
+flutter pub get       # Dependencies resolve?
+flutter analyze       # No static errors?
+flutter test          # Tests still pass?
+flutter build apk     # Builds successfully? (Android)
+```
+
+## Handoff
+
+- **Fixed** → Return to the pipeline stage that triggered the error. Use `.agent/skills/lg-resume-pipeline/SKILL.md`.
+- **Still broken** → Escalate to `.agent/skills/lg-debugger/SKILL.md` for deeper diagnosis.
+- **Student doesn't understand** → `.agent/skills/lg-critical-advisor/SKILL.md` for educational coaching on dependency management.
+
+````

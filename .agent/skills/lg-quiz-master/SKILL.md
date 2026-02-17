@@ -1,37 +1,91 @@
 ---
 name: lg-quiz-master
-description: Generate and administer learning assessments
+description: The Finale. A TV-show style quiz with 5 questions to evaluate learning outcomes and technical understanding.
 ---
 
-# LG Quiz Master
+# The Liquid Galaxy Quiz Show!
 
-Generates and administers learning assessments for LG project students.
+**GOLDEN FINALE** of the pipeline: **Init -> Brainstorm -> Plan -> Execute -> Review -> Quiz**.
 
-## Quiz Format
-- 5 questions per assessment
-- Categories: Command Flow, KML, Engineering, Layer Boundaries, Security
-- Multiple choice (4 options each)
-- Passing score: 60% (3/5)
+**Announce:** "Welcome to 'Who Wants to be a Liquid Galaxy Engineer?'! 5 high-stakes questions. Are you ready?"
+
+## Rules
+
+### One Question at a Time
+Ask, wait, give feedback, then next.
+
+### The 5 Categories
+1. **The Command Flow**: SSH-to-LG pipeline — how data travels from phone to Google Earth.
+2. **The KML Challenge**: Coordinate ordering, KML constructs, overlay placement, tour generation.
+3. **The Engineering Pillar**: SOLID, DRY, YAGNI, Provider pattern, service layer.
+4. **The Performance Pitfall**: SSH lifecycle, KML cleanup, memory management, connection disposal.
+5. **The Future Architect**: "What if?" scaling question — more screens, new data sources, new features.
+
+### TV Show Vibe
+Use emojis and catchphrases. Be personable, encouraging, reference specific challenges overcome.
+
+## Finale Report
+Save to `docs/reviews/YYYY-MM-DD-final-quiz-report.md`.
+
+```markdown
+# Liquid Galaxy Graduation Report: [Feature]
+
+## Score: [X]/5
+**Summary**: [High-energy mastery summary]
+
+## Knowledge Breakthroughs
+- [Concept]: [How demonstrated]
+
+## Questionnaire
+### Q1: [Category]
+- **Question**: [Text]
+- **Answer**: [Response]
+- **Verdict**: [Correct / Assisted / Missed]
+- **Resources** (if Missed/Assisted): [Targeted links from lg-learning-resources]
+... [Q2-Q5] ...
+
+## 📚 Recommended Study Resources
+(Auto-generated for each missed question using lg-learning-resources topic map)
+
+### Liquid Galaxy Official Sources (ALWAYS included)
+- 🏠 [LG Master Web App (Lucia's Guide)](https://github.com/LiquidGalaxyLAB/LG-Master-Web-App) — The reference LG controller implementation
+- 📋 [Liquid Galaxy LAB](https://github.com/LiquidGalaxyLAB) — All GSoC LG projects for inspiration
+- 📖 [LG Core Installation](https://github.com/LiquidGalaxyLAB/liquid-galaxy) — Understand what runs on the rig
+
+### Topic-Specific (per missed question)
+- [Category]: Resource Name + URL — What to study
+- [Category]: 🎥 YouTube Tutorial + URL — What it covers
+
+## Final Verdict
+[If score >= 4]: Graduation! [What to build next]
+[If score 2-3]: Almost there! Study the resources above, then retake.
+[If score 0-1]: Let's go back to basics. Start with Lucia's LG Master Web App and the linked tutorials.
+```
 
 ## Wrong Answer Protocol
-When a student answers incorrectly:
-1. **Explain**: Give the correct answer with a clear explanation
-2. **LG Source**: Link to official Liquid Galaxy documentation
-3. **Tutorial**: Suggest a relevant video or tutorial from `lg-learning-resources`
-4. **Practice**: Provide a small hands-on exercise to reinforce the concept
 
-## Sample Questions
-1. "Which file does flyto write to?" → `/tmp/query.txt`
-2. "What is the KML coordinate order?" → `longitude,latitude,altitude`
-3. "Which screen is the LG master?" → Screen 1 (lg1)
-4. "What pattern manages state in this app?" → Provider (ChangeNotifier)
-5. "How do you load KML on a slave screen?" → Write to `/var/www/html/kml_slave_<n>.kml`
+For each wrong answer, do ALL of the following:
 
-## Graduation Report
-If score >= 60%: Generate graduation report with:
-- Score and answers
-- Strengths and areas for improvement
-- Recommended next steps
-- Link to further learning resources
+### 1. Explain the Correct Answer
+Give a clear, concise explanation with a code snippet if applicable.
 
-If score < 60%: Trigger `lg-critical-advisor` for coaching session
+### 2. Link to LG Official Source
+Always reference how Lucia's LG Master Web App handles this concept:
+- *"See how Lucia implements this in [LG Master Web App](https://github.com/LiquidGalaxyLAB/LG-Master-Web-App) — look at the [specific file/section]."*
+
+### 3. Link to Learning Resources
+Use the topic map from `.agent/skills/lg-learning-resources/SKILL.md`:
+
+| Missed Category | Resources to Link |
+|----------------|-------------------|
+| Command Flow | SSH tutorials, dartssh2 docs, LG Master Web App SSH service |
+| KML Challenge | Google KML Reference, KML Tutorial, Earth Outreach, coordinate docs |
+| Engineering Pillar | SOLID videos, Clean Architecture Flutter, Flutter App Architecture docs |
+| Performance Pitfall | Flutter Performance docs, DevTools profiling, memory leak tutorials |
+| Future Architect | LG multi-screen repos, modular architecture videos, API design guides |
+
+### 4. Suggest a Practice Exercise
+*"Try this: [specific mini-task related to the missed concept]. Then explain what you built."*
+
+## Guardrail
+3+ wrong answers -> **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md) + **Learning Resources** (.agent/skills/lg-learning-resources/SKILL.md) for a structured study plan before retry.

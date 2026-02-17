@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  3D Colored Pyramid KML Template for Liquid Galaxy
+  Task 2 Requirement: Send a 3D colored pyramid to the LG rig.
+  
+  Usage: Replace {{LATITUDE}}, {{LONGITUDE}}, and {{HEIGHT}} with actual values.
+  The pyramid is built from 4 triangular faces + 1 square base, each a different color.
+  
+  KML Color Format: aaBBGGRR (alpha, blue, green, red)
+  Coordinate Order: longitude,latitude,altitude
+-->
+<kml xmlns="http://www.opengis.net/kml/2.2"
+     xmlns:gx="http://www.google.com/kml/ext/2.2">
+  <Document>
+    <name>LG 3D Pyramid</name>
+    <description>Colored 3D pyramid for Task 2 demo</description>
+    
+    <!-- Pyramid Face Styles -->
+    <Style id="face1"><PolyStyle><color>cc0000ff</color><outline>1</outline></PolyStyle></Style>
+    <Style id="face2"><PolyStyle><color>cc00ff00</color><outline>1</outline></PolyStyle></Style>
+    <Style id="face3"><PolyStyle><color>ccff0000</color><outline>1</outline></PolyStyle></Style>
+    <Style id="face4"><PolyStyle><color>cc00ffff</color><outline>1</outline></PolyStyle></Style>
+    <Style id="base"><PolyStyle><color>ccff00ff</color><outline>1</outline></PolyStyle></Style>
+    
+    <!-- Face 1: Front (Red) -->
+    <Placemark>
+      <name>Face 1</name>
+      <styleUrl>#face1</styleUrl>
+      <Polygon>
+        <extrude>0</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>
+              {{LONGITUDE-0.001}},{{LATITUDE-0.001}},0
+              {{LONGITUDE+0.001}},{{LATITUDE-0.001}},0
+              {{LONGITUDE}},{{LATITUDE}},{{HEIGHT}}
+              {{LONGITUDE-0.001}},{{LATITUDE-0.001}},0
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    
+    <!-- Face 2: Right (Green) -->
+    <Placemark>
+      <name>Face 2</name>
+      <styleUrl>#face2</styleUrl>
+      <Polygon>
+        <extrude>0</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>
+              {{LONGITUDE+0.001}},{{LATITUDE-0.001}},0
+              {{LONGITUDE+0.001}},{{LATITUDE+0.001}},0
+              {{LONGITUDE}},{{LATITUDE}},{{HEIGHT}}
+              {{LONGITUDE+0.001}},{{LATITUDE-0.001}},0
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    
+    <!-- Face 3: Back (Blue) -->
+    <Placemark>
+      <name>Face 3</name>
+      <styleUrl>#face3</styleUrl>
+      <Polygon>
+        <extrude>0</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>
+              {{LONGITUDE+0.001}},{{LATITUDE+0.001}},0
+              {{LONGITUDE-0.001}},{{LATITUDE+0.001}},0
+              {{LONGITUDE}},{{LATITUDE}},{{HEIGHT}}
+              {{LONGITUDE+0.001}},{{LATITUDE+0.001}},0
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    
+    <!-- Face 4: Left (Yellow) -->
+    <Placemark>
+      <name>Face 4</name>
+      <styleUrl>#face4</styleUrl>
+      <Polygon>
+        <extrude>0</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>
+              {{LONGITUDE-0.001}},{{LATITUDE+0.001}},0
+              {{LONGITUDE-0.001}},{{LATITUDE-0.001}},0
+              {{LONGITUDE}},{{LATITUDE}},{{HEIGHT}}
+              {{LONGITUDE-0.001}},{{LATITUDE+0.001}},0
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    
+    <!-- Base (Magenta) -->
+    <Placemark>
+      <name>Base</name>
+      <styleUrl>#base</styleUrl>
+      <Polygon>
+        <extrude>0</extrude>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>
+              {{LONGITUDE-0.001}},{{LATITUDE-0.001}},0
+              {{LONGITUDE+0.001}},{{LATITUDE-0.001}},0
+              {{LONGITUDE+0.001}},{{LATITUDE+0.001}},0
+              {{LONGITUDE-0.001}},{{LATITUDE+0.001}},0
+              {{LONGITUDE-0.001}},{{LATITUDE-0.001}},0
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    
+  </Document>
+</kml>

@@ -1,45 +1,56 @@
-# Test iOS Emulator Workflow
+---
+name: Test iOS Emulator
+description: Workflow to test the Flutter LG controller app on iOS Simulator for cross-platform validation.
+---
 
-Guide for testing LG Flutter apps on iOS Simulator (macOS only).
+# Test iOS Emulator Workflow
 
 ## Prerequisites
 - macOS with Xcode installed
-- Xcode Command Line Tools: `xcode-select --install`
-- CocoaPods: `sudo gem install cocoapods`
+- iOS Simulator available: `open -a Simulator`
+- Flutter iOS support: `flutter doctor` shows iOS toolchain
 
-## Setup
-1. Open Xcode → Preferences → Platforms → Install iOS Simulator
-2. List available simulators: `xcrun simctl list devices available`
-3. Boot a simulator: `open -a Simulator`
+## Steps
 
-## Running the App
+### 1. Configure iOS Permissions
+Ensure `ios/Runner/Info.plist` includes network permissions:
+```xml
+<key>NSAppTransportSecurity</key>
+<dict>
+  <key>NSAllowsArbitraryLoads</key>
+  <true/>
+</dict>
+```
+
+### 2. Install Dependencies
 ```bash
 cd flutter_client
 flutter pub get
 cd ios && pod install && cd ..
-flutter run -d <simulator-id>
 ```
 
-## Testing
-1. Verify all screens render correctly on iOS
-2. Check iOS-specific UI differences (navigation, safe area)
-3. Test connection flow (will work with VM/Docker mock)
-4. Verify KML generation (KML is platform-agnostic)
-
-## Screenshots
+### 3. Run on Simulator
 ```bash
-xcrun simctl io booted screenshot ios_screenshot.png
+# List available simulators
+flutter devices
+
+# Run on iOS Simulator
+flutter run -d "iPhone 15 Pro"
 ```
 
-## Screen Recording
+### 4. Verify Functionality
+- [ ] App launches without crash
+- [ ] SSH connection works (HTTP/SSH networking)
+- [ ] UI renders correctly on iOS form factor
+- [ ] KML generation works
+- [ ] Navigation and gestures work properly
+
+### 5. Build (Optional)
 ```bash
-xcrun simctl io booted recordVideo ios_demo.mp4
-# Press Ctrl+C to stop recording
+flutter build ios --release --no-codesign
 ```
 
-## Common iOS Issues
-| Issue | Fix |
-|-------|-----|
-| Pod install fails | `cd ios && rm Podfile.lock && pod install --repo-update` |
-| Signing error | Set team in Xcode → Runner → Signing & Capabilities |
-| Simulator not found | `xcrun simctl list` to find correct ID |
+## Notes
+- iOS builds are NOT required for LG rig testing (LG runs Linux)
+- iOS testing demonstrates cross-platform capability of the Flutter codebase
+- The primary deliverable is the Android APK

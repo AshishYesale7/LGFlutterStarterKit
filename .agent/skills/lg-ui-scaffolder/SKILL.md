@@ -1,29 +1,137 @@
 ---
 name: lg-ui-scaffolder
-description: Scaffold Flutter UI screens following Material 3 patterns
+description: 'Generates Flutter screen and widget code from visualization designs. Produces controller-style UI that delegates all business logic to services while respecting strict layer boundaries.'
 ---
 
-# LG UI Scaffolder
+# LG UI Scaffolder — Flutter Screen Generator
 
-Creates Flutter screens following Material 3 and LG app conventions.
+Produces phone-controller screens and reusable widgets from a visualization
+design. Every generated screen follows the strict rule: **presentation code
+reads state and dispatches actions — it never performs network calls, generates
+KML, or opens SSH connections**.
 
-## Screen Template
-Every screen follows this structure:
-1. AppBar with title and navigation actions
-2. Body with SingleChildScrollView or ListView
-3. Cards for grouped content
-4. Action buttons for LG operations
-5. Status indicators for connection state
+**Announce:** "UI Scaffolder activated. Generating controller screens for the LG rig."
 
-## Material 3 Conventions
-- Use `ColorScheme` from theme, never hardcode colors
-- Use `FilledButton`, `OutlinedButton`, `TextButton` hierarchy
-- Use `const` constructors wherever possible
-- Use `Card` with `Padding` for content groups
+## When to Invoke
+- After `lg-plan-writer` defines the screens and interactions.
+- After `lg-viz-architect` maps phone actions to rig responses.
+- When the student needs a new screen added to an existing app.
 
-## Screen Checklist
-- [ ] Stateful or Stateless decision documented
-- [ ] Provider access via `context.watch` or `context.read`
-- [ ] Loading states handled
-- [ ] Error states with user feedback
-- [ ] Responsive layout considerations
+## Screen Generation Rules
+
+### 1. Architecture Compliance
+Every generated screen must:
+- Use `context.watch<LGService>()` or `Consumer<LGService>` for state.
+- Call service methods (`lgService.flyTo(...)`, `lgService.sendKML(...)`) for actions.
+- **NEVER** import `dartssh2`, `dart:io`, or `package:http`.
+- **NEVER** contain KML string literals or XML generation logic.
+- **NEVER** call `http.get()` or open sockets.
+
+### 2. Standard Screen Template
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../services/lg_service.dart';
+
+class {{ScreenName}} extends StatefulWidget {
+  const {{ScreenName}}({super.key});
+
+  @override
+  State<{{ScreenName}}> createState() => _{{ScreenName}}State();
+}
+
+class _{{ScreenName}}State extends State<{{ScreenName}}> {
+  bool _isLoading = false;
+
+  Future<void> _onAction() async {
+    setState(() => _isLoading = true);
+    try {
+      final lgService = context.read<LGService>();
+      await lgService.someAction(); // Delegate to service
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: $e')),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final lgService = context.watch<LGService>();
+    // Build UI based on lgService state...
+  }
+}
+```
+
+### 3. Widget Extraction
+Extract into `lib/widgets/` when:
+- A UI element appears on 2+ screens.
+- A section exceeds ~80 lines of build code.
+- The element has its own interaction logic (e.g., `ConnectionCard`, `PlacemarkList`).
+
+### 4. Screen Types for LG Apps
+
+| Screen Type | Purpose | Key Widgets |
+|-------------|---------|-------------|
+| **Connection Screen** | Enter LG rig IP/port/credentials | TextFormField, ElevatedButton |
+| **Dashboard Screen** | Quick actions: FlyTo, Orbit, Send KML | GridView of ActionCards |
+| **Data List Screen** | Browse API data (earthquakes, POIs) | ListView.builder with ListTile |
+| **Detail Screen** | Show single item, "Visualize on LG" button | Card, FlyTo + Balloon actions |
+| **Settings Screen** | Rig config, screen count, defaults | Form with SharedPreferences |
+| **Tour Screen** | Compose and play KML tours | ReorderableListView, Play/Stop |
+
+### 5. Responsive Layout
+- Use `LayoutBuilder` for tablet vs phone layouts.
+- Phone: single-column with bottom navigation.
+- Tablet: two-pane layout (list + detail side-by-side).
+- Always support dark mode (LG demos are in dark rooms).
+- Minimum touch target: 48×48 dp.
+
+## Generation Workflow
+
+### Step 1 — Screen Inventory
+Read the plan from `docs/plans/` and list all required screens:
+
+```
+Screen 1: ConnectionScreen  — LG rig connection
+Screen 2: DashboardScreen   — Quick action grid
+Screen 3: EarthquakeListScreen — USGS data browser
+Screen 4: EarthquakeDetailScreen — Single quake detail + visualize
+```
+
+### Step 2 — Generate Screens
+For each screen:
+1. Create file in `lib/screens/`.
+2. Wire up provider reads for state.
+3. Add action handlers that delegate to services.
+4. Add loading states and error handling.
+5. Register route in `MaterialApp.routes` in `main.dart`.
+
+### Step 3 — Generate Shared Widgets
+For reusable elements:
+1. Create file in `lib/widgets/`.
+2. Keep widgets stateless where possible.
+3. Accept callbacks (`onTap`, `onAction`) — no direct service calls in widgets.
+
+### Step 4 — Verify Compliance
+After generation, run the boundary check:
+- `grep -rn "import.*dartssh2" lib/screens/ lib/widgets/` → must return nothing.
+- `grep -rn "http.get\|HttpClient" lib/screens/ lib/widgets/` → must return nothing.
+- `grep -rn "kml\|KML\|<Placemark" lib/screens/ lib/widgets/` → must return nothing (unless displaying KML status text).
+- `flutter analyze` → zero errors.
+
+## Output
+For each screen generated:
+- Dart file in `lib/screens/`
+- Route entry in `main.dart`
+- Any extracted widgets in `lib/widgets/`
+- Entry in `docs/learning-journal.md` explaining the screen's purpose
+
+## Handoff
+Passes generated screens to `lg-code-reviewer` for quality review and
+`lg-shield` for boundary validation.

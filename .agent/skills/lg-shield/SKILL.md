@@ -1,34 +1,91 @@
 ---
 name: lg-shield
-description: Security scanning and hardening for LG apps
+description: 'Security and boundary enforcement guardrail. Validates that no secrets leak into source control, no layers violate their architectural boundaries, and all data flows respect the API → Domain → KML → Transport pipeline.'
 ---
 
-# LG Shield
+# LG Shield — Security & Boundary Enforcement
 
-Security analysis and hardening for Liquid Galaxy Flutter apps.
+Runs automatically at the **start** and **end** of every workflow, plus on-demand
+when any skill produces or modifies code.
 
-## Security Checklist
-1. **No hardcoded credentials** — use flutter_secure_storage
-2. **SSH key management** — never log passwords
-3. **Input validation** — sanitize all user inputs before SSH execution
-4. **Dependency audit** — check for known vulnerabilities
-5. **Network security** — validate SSL, handle timeouts
+**Announce:** "Shield scan initiated. Checking security posture and layer boundaries."
 
-## Scan Protocol
-1. Grep for hardcoded passwords/keys/tokens
-2. Check that `Config.lgPassword` is only used via `SettingsProvider`
-3. Verify SSH commands are parameterized (no string concatenation with user input)
-4. Check `pubspec.yaml` dependencies for known CVEs
-5. Review SFTP file uploads for path traversal
+## Automated Checks
 
-## SSH Command Safety
-```dart
-// BAD — shell injection risk
-await ssh.execute("echo '$userInput' > /tmp/file");
+### 1. Secret Detection
+Scan all Dart, YAML, JSON, and environment files for:
 
-// GOOD — parameterized
-await ssh.execute("echo '${userInput.replaceAll("'", "\\'")}' > /tmp/file");
+| Pattern | Action |
+|---------|--------|
+| Hardcoded API keys (`AIza...`, `sk-...`, Bearer tokens) | **BLOCK** — move to `.env` + `flutter_secure_storage` |
+| Passwords in `SharedPreferences` | **BLOCK** — must use `flutter_secure_storage` |
+| Plain-text credentials in `config.dart` | **WARN** — mark as dev-only defaults, document in tech-debt |
+| `.env` or keystore files not in `.gitignore` | **BLOCK** — add to `.gitignore` immediately |
+
+### 2. Repository Hygiene
+- `.gitignore` must exclude: `*.env`, `*.jks`, `*.keystore`, `*.p12`, `build/`, `.dart_tool/`, `node_modules/`
+- No binary blobs > 1 MB in tracked files.
+- No generated code committed without a `// GENERATED — DO NOT EDIT` header.
+
+### 3. Layer Boundary Validation
+Verify that imports respect the layered architecture:
+
+```
+Forbidden import chains:
+  screens/*.dart  →  package:dartssh2    (SSH in UI)
+  screens/*.dart  →  dart:io HttpClient  (network in UI)
+  kml_service.dart →  package:dartssh2   (SSH in KML layer)
+  kml_service.dart →  package:http       (network in KML layer)
+  ssh_service.dart →  kml_service.dart   (KML in transport layer)
+  *_service.dart   →  screens/*.dart     (UI in service layer)
 ```
 
+### 4. Data Flow Integrity
+The canonical pipeline must be preserved:
+
+```
+External API (http)
+  → Provider / API Service (lib/services/*_service.dart)
+  → Domain Models (lib/models/*.dart)
+  → KML Generator (lib/services/kml_service.dart)
+  → KML Payload (String)
+  → SSH Transport (lib/services/ssh_service.dart)
+  → LG Rig
+```
+
+No layer may skip a step.  
+UI code **never** calls `http.get()` directly.  
+UI code **never** generates KML strings.  
+KML generators **never** open SSH connections.
+
+### 5. Dependency Audit
+Scan `pubspec.yaml` for:
+- Packages with known vulnerabilities (log warning).
+- Unnecessary platform permissions (camera, location when unused).
+- Missing `flutter_secure_storage` when the app handles credentials.
+
+## Enforcement Levels
+
+| Level | Action |
+|-------|--------|
+| **BLOCK** | Execution halted. Must be resolved before continuing. |
+| **WARN** | Logged to `docs/tech-debt.md`. May proceed with acknowledgement. |
+| **INFO** | Noted in review report. No action required. |
+
+## Integration Points
+- Called by `generate-flutter-app` workflow at Stage 0 (pre-flight) and Stage 10 (post-build).
+- Called by `lg-critical-advisor` during Step 3 (Security Audit).
+- Called by `lg-code-reviewer` during the security section of the review.
+
 ## Output
-Security report written to `docs/reviews/shield-report.md`
+Produces a `shield-report.md` in `docs/reviews/`:
+
+```markdown
+# Shield Report — [Date]
+## Secret Scan: PASS / FAIL
+## Boundary Scan: PASS / FAIL
+## Data Flow Scan: PASS / FAIL
+## Dependency Audit: PASS / WARN
+## Blockers: [list]
+## Warnings: [list]
+```

@@ -1,25 +1,63 @@
 ---
 name: lg-plan-writer
-description: Write detailed implementation plans for LG features
+description: Creates detailed implementation plans for LG Flutter features with educational checkpoints before any code is written.
 ---
 
-# LG Plan Writer
+# Writing Liquid Galaxy Implementation Plans
 
-Creates structured implementation plans for Liquid Galaxy features.
+Third step: **Init -> Brainstorm -> Plan -> Execute -> Review -> Quiz (Finale)**.
 
-## Plan Structure
-1. **Goal**: What the feature achieves
-2. **Architecture Impact**: Which layers are affected
-3. **Tasks**: Ordered list of implementation steps (max 10)
-4. **Dependencies**: Required packages or services
-5. **Testing Strategy**: How to verify correctness
-6. **KML Integration**: How it connects to Google Earth
+**GUARDRAIL**: If the student fails Educational Verification, call **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md).
 
-## Output Format
-Plans are written to `docs/plans/<date>-<feature>-design.md`
+**Save plans to:** `docs/plans/YYYY-MM-DD-<feature-name>-plan.md`
 
-## Rules
-- Each task must be atomic (completable in one commit)
-- Tasks must respect layer boundaries (screen → provider → service)
-- Each task needs a test strategy
-- Plans reference specific files and line numbers
+## Task Granularity
+Each step: single logical action, 5-10 minutes. Commit after each.
+
+## Plan Header
+
+```markdown
+# [Feature Name] Implementation Plan
+**Goal:** [One sentence]
+**Architecture:** Controller-to-Rig over SSH
+**Tech Stack:** Dart, Flutter, Provider, [additional packages]
+**Educational Objectives:** [Principles to learn]
+
+## Implementation Checklist
+- [ ] Task 1: [Short Title]
+- [ ] Task 2: [Short Title]
+```
+
+## Task Structure
+
+```markdown
+### Task N: [Name]
+**Files:** Create/Modify/Test paths
+**Step 1**: Why we're touching these files
+**Step 2**: Code pattern / interface
+**Step 3**: Verification (`flutter analyze`, `flutter test`, visual check)
+**Step 4**: `git commit -m "feat: [description]"`
+```
+
+## Engineering Principles
+- **Controller-to-Rig**: Flutter app controls, Google Earth displays via KML over SSH.
+- **Separation of Concerns**: UI in screens/, logic in services/, data in models/.
+- **DRY/YAGNI/SOLID**: Modular, minimal, clean.
+
+## Educational Verification Phase (MANDATORY)
+Before implementation, ask:
+1. "Why is [Logic] in a service instead of the widget?"
+2. "What trade-off did we make choosing Provider?"
+3. "Trace the data path: App → SSH → LG Master → Google Earth."
+4. "Which principle applies to separating SSH from KML logic?"
+
+Do not proceed until student answers reasonably.
+
+## Handoff
+
+**Student Checkpoint (MANDATORY):**
+Before handing to the executor, ask:
+- *"The plan is ready. Before we start coding — why is [core logic] in a service instead of the widget? What trade-off did we make?"*
+- **Wait for the student's answer.** If they can't explain, link to [LG Master Web App](https://github.com/LiquidGalaxyLAB/LG-Master-Web-App) and ask them to study Lucia's service layer.
+
+"Plan saved to `docs/plans/<file>.md`. Ready for implementation? Using **Plan Executer** (.agent/skills/lg-exec/SKILL.md)."

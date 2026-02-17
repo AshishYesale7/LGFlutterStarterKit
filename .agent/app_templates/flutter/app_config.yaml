@@ -1,0 +1,73 @@
+# LG Flutter App Configuration Template
+# Used by the generate-flutter-app workflow to bootstrap a new LG controller app.
+# Students should copy this file and fill in their values.
+#
+# NAMING CONVENTION: App name MUST follow LG-<TaskName> pattern.
+#   Good: LG-Task2-Demo, LG-Earthquake-Viz, LG-Satellite-Tracker
+#   Bad:  my_app, flutter_test, earthquake_app
+
+app:
+  name: "LG-Task2-Demo"                          # MUST start with LG-
+  package: "com.liquidgalaxy.lg_task2_demo"       # Reverse domain, snake_case
+  description: "Task 2 demo: send logo, 3D pyramid, flyTo home city, clean KMLs"
+
+rig:
+  screens: 3          # 3, 5, or 7 (Task 2 uses 3)
+  master_ip: "192.168.56.101"
+  ssh_port: 22
+  ssh_user: "lg"
+  ssh_password: "lg"  # Dev-only default; use flutter_secure_storage in production
+
+# Student's home city for flyTo demo
+home_city:
+  name: ""            # e.g., "Barcelona", "Mumbai", "San Francisco"
+  latitude: 0.0       # e.g., 41.3874
+  longitude: 0.0      # e.g., 2.1686
+  altitude: 15000.0   # Camera altitude in meters
+
+platforms:
+  - android           # Primary — required for release APK
+  # - ios             # Optional phone controller
+  # - linux           # Optional for desktop testing
+  # - macos           # Optional for desktop testing
+
+# External APIs (empty for Task 2; add for advanced apps)
+apis: []
+  # Example for earthquake app:
+  # - name: "USGS Earthquakes"
+  #   url: "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"
+  #   format: geojson
+  #   requires_key: false
+
+# Task 2 feature flags
+features:
+  ssh_control: true       # SSH connection to LG rig
+  kml_generation: true    # Generate KML strings in Dart
+  logo_overlay: true      # Send logo to slave screen as ScreenOverlay
+  pyramid_3d: true        # Send 3D colored extruded pyramid KML
+  flyto_home: true        # FlyTo student's home city
+  clean_kml: true         # Clear all KML files from rig
+  clean_logos: true       # Clear logo overlays from slave screens
+
+# Asset recommendations (generated via lg-nanobanana-sprite)
+assets:
+  logo:
+    description: "App logo for ScreenOverlay on left slave screen"
+    spec: "1024x512 PNG, transparent background"
+    prompt_hint: "Modern sleek logo for [App Name], Liquid Galaxy themed, blue and white tones"
+  placemark_icon:
+    description: "Custom marker for data points on Google Earth"
+    spec: "512x512 PNG, transparent background"
+    prompt_hint: "Top-down view of a [theme] icon, high contrast, 4k"
+  app_icon:
+    description: "Android launcher icon"
+    spec: "1024x1024, adaptive icon format"
+
+# Reference implementation
+reference:
+  lucia_repo: "https://github.com/LiquidGalaxyLAB/LG-Master-Web-App"
+  lucia_readme: "https://raw.githubusercontent.com/LiquidGalaxyLAB/LG-Master-Web-App/refs/heads/FlutterNodejs/README.md"
+  lg_lab: "https://github.com/LiquidGalaxyLAB"
+  gsoc_2026: "https://www.liquidgalaxy.eu/2025/11/GSoC2026.html"
+  lg_mobile_apps: "https://www.liquidgalaxy.eu/2018/06/mobile-applications.html"
+  lg_store: "https://store.liquidgalaxy.eu/"

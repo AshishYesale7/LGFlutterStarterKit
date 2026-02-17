@@ -1,32 +1,181 @@
+```skill
 ---
-name: lg-flutter-build
-description: Build and deploy Flutter apps for LG rig testing
+name: Liquid Galaxy Flutter Build Manager
+description: 'Builds, tests, and packages Flutter apps for all target platforms (Android APK, Web, Linux, macOS, iOS). Handles release signing, optimization, and artifact placement.'
 ---
 
-# LG Flutter Build
+# Liquid Galaxy Flutter Build Manager
 
-Manages the build process for Flutter apps targeting the Liquid Galaxy.
+## Overview
 
-## Build Targets
-1. **Debug APK**: `flutter build apk --debug`
-2. **Release APK**: `flutter build apk --release`
-3. **With LG Host**: `flutter build apk --dart-define=LG_HOST=192.168.56.101`
-4. **App Bundle**: `flutter build appbundle`
+This skill manages the complete build pipeline for Liquid Galaxy Flutter applications across all supported platforms. It handles compilation, testing, optimization, and artifact generation.
 
-## Build Verification
-1. `flutter analyze` — zero errors
-2. `flutter test` — all passing
-3. `flutter build apk --debug` — successful build
-4. Install on device/emulator: `flutter install`
-5. Verify app launches and connects to LG rig
+**Announce at start:** "I'm using the lg-flutter-build skill to build your app for [Platform(s)]."
 
-## Size Optimization
-- Enable ProGuard for release builds
-- Use `--split-per-abi` for smaller APKs
-- Remove unused assets and dependencies
-- Use `flutter build apk --release --split-per-abi`
+## 🔍 Pre-Build Checks (Mandatory)
 
-## Deployment
-1. Build release APK
-2. Transfer to device via ADB: `adb install build/app/outputs/flutter-apk/app-release.apk`
-3. Or upload to GitHub Release
+Before any build, run these verification steps:
+
+```bash
+# 1. Code Quality
+cd flutter_client
+flutter analyze                    # Zero errors required
+dart format --set-exit-if-changed . # Formatting check
+
+# 2. Tests
+flutter test                       # All tests must pass
+
+# 3. Dependency Resolution
+flutter pub get                    # Ensure deps are resolved
+flutter pub outdated               # Check for critical updates
+```
+
+If ANY check fails, **stop and fix** before building.
+
+## 📱 Android Build (Primary — LG Rig Target)
+
+### Debug Build (for development)
+```bash
+flutter build apk --debug
+# Output: build/app/outputs/flutter-apk/app-debug.apk
+```
+
+### Release Build (for submission)
+```bash
+flutter build apk --release --split-per-abi
+# Outputs:
+#   build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
+#   build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
+#   build/app/outputs/flutter-apk/app-x86_64-release.apk
+```
+
+### With Custom LG Host (build-time config)
+```bash
+flutter build apk --release --dart-define=LG_HOST=192.168.1.100
+flutter build apk --release --dart-define=LG_HOST=10.160.67.198
+```
+
+### Verification
+- Install on device: `adb install build/app/outputs/flutter-apk/app-release.apk`
+- Check it launches without crash
+- Verify SSH connection to LG rig if applicable
+
+## 🌐 Web Build
+
+```bash
+flutter build web --release --web-renderer canvaskit
+# Output: build/web/
+```
+
+### Deployment Options
+- **Local testing**: `cd build/web && python3 -m http.server 8080`
+- **Firebase Hosting**: `firebase deploy --only hosting`
+- **GitHub Pages**: Copy `build/web/` contents to `gh-pages` branch
+
+### Verification
+- Open in browser, verify no console errors
+- Test KML generation and display
+- Check responsive layout
+
+## 🐧 Linux Build (LG Rig Native)
+
+```bash
+flutter build linux --release
+# Output: build/linux/x64/release/bundle/
+```
+
+### Verification
+- Run: `./build/linux/x64/release/bundle/<app_name>`
+- Verify full-screen mode works
+- Test SSH connection to LG master
+
+## 🍎 macOS Build (Development)
+
+```bash
+flutter build macos --release
+# Output: build/macos/Build/Products/Release/<AppName>.app
+```
+
+### Entitlements Required
+Ensure `macos/Runner/Release.entitlements` includes:
+```xml
+<key>com.apple.security.network.client</key>
+<true/>
+<key>com.apple.security.network.server</key>
+<true/>
+```
+
+## 📲 iOS Build (Optional Showcase)
+
+```bash
+flutter build ios --release --no-codesign
+# Or with signing:
+flutter build ipa --release
+```
+
+### Verification
+- Test on simulator: `flutter run -d "iPhone 15 Pro"`
+- Check network permissions in `Info.plist`
+
+## 🏗 Build All Platforms Script
+
+For a comprehensive build, execute sequentially:
+
+```bash
+#!/bin/bash
+echo "=== LG Flutter Build Pipeline ==="
+
+cd flutter_client
+
+echo "[1/5] Running analysis..."
+flutter analyze || exit 1
+
+echo "[2/5] Running tests..."
+flutter test || exit 1
+
+echo "[3/5] Building Android APK..."
+flutter build apk --release --split-per-abi || echo "Android build failed"
+
+echo "[4/5] Building Web..."
+flutter build web --release --web-renderer canvaskit || echo "Web build failed"
+
+echo "[5/5] Building Linux..."
+flutter build linux --release || echo "Linux build failed"
+
+echo "=== Build Complete ==="
+echo "Artifacts:"
+ls -la build/app/outputs/flutter-apk/*.apk 2>/dev/null
+ls -la build/web/index.html 2>/dev/null
+ls -la build/linux/x64/release/bundle/ 2>/dev/null
+```
+
+## 📦 Artifact Management
+
+After successful builds, organize artifacts:
+
+```text
+builds/
+├── android/
+│   ├── app-arm64-v8a-release.apk
+│   └── app-x86_64-release.apk
+├── web/
+│   └── (web build contents)
+├── linux/
+│   └── (linux bundle)
+└── BUILD_INFO.md  (auto-generated: date, commit, flutter version)
+```
+
+## Post-Build Commit
+
+```bash
+git add .
+git commit -m "build: release artifacts for [platforms]"
+```
+
+## Handoff
+
+After successful build, ask:
+- "Would you like to deploy to a test device?"
+- "Ready for a Code Review?" -> Hand to **lg-code-reviewer**
+
+```

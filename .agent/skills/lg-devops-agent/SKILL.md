@@ -1,38 +1,177 @@
 ---
 name: lg-devops-agent
-description: DevOps automation for LG project deployment and testing
+description: Manages CI/CD pipelines, Docker configurations, LG rig deployment, and build automation for Liquid Galaxy Flutter applications.
 ---
 
-# LG DevOps Agent
+# Liquid Galaxy DevOps Agent
 
-Manages DevOps tasks for Liquid Galaxy projects.
+## Overview
 
-## Docker Mock Server
-For testing without a physical LG rig:
+This skill handles the infrastructure and deployment side of Liquid Galaxy Flutter app development. It covers CI/CD pipelines, Docker containers for development, LG rig deployment, and build automation.
+
+**Announce at start:** "I'm using the lg-devops-agent skill to set up [DevOps Task]."
+
+## 🐳 Docker for LG Development
+
+### SSH Mock Server (for development without a physical rig)
+
+```dockerfile
+# Dockerfile.lg-mock
+FROM ubuntu:22.04
+RUN apt-get update && apt-get install -y openssh-server
+RUN mkdir /var/run/sshd
+RUN echo 'lg:lg' | chpasswd
+RUN mkdir -p /var/www/html/kml
+RUN echo "" > /var/www/html/kml/slave_0.kml
+EXPOSE 22
+CMD ["/usr/sbin/sshd", "-D"]
+```
+
+```bash
+# Build and run
+docker build -t lg-mock -f Dockerfile.lg-mock .
+docker run -d -p 2222:22 --name lg-mock lg-mock
+
+# Test SSH connection
+ssh -p 2222 lg@localhost  # password: lg
+```
+
+### Docker Compose (mock rig + optional data proxy)
+
 ```yaml
-# docker-compose.yml
 version: '3.8'
 services:
   lg-mock:
-    image: ubuntu:22.04
+    build:
+      context: .
+      dockerfile: Dockerfile.lg-mock
     ports:
       - "2222:22"
-    command: /usr/sbin/sshd -D
+    volumes:
+      - ./kml-data:/var/www/html/kml
+
+  data-proxy:
+    build: ./server
+    ports:
+      - "3000:3000"
+    environment:
+      - OPENWEATHER_API_KEY=${OPENWEATHER_API_KEY}
 ```
 
-## CI/CD Pipeline
-1. `flutter analyze` — static analysis
-2. `dart format --set-exit-if-changed .` — code formatting
-3. `flutter test --coverage` — run tests
-4. `flutter build apk --release` — build APK
-5. Upload APK as artifact
+## 🔄 GitHub Actions CI/CD
 
-## Environment Management
-- Development: local emulator + mock SSH server
-- Staging: Docker compose LG mock
-- Production: Physical LG rig
+### Flutter Analysis + Tests
 
-## Monitoring
-- ADB logcat for runtime logs
-- Flutter DevTools for performance
-- SSH connection health monitoring
+```yaml
+# .github/workflows/flutter-ci.yml
+name: Flutter CI
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  analyze-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          channel: 'stable'
+
+      - name: Install dependencies
+        working-directory: flutter_client
+        run: flutter pub get
+
+      - name: Analyze
+        working-directory: flutter_client
+        run: flutter analyze
+
+      - name: Format check
+        working-directory: flutter_client
+        run: dart format --set-exit-if-changed .
+
+      - name: Run tests
+        working-directory: flutter_client
+        run: flutter test --coverage
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
+        with:
+          file: flutter_client/coverage/lcov.info
+```
+
+### Android APK Build
+
+```yaml
+# .github/workflows/build-apk.yml
+name: Build APK
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+
+      - name: Build APK
+        working-directory: flutter_client
+        run: flutter build apk --release --split-per-abi
+
+      - name: Upload APK artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-apk
+          path: flutter_client/build/app/outputs/flutter-apk/*.apk
+```
+
+## 📦 Deployment to LG Rig
+
+### Deploy KML Assets to Rig
+```bash
+#!/bin/bash
+# deploy-assets.sh — Upload custom assets to LG rig
+LG_HOST="${LG_HOST:-192.168.1.100}"
+LG_USER="${LG_USER:-lg}"
+
+echo "Deploying assets to LG rig ($LG_HOST)..."
+scp -r assets/* $LG_USER@$LG_HOST:/var/www/html/assets/
+echo "Assets deployed. Accessible at http://$LG_HOST:81/assets/"
+```
+
+### Install APK on Connected Android Device
+```bash
+#!/bin/bash
+# deploy-apk.sh — Install the release APK on a connected Android device
+cd flutter_client
+flutter build apk --release
+adb install build/app/outputs/flutter-apk/app-release.apk
+echo "APK installed. Launch the app on the device."
+```
+
+## 🔧 Environment Setup Checklist
+
+### For New Developers
+1. Install Flutter SDK: `flutter doctor` should pass.
+2. Clone the repo.
+3. `cd flutter_client && flutter pub get`
+4. `flutter analyze` — zero errors.
+5. Optional: `docker compose up -d` for mock LG rig.
+6. `flutter run -d <device>` to test.
+
+### For LG Rig Admin
+1. Ensure all rig machines are on the same subnet.
+2. SSH access configured for user `lg` on master.
+3. `/var/www/html/kml/` writable from SSH.
+4. Google Earth Pro installed and running on all machines.
+5. `lg-sync` service running to sync master → slaves.
+
+## Handoff
+After DevOps setup → return to calling skill (typically `lg-exec` or `lg-flutter-build`).
