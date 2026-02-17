@@ -1,6 +1,6 @@
 ```skill
 ---
-name: Liquid Galaxy API Integrator
+name: lg-api-integrator
 description: 'Integrates external REST APIs into LG Flutter apps. Handles data fetching, parsing, caching, error handling, and transformation into KML-ready models. Supports USGS, NASA, OpenWeather, and custom APIs.'
 ---
 
@@ -184,6 +184,23 @@ Future<String> apiToKml({
 - [ ] Loading and error states visible in UI
 - [ ] API key (if needed) is NOT hardcoded — use environment variable or config
 - [ ] Rate limiting respected
+
+## ⛔️ Student Interaction — MANDATORY
+
+**After integrating each API, STOP and walk through with the student:**
+1. Show the raw API response and the parsed domain model side-by-side.
+2. Ask: *"Why do we cache API responses? What happens if the API is down?"*
+3. If the student cannot explain the caching/fallback strategy, link to **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md).
+
+**DO NOT move to the next API** until the student understands the current integration.
+
+## Reference Links
+
+- **Lucia's API integration patterns**: https://github.com/LiquidGalaxyLAB/LG-Master-Web-App
+- **Dart http package**: https://pub.dev/packages/http
+- **Flutter JSON serialization**: https://docs.flutter.dev/data-and-backend/serialization/json
+- **USGS earthquake API docs**: https://earthquake.usgs.gov/fdsnws/event/1/
+- For deeper study → **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md)
 
 ## Handoff
 

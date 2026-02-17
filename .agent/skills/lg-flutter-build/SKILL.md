@@ -1,6 +1,6 @@
 ```skill
 ---
-name: Liquid Galaxy Flutter Build Manager
+name: lg-flutter-build
 description: 'Builds, tests, and packages Flutter apps for all target platforms (Android APK, Web, Linux, macOS, iOS). Handles release signing, optimization, and artifact placement.'
 ---
 
@@ -11,6 +11,15 @@ description: 'Builds, tests, and packages Flutter apps for all target platforms 
 This skill manages the complete build pipeline for Liquid Galaxy Flutter applications across all supported platforms. It handles compilation, testing, optimization, and artifact generation.
 
 **Announce at start:** "I'm using the lg-flutter-build skill to build your app for [Platform(s)]."
+
+> **Context**: Gemini Summer of Code 2026 — the release APK is a key Task 2 deliverable.
+
+### ⚠️ MANDATORY: APK Naming Convention
+
+When building release APKs, the output **MUST** match the `LG-<TaskName>` convention:
+- `android/app/build.gradle` → `applicationId` should reflect the project name
+- Release notes and artifact filenames should reference `LG-<TaskName>`
+- Example: `LG-Earthquake-Viz-arm64-v8a-release.apk`
 
 ## 🔍 Pre-Build Checks (Mandatory)
 
@@ -171,6 +180,13 @@ builds/
 git add .
 git commit -m "build: release artifacts for [platforms]"
 ```
+
+## Reference Links
+
+- **Flutter build modes**: https://docs.flutter.dev/testing/build-modes
+- **Android APK signing**: https://docs.flutter.dev/deployment/android
+- **Flutter web deployment**: https://docs.flutter.dev/deployment/web
+- For deeper study → **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md)
 
 ## Handoff
 

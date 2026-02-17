@@ -178,6 +178,24 @@ Before finalizing any KML composition:
 ## Output
 Produces KML composition code (Dart methods) and any new KML templates.
 
+## ⛔️ Student Interaction — MANDATORY
+
+**After crafting each KML composition, STOP and show the student:**
+1. A preview of the generated KML in Google Earth Pro (or link to KML reference).
+2. Explain the `aaBBGGRR` color format and `lon,lat,alt` coordinate order.
+3. Ask: *"What KML element creates this visual effect? How would you change the color/size?"*
+4. If the student cannot modify the KML confidently, link to **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md).
+
+**DO NOT auto-craft the next composition** until the student understands the current one.
+
+## Reference Links
+
+- **KML Reference (Google)**: https://developers.google.com/kml/documentation/kmlreference
+- **KML Tutorial**: https://developers.google.com/kml/documentation/kml_tut
+- **Lucia's KML patterns**: https://github.com/LiquidGalaxyLAB/LG-Master-Web-App
+- **gx:Tour (animated tours)**: https://developers.google.com/kml/documentation/touring
+- For deeper study → **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md)
+
 ## Handoff
 Passes composed KML code to `lg-data-pipeline` for integration into the
 transport flow, and to `lg-code-reviewer` for quality checks.

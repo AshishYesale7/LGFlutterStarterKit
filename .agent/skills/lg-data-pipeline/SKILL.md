@@ -154,6 +154,23 @@ For each new API integration, produces:
 - LGService orchestration method
 - Entry in `docs/plans/` describing the pipeline
 
+## ⛔️ Student Interaction — MANDATORY
+
+**After building each pipeline stage, STOP and explain:**
+1. Show the data transformation at that stage (Raw JSON → Model → KML coordinates).
+2. Ask: *"Why do we convert the raw API response into a domain model instead of passing JSON directly to KML generation?"*
+3. If the student cannot explain the separation, demonstrate by tracing a single data point through all layers.
+4. Link to **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md) for Data Pipeline and KML topics.
+
+**DO NOT move to the next pipeline stage** until the student can explain the current transformation.
+
+## Reference Links
+
+- **Lucia's kml_service.dart**: https://github.com/LiquidGalaxyLAB/LG-Master-Web-App
+- **KML Reference (Google)**: https://developers.google.com/kml/documentation/kmlreference
+- **Dart JSON serialization**: https://docs.flutter.dev/data-and-backend/serialization/json
+- For deeper study → **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md)
+
 ## Handoff
 Passes generated code to `lg-code-reviewer` for quality checks and to
 `lg-shield` for boundary validation.

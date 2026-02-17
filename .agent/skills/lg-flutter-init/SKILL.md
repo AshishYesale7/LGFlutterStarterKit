@@ -227,4 +227,5 @@ Explain these **3 Golden Rules** to the student:
 5. Run `flutter analyze` to verify zero errors.
 6. Commit: `git add . && git commit -m "init: LG Flutter project scaffolding"`.
 7. **Student checkpoint**: *"The project is scaffolded. Can you explain: What happens when your Flutter app sends a KML file to the LG rig? Which machine receives it and what happens next?"*
-8. Hand off to **Brainstormer** (.agent/skills/lg-brainstormer/SKILL.md).
+8. If the student cannot answer, link to **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md) — SSH & LG Communication topic.
+9. Hand off to **Brainstormer** (.agent/skills/lg-brainstormer/SKILL.md).

@@ -238,6 +238,23 @@ class ConnectionLogic {
 
 If the student proposes putting SSH calls or KML generation directly in a widget, **STOP** and activate the **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md). This is a layer boundary violation per `.agent/rules/layer-boundaries.md`.
 
+## ⛔️ Student Interaction — MANDATORY
+
+**After implementing each logic component, STOP and walk through it with the student:**
+1. Explain the state management pattern chosen and *why* it was chosen.
+2. Trace the data flow: UI event → Provider → Service → SSH/KML → Rig.
+3. Ask: *"If connection drops during this operation, what happens? How would you handle reconnection?"*
+4. If the student cannot reason about error recovery, link to **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md) for SSH and State Management topics.
+
+**DO NOT move to the next service/provider** until the student confirms understanding of the current one.
+
+## Reference Links
+
+- **Lucia's lg_service.dart (SSH patterns)**: https://github.com/LiquidGalaxyLAB/LG-Master-Web-App
+- **Flutter Provider docs**: https://pub.dev/packages/provider
+- **Dart concurrency**: https://dart.dev/language/concurrency
+- For deeper study → **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md)
+
 ## Handoff
 
 After logic design, use **lg-file-generator** (.agent/skills/lg-file-generator/SKILL.md) to create the files, then **lg-exec** (.agent/skills/lg-exec/SKILL.md) for implementation.

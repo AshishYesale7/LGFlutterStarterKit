@@ -233,6 +233,23 @@ lib/modules/<module_name>/
 - [ ] Corresponding test file created (for services/models)
 - [ ] Provider registered in `main.dart` (for services)
 
+## ⛔️ Student Interaction — MANDATORY
+
+**After generating each file, STOP and explain to the student:**
+1. What was generated and why each section exists.
+2. How the file fits into the LG architecture (which layer, which pattern).
+3. Ask: *"Can you explain what this file does in your own words?"*
+4. If the student cannot explain, link to **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md) for the relevant topic.
+
+**DO NOT auto-generate the next file** until the student confirms understanding.
+
+## Reference Links
+
+- **Lucia's LG Master App (architecture reference)**: https://github.com/LiquidGalaxyLAB/LG-Master-Web-App
+- **Dart effective style**: https://dart.dev/effective-dart/style
+- **Flutter widget catalog**: https://docs.flutter.dev/ui/widgets
+- For deeper study → **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md)
+
 ## Handoff
 
 After file generation, return to the calling workflow or use **lg-exec** (.agent/skills/lg-exec/SKILL.md) for implementation.

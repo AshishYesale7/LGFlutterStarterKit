@@ -5,6 +5,15 @@ description: How to test the Liquid Galaxy Flutter controller app with or withou
 
 # Test Rig Workflow (Flutter)
 
+> **Context**: Gemini Summer of Code 2026 — Task 2 requires a working LG app with FlyTo, Orbit, SendKML, ClearKML, and Logo overlay. This workflow validates all those operations.
+
+## Related Skills
+- **lg-ssh-controller** (.agent/skills/lg-ssh-controller/SKILL.md) — SSH command patterns
+- **lg-kml-writer** (.agent/skills/lg-kml-writer/SKILL.md) — KML generation
+- **lg-emulator-manager** (.agent/skills/lg-emulator-manager/SKILL.md) — emulator setup
+- **lg-debugger** (.agent/skills/lg-debugger/SKILL.md) — diagnosing failures
+- **lg-demo-recorder** (.agent/skills/lg-demo-recorder/SKILL.md) — capturing evidence for submission
+
 ## Overview
 Test your LG Flutter controller app with or without a physical Liquid Galaxy rig.
 
@@ -35,7 +44,9 @@ Test your LG Flutter controller app with or without a physical Liquid Galaxy rig
 
 ### Test SSH with a Local Linux VM or Docker
 ```bash
-# Option A: Docker container with SSH
+# Option A: Docker container with SSH (recommended for testing)
+docker run -d -p 2222:22 --name lg-test lscr.io/linuxserver/openssh-server:latest
+# Or use the standard ubuntu sshd:
 docker run -d -p 2222:22 rastasheep/ubuntu-sshd:18.04
 
 # Option B: Local VM
@@ -81,3 +92,12 @@ curl "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson
 - [ ] UI is intuitive and clear on phone/tablet
 - [ ] Error states are handled gracefully (no connection, timeout, etc.)
 - [ ] Loading indicators shown during async operations
+
+### Task 2 Required Operations (Contest Deliverable)
+- [ ] **FlyTo** — sends `<LookAt>` to `/tmp/query.txt`, camera moves
+- [ ] **Orbit** — sends `<gx:Tour>` orbit, smooth 360° rotation
+- [ ] **SendKML** — writes KML to `/var/www/html/kml/`, placemarks appear
+- [ ] **ClearKML** — empties KML files, Google Earth shows clean globe
+- [ ] **Logo Overlay** — `<ScreenOverlay>` with app logo on slave screen
+
+> After completing all checks, use **lg-demo-recorder** (.agent/skills/lg-demo-recorder/SKILL.md) to capture evidence screenshots and screen recordings for contest submission.

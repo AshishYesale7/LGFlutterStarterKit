@@ -16,6 +16,7 @@ Fifth step in the pipeline: **Init -> Brainstorm -> Plan -> Execute -> Review ->
 - **SOLID Purity**: Are classes doing too much?
 - **DRY Compliance**: Any copy-pasted logic that should be shared?
 - **Naming**: Descriptive and consistent with Dart conventions?
+- **LG-<TaskName> Convention**: Repo name, app title, and README all use the `LG-<TaskName>` pattern?
 - **Widget Tree**: Appropriately decomposed? No "God Widgets."
 - **Provider Usage**: Services properly registered and consumed?
 
@@ -44,8 +45,15 @@ Run and verify:
 
 ### 5. Documentation & OSS Readiness
 - **Dart Doc**: `///` doc comments on all public members.
-- **README**: Explains new features.
+- **README**: Explains new features, includes setup instructions, screenshots.
+- **App name**: Follows `LG-<TaskName>` convention in README, `pubspec.yaml`, and repo name.
 - **Readability**: New student could understand in 5 minutes.
+
+### 6. Contest Alignment (Gemini Summer of Code 2026)
+- **Mandatory screens**: Splash, Home, Connection Settings, Settings/About, Help (per Lucia's guide).
+- **Task 2 operations**: FlyTo, Orbit, SendKML, ClearKML, Logo overlay — all implemented?
+- **Reference links**: README links to Lucia's repo, LG LAB, contest page?
+- See `.agent/rules/lg-architecture.md` for the full Task 2 requirements table.
 
 ## Review Report
 Save to `docs/reviews/YYYY-MM-DD-<feature>-review.md`.
@@ -73,6 +81,22 @@ Save to `docs/reviews/YYYY-MM-DD-<feature>-review.md`.
 
 ## Guardrail: Revision Loop
 If REVISIONS NEEDED, hand back to Plan Writer or Executer. Feature is not "Complete" until APPROVED.
+
+## ⛔️ Student Interaction — MANDATORY
+
+**Before issuing the final verdict, STOP and discuss with the student:**
+1. Walk through the most significant findings (both good and bad).
+2. Ask: *"Which of these issues do you understand? Which do you need help with?"*
+3. For any item the student doesn't understand, link to **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md).
+
+**DO NOT auto-fix issues** — guide the student to fix them, then re-review.
+
+## Reference Links
+
+- **Lucia's LG Master App (reference implementation)**: https://github.com/LiquidGalaxyLAB/LG-Master-Web-App
+- **Effective Dart style guide**: https://dart.dev/effective-dart
+- **Flutter performance best practices**: https://docs.flutter.dev/perf/best-practices
+- For deeper study → **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md)
 
 ## Final Completion
 Once APPROVED:

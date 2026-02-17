@@ -113,6 +113,23 @@ Produces a `viz-design.md` document in `docs/plans/`:
 ## Performance Budget: [Constraints table]
 ```
 
+## ⛔️ Student Interaction — MANDATORY
+
+**After completing the visualization design, STOP and discuss with the student:**
+1. Walk through the storyboard — ask them to visualize what each "moment" looks like on a 3-screen rig.
+2. Ask: *"Which phone action maps to which rig response? Trace one interaction end-to-end."*
+3. If the student cannot explain the phone-to-rig interaction model, link to **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md).
+
+**DO NOT move to planning** until the student can explain their visualization design.
+
+## Reference Links
+
+- **Lucia's LG Master App (experience reference)**: https://github.com/LiquidGalaxyLAB/LG-Master-Web-App
+- **KML Reference (Google)**: https://developers.google.com/kml/documentation/kmlreference
+- **Google Earth gallery (inspiration)**: https://earth.google.com/gallery/
+- **LG LAB past projects**: https://github.com/LiquidGalaxyLAB
+- For deeper study → **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md)
+
 ## Handoff
 Passes the visualization design to `lg-plan-writer` for task breakdown and to
 `lg-kml-craftsman` for artistic KML composition.

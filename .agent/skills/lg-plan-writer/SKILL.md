@@ -60,4 +60,10 @@ Before handing to the executor, ask:
 - *"The plan is ready. Before we start coding — why is [core logic] in a service instead of the widget? What trade-off did we make?"*
 - **Wait for the student's answer.** If they can't explain, link to [LG Master Web App](https://github.com/LiquidGalaxyLAB/LG-Master-Web-App) and ask them to study Lucia's service layer.
 
+## Reference Links
+
+- **Lucia's LG Master App**: https://github.com/LiquidGalaxyLAB/LG-Master-Web-App
+- **Flutter project structure**: https://docs.flutter.dev/resources/architectural-overview
+- For deeper study → **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md)
+
 "Plan saved to `docs/plans/<file>.md`. Ready for implementation? Using **Plan Executer** (.agent/skills/lg-exec/SKILL.md)."

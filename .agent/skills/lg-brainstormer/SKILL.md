@@ -89,3 +89,10 @@ Before moving to implementation, ask the student:
 - **YAGNI ruthlessly** — remove unnecessary features
 - **Explore alternatives** — propose 2-3 approaches before settling
 - **Incremental validation** — present design in sections
+
+## Reference Links
+
+- **LG LAB past projects (inspiration)**: https://github.com/LiquidGalaxyLAB
+- **GSoC 2026 Ideas**: https://www.liquidgalaxy.eu/2025/11/GSoC2026.html
+- **LG Mobile Applications**: https://www.liquidgalaxy.eu/2018/06/mobile-applications.html
+- For deeper study → **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md)

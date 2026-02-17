@@ -5,6 +5,13 @@ description: Workflow to test the Flutter LG controller app on iOS Simulator for
 
 # Test iOS Emulator Workflow
 
+> **Context**: Gemini Summer of Code 2026 — iOS is NOT required for the LG rig (which runs Linux/Android), but cross-platform testing demonstrates robust Flutter architecture.
+
+## Related Skills
+- **lg-emulator-manager** (.agent/skills/lg-emulator-manager/SKILL.md) — emulator/simulator management
+- **lg-debugger** (.agent/skills/lg-debugger/SKILL.md) — diagnosing platform-specific issues
+- **lg-flutter-build** (.agent/skills/lg-flutter-build/SKILL.md) — building for iOS
+
 ## Prerequisites
 - macOS with Xcode installed
 - iOS Simulator available: `open -a Simulator`
@@ -53,4 +60,5 @@ flutter build ios --release --no-codesign
 ## Notes
 - iOS builds are NOT required for LG rig testing (LG runs Linux)
 - iOS testing demonstrates cross-platform capability of the Flutter codebase
-- The primary deliverable is the Android APK
+- The primary deliverable is the **Android APK** (see **lg-flutter-build**)
+- For contest submission evidence, use **lg-demo-recorder** (.agent/skills/lg-demo-recorder/SKILL.md)

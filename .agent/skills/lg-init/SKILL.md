@@ -215,4 +215,5 @@ Explain these to the student:
 4. `flutter pub get && flutter analyze`.
 5. Commit: `init: LG Flutter project scaffolding`.
 6. **Ask the student**: *"The project is scaffolded. Before we brainstorm features, can you explain: What is the relationship between the Flutter app on your phone and Google Earth on the LG rig?"*
-7. Hand to **Brainstormer** (.agent/skills/lg-brainstormer/SKILL.md).
+7. If the student cannot answer, link to **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md) — Architecture topic.
+8. Hand to **Brainstormer** (.agent/skills/lg-brainstormer/SKILL.md).

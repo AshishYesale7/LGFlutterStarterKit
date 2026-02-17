@@ -9,6 +9,8 @@ description: Manages CI/CD pipelines, Docker configurations, LG rig deployment, 
 
 This skill handles the infrastructure and deployment side of Liquid Galaxy Flutter app development. It covers CI/CD pipelines, Docker containers for development, LG rig deployment, and build automation.
 
+> **Context**: Gemini Summer of Code 2026 — Task 2 requires a deployable Flutter app. DevOps ensures builds pass, Docker mock rigs work, and the APK is contest-ready.
+
 **Announce at start:** "I'm using the lg-devops-agent skill to set up [DevOps Task]."
 
 ## 🐳 Docker for LG Development
@@ -172,6 +174,14 @@ echo "APK installed. Launch the app on the device."
 3. `/var/www/html/kml/` writable from SSH.
 4. Google Earth Pro installed and running on all machines.
 5. `lg-sync` service running to sync master → slaves.
+
+## Reference Links
+
+- **LG rig setup scripts**: https://github.com/LiquidGalaxyLAB/liquid-galaxy
+- **Flutter CI best practices**: https://docs.flutter.dev/testing/build-modes
+- **GitHub Actions Flutter**: https://github.com/marketplace/actions/flutter-action
+- **Docker SSH for testing**: https://hub.docker.com/r/linuxserver/openssh-server
+- For deeper study → **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md)
 
 ## Handoff
 After DevOps setup → return to calling skill (typically `lg-exec` or `lg-flutter-build`).

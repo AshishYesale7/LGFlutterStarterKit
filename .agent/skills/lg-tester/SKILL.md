@@ -312,5 +312,12 @@ flutter test test/services/kml_service_test.dart
 flutter test --reporter expanded
 ```
 
+## Reference Links
+
+- **Flutter testing guide**: https://docs.flutter.dev/testing
+- **Dart test package**: https://pub.dev/packages/test
+- **Mockito for Dart**: https://pub.dev/packages/mockito
+- For deeper study → **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md)
+
 ## Handoff
 After tests written → `lg-code-reviewer` for review. Tests must pass before any release.

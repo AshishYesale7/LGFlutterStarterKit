@@ -120,5 +120,14 @@ ssh lg@192.168.1.100 "echo '' > /var/www/html/kml/slave_0.kml"
 ssh lg@192.168.1.100 "killall googleearth-bin; sleep 2; /opt/google/earth/pro/googleearth-bin &"
 ```
 
+## Reference Links
+
+- **Lucia's LG Master App (working reference)**: https://github.com/LiquidGalaxyLAB/LG-Master-Web-App
+- **dartssh2 docs**: https://pub.dev/packages/dartssh2
+- **KML Reference (validate your KML)**: https://developers.google.com/kml/documentation/kmlreference
+- **Flutter debugging guide**: https://docs.flutter.dev/testing/debugging
+- **LG rig setup/troubleshooting**: https://github.com/LiquidGalaxyLAB/liquid-galaxy/wiki
+- For deeper study → **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md)
+
 ## Handoff
 After fix → `lg-code-reviewer` for verification that the fix is clean.

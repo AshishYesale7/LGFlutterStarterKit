@@ -132,6 +132,24 @@ For each screen generated:
 - Any extracted widgets in `lib/widgets/`
 - Entry in `docs/learning-journal.md` explaining the screen's purpose
 
+## ⛔️ Student Interaction — MANDATORY
+
+**After generating each screen, STOP and explain:**
+1. How the screen reads state from Provider (watch vs read).
+2. Why NO business logic exists in the screen — it only delegates to services.
+3. Show the corresponding entry in `docs/learning-journal.md`.
+4. Ask: *"What happens when you tap [action] on this screen? Trace the call from UI to rig."*
+5. If the student cannot trace the flow, link to **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md).
+
+**DO NOT auto-generate the next screen** until the student confirms understanding.
+
+## Reference Links
+
+- **Lucia's screen structure**: https://github.com/LiquidGalaxyLAB/LG-Master-Web-App (splash, main, connection, settings, help)
+- **Flutter layout guide**: https://docs.flutter.dev/ui/layout
+- **Material Design 3**: https://m3.material.io/
+- For deeper study → **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md)
+
 ## Handoff
 Passes generated screens to `lg-code-reviewer` for quality review and
 `lg-shield` for boundary validation.

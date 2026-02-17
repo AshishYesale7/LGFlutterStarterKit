@@ -16,19 +16,27 @@ This skill manages all GitHub-related operations for Liquid Galaxy Flutter proje
 ### When This Triggers
 During `lg-init` Phase 0, after the new app directory is created as a **sibling** to `LGFlutterStarterKit`.
 
+### ⚠️ MANDATORY: App Naming Convention
+
+The repository name **MUST** follow the `LG-<TaskName>` pattern:
+- ✅ `LG-Earthquake-Viz`, `LG-Space-Explorer`, `LG-Weather-Atlas`
+- ❌ `earthquake_app`, `my_flutter_project`, `cool_viz`
+
+**Validate before creating**: If the name does not start with `LG-`, **STOP** and ask the student to rename.
+
 ### Step 1: Create GitHub Repository
 ```bash
 # Method 1: GitHub CLI (RECOMMENDED — if gh is installed)
 gh auth status  # Verify authenticated
-gh repo create "<username>/<app-name>" --public --description "Liquid Galaxy Flutter controller: <description>" --source . --remote origin --push
+gh repo create "<username>/LG-<TaskName>" --public --description "Liquid Galaxy Flutter controller: <description>" --source . --remote origin --push
 
 # Method 2: Manual (if gh not installed)
 # 1. Go to https://github.com/new
-# 2. Create repo with name: <app-name>
+# 2. Create repo with name: LG-<TaskName>
 # 3. Set to Public
 # 4. Do NOT initialize with README (we already have one)
 # 5. Copy the repo URL
-git remote add origin https://github.com/<username>/<app-name>.git
+git remote add origin https://github.com/<username>/LG-<TaskName>.git
 git push -u origin main
 ```
 
@@ -50,11 +58,14 @@ git add .github/ && git commit -m "chore(ci): add Flutter CI/CD workflows" && gi
 ### Step 4: Set Up Templates
 Copy PR and Issue templates from starter kit reference (see below).
 
-### Important: Two Repos, Two Purposes
+### Important: Three Repos, Three Purposes (Contest Workflow)
 | Repository | Purpose | Push To |
 |------------|---------|--------|
 | `LGFlutterStarterKit` | Template/reference (Antigravity agent system) | Original repo (read-only for students) |
-| `<NewAppName>` | Student's actual LG app | Student's own GitHub account |
+| `LG-<TaskName>` | Student's actual LG app (Task 2 deliverable) | Student's own GitHub account |
+| Agent System Repo | Gemini agent config + prompts (Task 1 deliverable) | Student's own GitHub account |
+
+> **Contest**: Gemini Summer of Code 2026 — see `.agent/rules/lg-architecture.md` for full requirements.
 
 ## 🌿 Branching Strategy
 
@@ -205,6 +216,13 @@ README.md
 DEVELOPMENT_LOG.md
 CONTRIBUTING.md       # How to contribute
 ```
+
+## Reference Links
+
+- **Conventional Commits**: https://www.conventionalcommits.org/
+- **GitHub CLI docs**: https://cli.github.com/manual/
+- **Open Source Guides**: https://opensource.guide/
+- For deeper study → **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md)
 
 ## Handoff
 After GitHub setup → return to the original workflow.
