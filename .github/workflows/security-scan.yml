@@ -1,0 +1,69 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 6 * * 1'  # Weekly Monday 6 AM UTC
+
+jobs:
+  secret-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for hardcoded secrets
+        run: |
+          echo "Scanning for potential secrets..."
+          FOUND=0
+          # Check for hardcoded passwords (excluding config.dart defaults and skill docs)
+          if grep -rn --include="*.dart" "password.*=.*['\"]" flutter_client/lib/ | grep -v "config.dart" | grep -v "lgPassword" | grep -v "obscureText" | grep -v "labelText" | grep -v "Password'" | head -20; then
+            echo "⚠️  Potential hardcoded passwords found"
+            FOUND=1
+          fi
+          # Check for API keys
+          if grep -rn --include="*.dart" "api[_-]key\|apiKey\|API_KEY" flutter_client/lib/ | head -20; then
+            echo "⚠️  Potential API keys found"
+            FOUND=1
+          fi
+          if [ $FOUND -eq 0 ]; then
+            echo "✅ No hardcoded secrets detected"
+          fi
+
+  dependency-audit:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: flutter_client
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.0'
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Check for outdated packages
+        run: flutter pub outdated
+
+  npm-audit:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: server
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Run npm audit
+        run: npm audit --audit-level=moderate || true

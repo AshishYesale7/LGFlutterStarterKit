@@ -1,0 +1,58 @@
+name: Flutter Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      build-type:
+        description: 'Build type'
+        required: true
+        default: 'debug'
+        type: choice
+        options:
+          - debug
+          - release
+      lg-host:
+        description: 'LG Host IP (for dart-define)'
+        required: false
+        default: '192.168.56.101'
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: flutter_client
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.0'
+          channel: stable
+          cache: true
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Build Debug APK
+        if: inputs.build-type == 'debug'
+        run: flutter build apk --debug --dart-define=LG_HOST=${{ inputs.lg-host }}
+
+      - name: Build Release APK
+        if: inputs.build-type == 'release'
+        run: flutter build apk --release --dart-define=LG_HOST=${{ inputs.lg-host }}
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: lg-starter-${{ inputs.build-type }}-apk
+          path: flutter_client/build/app/outputs/flutter-apk/app-${{ inputs.build-type }}.apk

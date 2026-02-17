@@ -1,0 +1,199 @@
+// TEMPLATE: kml_service.dart
+// KML generation utilities for Liquid Galaxy
+
+/// KML Service — Liquid Galaxy KML Generator
+///
+/// ARCHITECTURE:
+/// Generates valid KML 2.2 XML strings for visualization on Google Earth
+/// via the Liquid Galaxy rig. This service is stateless — it transforms
+/// data into KML strings. The SSHService handles sending them to the rig.
+///
+/// IMPORTANT: KML coordinates are in lon,lat,alt order (NOT lat,lon!)
+
+class KMLService {
+  /// Generate a single placemark
+  String generatePlacemark({
+    required String name,
+    required double latitude,
+    required double longitude,
+    double altitude = 0,
+    String description = '',
+    String iconUrl = '',
+    double iconScale = 2.5,
+  }) {
+    return '''<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <Placemark>
+      <name>$name</name>
+      <description><![CDATA[$description]]></description>
+      ${iconUrl.isNotEmpty ? '''<Style>
+        <IconStyle>
+          <Icon><href>$iconUrl</href></Icon>
+          <scale>$iconScale</scale>
+        </IconStyle>
+      </Style>''' : ''}
+      <Point>
+        <altitudeMode>relativeToGround</altitudeMode>
+        <coordinates>$longitude,$latitude,$altitude</coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>''';
+  }
+
+  /// Generate multiple placemarks from data list
+  String generatePlacemarks(
+    List<Map<String, dynamic>> items, {
+    String documentName = 'Data Visualization',
+  }) {
+    final buffer = StringBuffer();
+    buffer.writeln('<?xml version="1.0" encoding="UTF-8"?>');
+    buffer.writeln('<kml xmlns="http://www.opengis.net/kml/2.2">');
+    buffer.writeln('<Document><name>$documentName</name>');
+
+    for (final item in items) {
+      buffer.writeln('''
+    <Placemark>
+      <name>${_escapeXml(item['name']?.toString() ?? 'Unnamed')}</name>
+      <description><![CDATA[${item['description'] ?? ''}]]></description>
+      <Point>
+        <coordinates>${item['longitude']},${item['latitude']},${item['altitude'] ?? 0}</coordinates>
+      </Point>
+    </Placemark>''');
+    }
+
+    buffer.writeln('</Document></kml>');
+    return buffer.toString();
+  }
+
+  /// Generate a FlyTo LookAt KML
+  String generateFlyTo({
+    required double latitude,
+    required double longitude,
+    double altitude = 0,
+    double heading = 0,
+    double tilt = 60,
+    double range = 15000,
+    double duration = 3,
+  }) {
+    return '''<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"
+     xmlns:gx="http://www.google.com/kml/ext/2.2">
+  <gx:FlyTo>
+    <gx:duration>$duration</gx:duration>
+    <gx:flyToMode>smooth</gx:flyToMode>
+    <LookAt>
+      <longitude>$longitude</longitude>
+      <latitude>$latitude</latitude>
+      <altitude>$altitude</altitude>
+      <heading>$heading</heading>
+      <tilt>$tilt</tilt>
+      <range>$range</range>
+      <altitudeMode>relativeToGround</altitudeMode>
+    </LookAt>
+  </gx:FlyTo>
+</kml>''';
+  }
+
+  /// Generate an orbit tour around a location
+  String generateOrbit({
+    required double latitude,
+    required double longitude,
+    double altitude = 5000,
+    double range = 20000,
+    double tilt = 60,
+    int steps = 36,
+    double stepDuration = 1.2,
+  }) {
+    final buffer = StringBuffer();
+    buffer.writeln('<?xml version="1.0" encoding="UTF-8"?>');
+    buffer.writeln('<kml xmlns="http://www.opengis.net/kml/2.2"');
+    buffer.writeln('     xmlns:gx="http://www.google.com/kml/ext/2.2">');
+    buffer.writeln('<gx:Tour><name>Orbit</name><gx:Playlist>');
+
+    for (int i = 0; i < steps; i++) {
+      final heading = (360.0 / steps) * i;
+      buffer.writeln('''
+    <gx:FlyTo>
+      <gx:duration>$stepDuration</gx:duration>
+      <gx:flyToMode>smooth</gx:flyToMode>
+      <LookAt>
+        <longitude>$longitude</longitude>
+        <latitude>$latitude</latitude>
+        <altitude>$altitude</altitude>
+        <heading>$heading</heading>
+        <tilt>$tilt</tilt>
+        <range>$range</range>
+        <altitudeMode>relativeToGround</altitudeMode>
+      </LookAt>
+    </gx:FlyTo>''');
+    }
+
+    buffer.writeln('</gx:Playlist></gx:Tour></kml>');
+    return buffer.toString();
+  }
+
+  /// Generate a balloon (info popup) KML
+  String generateBalloon({
+    required String name,
+    required double latitude,
+    required double longitude,
+    required String htmlContent,
+  }) {
+    return '''<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"
+     xmlns:gx="http://www.google.com/kml/ext/2.2">
+  <Document>
+    <Placemark>
+      <name>${_escapeXml(name)}</name>
+      <description><![CDATA[$htmlContent]]></description>
+      <Point>
+        <coordinates>$longitude,$latitude,0</coordinates>
+      </Point>
+      <gx:balloonVisibility>1</gx:balloonVisibility>
+    </Placemark>
+  </Document>
+</kml>''';
+  }
+
+  /// Generate a logo overlay for slave screens
+  String generateLogoOverlay({
+    required String imageUrl,
+    double x = 0.02,
+    double y = 0.98,
+    double width = 0.3,
+    double height = 0.15,
+  }) {
+    return '''<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <ScreenOverlay>
+      <name>Logo</name>
+      <Icon><href>$imageUrl</href></Icon>
+      <overlayXY x="0" y="1" xunits="fraction" yunits="fraction"/>
+      <screenXY x="$x" y="$y" xunits="fraction" yunits="fraction"/>
+      <size x="$width" y="$height" xunits="fraction" yunits="fraction"/>
+    </ScreenOverlay>
+  </Document>
+</kml>''';
+  }
+
+  /// Generate a clean/empty KML to reset the rig
+  String generateCleanKML() {
+    return '''<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document><name>clear</name></Document>
+</kml>''';
+  }
+
+  /// Escape special XML characters
+  String _escapeXml(String text) {
+    return text
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&apos;');
+  }
+}
