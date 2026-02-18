@@ -2,9 +2,6 @@
 	"folders": [
 		{
 			"path": "."
-		},
-		{
-			"path": "../lg_task2_controller"
 		}
 	],
 	"settings": {}

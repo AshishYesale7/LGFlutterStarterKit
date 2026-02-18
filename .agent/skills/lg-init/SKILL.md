@@ -27,23 +27,25 @@ The student's generated app is **deliverable #2**. It must be in its own repo, b
 
 ## CRITICAL: Separate Directory Rule
 
-**The new app MUST be created in a separate directory, NOT inside `LGFlutterStarterKit`.**
+**The new app MUST be created as a sibling directory inside the Antigravity workspace, NOT inside `LGFlutterStarterKit`.**
 
-The starter kit is a **template/reference** — it stays untouched. The new app gets its own directory and its own Git repo.
+The starter kit is a **template/reference** — it stays untouched. The new app gets its own directory and its own Git repo, but BOTH live inside the same workspace so the student can see them side-by-side in their IDE.
 
 ```
-parent_directory/
-├── LGFlutterStarterKit/          ← THIS STAYS UNTOUCHED (template)
-│   ├── .agent/                    ← Agent skills, rules, workflows
-│   ├── flutter_client/            ← Reference implementation
+~/.gemini/antigravity/scratch/            ← ANTIGRAVITY WORKSPACE ROOT
+├── LGFlutterStarterKit/                  ← THIS STAYS UNTOUCHED (template)
+│   ├── .agent/                            ← Agent skills, rules, workflows
+│   ├── flutter_client/                    ← Reference implementation
 │   └── ...
-└── LG-Task2-Demo/                ← NEW APP GOES HERE (separate repo)
+└── LG-Task2-Demo/                        ← NEW APP GOES HERE (separate repo)
     ├── flutter_client/
     ├── docs/
     ├── .github/
     ├── README.md
     └── ...
 ```
+
+**After creating the app directory, add it to the IDE workspace** so the student sees both repos in the file explorer.
 
 ---
 
@@ -81,19 +83,26 @@ LG-<TaskName>
 ### Step 1: Explain and Confirm Project Location
 
 **First, explain to the student what will happen:**
-> *"I'm going to create your LG app in a SEPARATE directory next to the starter kit — not inside it. The starter kit stays untouched as a reference. Here's the directory structure:"*
+> *"I'm going to create your LG app as a sibling directory next to the starter kit — inside the same Antigravity workspace. Both repos will be visible in your IDE side-by-side. Here's the layout:"*
 
 ```bash
-# The starter kit location
-STARTER_KIT=$(pwd)   # e.g., /Users/user/.gemini/antigravity/scratch/LGFlutterStarterKit
+# The Antigravity workspace root
+WORKSPACE_ROOT=$(dirname "$STARTER_KIT")   # ~/.gemini/antigravity/scratch/
 
-# New app goes in a SIBLING directory
-PARENT_DIR=$(dirname "$STARTER_KIT")
+# The starter kit location
+STARTER_KIT=$(pwd)   # e.g., ~/.gemini/antigravity/scratch/LGFlutterStarterKit
+
+# New app goes as a SIBLING inside the same workspace
 APP_NAME="LG-Task2-Demo"   # Must follow LG-<TaskName> convention
-APP_DIR="$PARENT_DIR/$APP_NAME"
+APP_DIR="$WORKSPACE_ROOT/$APP_NAME"
 ```
 
-Ask: *"The new project will live at `[path]`. This keeps your starter kit separate from your app code. Does this make sense to you? Any questions about why we use sibling directories?"*
+**Tell the student the exact path:**
+> *"Your new project will live at: `~/.gemini/antigravity/scratch/LG-Task2-Demo/`"*
+> *"The starter kit stays untouched at: `~/.gemini/antigravity/scratch/LGFlutterStarterKit/`"*
+> *"Both will be visible in your IDE workspace."*
+
+Ask: *"This means your app code and the mentor's skills live side-by-side. Does this workspace layout make sense? Any questions about why we keep them separate but within reach?"*
 
 ⛔ **STOP and WAIT** for the student's response.
 
@@ -102,6 +111,10 @@ Ask: *"The new project will live at `[path]`. This keeps your starter kit separa
 mkdir -p "$APP_DIR"
 cd "$APP_DIR"
 ```
+
+**Tell the student:**
+> *"📂 Created directory: `~/.gemini/antigravity/scratch/LG-Task2-Demo/`"*
+> *"To navigate here yourself: `cd ~/.gemini/antigravity/scratch/LG-Task2-Demo`"*
 
 ### Step 3: Copy Starter Kit Scaffolding
 
@@ -128,8 +141,20 @@ cp -r "$STARTER_KIT/server" "$APP_DIR/server" 2>/dev/null || true
 touch README.md DEVELOPMENT_LOG.md
 ```
 
-**After copying, explain the structure:**
-> *"Here's what we just created: `flutter_client/` is your main app code, `docs/` is where plans and reviews go, `server/` is the Node.js backend. Each folder has a specific purpose."*
+**After copying, show the student exactly what was created with full paths:**
+
+```
+📁 Files created:
+  ✅ ~/.gemini/antigravity/scratch/LG-Task2-Demo/flutter_client/  (Flutter app template)
+  ✅ ~/.gemini/antigravity/scratch/LG-Task2-Demo/server/          (Node.js backend)
+  ✅ ~/.gemini/antigravity/scratch/LG-Task2-Demo/docs/plans/      (Design & plan docs)
+  ✅ ~/.gemini/antigravity/scratch/LG-Task2-Demo/docs/screenshots/ (Demo evidence)
+  ✅ ~/.gemini/antigravity/scratch/LG-Task2-Demo/.github/          (CI/CD workflows)
+  ✅ ~/.gemini/antigravity/scratch/LG-Task2-Demo/README.md
+  ✅ ~/.gemini/antigravity/scratch/LG-Task2-Demo/DEVELOPMENT_LOG.md
+```
+
+> *"Here's what we just created. `flutter_client/` is your main app code, `docs/` is where plans and reviews go, `server/` is the Node.js backend. Each folder has a specific purpose."*
 
 Ask: *"Can you guess which folder your SSH service code will go in? Which folder will your screen widgets live in?"*
 
@@ -143,12 +168,31 @@ git add .
 git commit -m "init: project scaffolding from LGFlutterStarterKit"
 ```
 
-### Step 5: Create GitHub Repo
+**Tell the student:**
+> *"💻 Terminal command: `cd ~/.gemini/antigravity/scratch/LG-Task2-Demo && git init && git add . && git commit -m 'init: project scaffolding from LGFlutterStarterKit'`"*
+> *"Git repo initialized with your first commit. To check status: `cd ~/.gemini/antigravity/scratch/LG-Task2-Demo && git log --oneline`"*
+
+### Step 5: Add to IDE Workspace
+
+**CRITICAL: Make both repos visible in the IDE.**
+
+> *"I'm adding your new app to the current workspace so you can see both repos in the file explorer:"*
+> *"📂 Workspace now contains:"*
+> *"  1. `LGFlutterStarterKit/` — The template + agent skills"*
+> *"  2. `LG-Task2-Demo/` — Your app (this is where we'll work)"*
+
+If using VS Code, add the folder to the workspace. If using another IDE, tell the student how to open both directories.
+
+### Step 6: Create GitHub Repo
 Hand off to `.agent/skills/lg-github-agent/SKILL.md` to:
 1. Create a new GitHub repo with the app name
 2. Set origin remote
 3. Push initial commit
 4. Set up branch protection and templates
+
+**Tell the student the GitHub URL:**
+> *"GitHub repo created: `https://github.com/<username>/LG-Task2-Demo`"*
+> *"To push manually: `cd ~/.gemini/antigravity/scratch/LG-Task2-Demo && git push -u origin main`"*
 
 ---
 
@@ -279,12 +323,23 @@ Ask: *"Why is this important? What would go wrong if we put SSH code directly in
 ## Execution
 1. Gather requirements.
 2. Recommend logo/assets via Nano Banana.
-3. Create/modify files.
+3. Create/modify files — **show full paths for every file created**.
 4. `flutter pub get && flutter analyze`.
+   > *"🖥️ Terminal: `cd ~/.gemini/antigravity/scratch/LG-Task2-Demo/flutter_client && flutter pub get && flutter analyze`"*
 5. Commit: `init: LG Flutter project scaffolding`.
-6. **Ask the student**: *"The project is scaffolded. Before we brainstorm features, can you explain: What is the relationship between the Flutter app on your phone and Google Earth on the LG rig?"*
-7. If the student cannot answer, link to **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md) — Architecture topic.
-8. Hand to **Brainstormer** (.agent/skills/lg-brainstormer/SKILL.md).
+   > *"🖥️ Terminal: `cd ~/.gemini/antigravity/scratch/LG-Task2-Demo && git add . && git commit -m 'init: LG Flutter project scaffolding'`"*
+6. **Summary block — show everything created:**
+   ```
+   📁 Project created at: ~/.gemini/antigravity/scratch/LG-Task2-Demo/
+   📂 Flutter app: ~/.gemini/antigravity/scratch/LG-Task2-Demo/flutter_client/
+   📂 Docs: ~/.gemini/antigravity/scratch/LG-Task2-Demo/docs/
+   📂 Server: ~/.gemini/antigravity/scratch/LG-Task2-Demo/server/
+   🌐 GitHub: https://github.com/<user>/LG-Task2-Demo
+   🖥️ To run: cd ~/.gemini/antigravity/scratch/LG-Task2-Demo/flutter_client && flutter run
+   ```
+7. **Ask the student**: *"The project is scaffolded. Before we brainstorm features, can you explain: What is the relationship between the Flutter app on your phone and Google Earth on the LG rig?"*
+8. If the student cannot answer, link to **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md) — Architecture topic.
+9. Hand to **Brainstormer** (.agent/skills/lg-brainstormer/SKILL.md).
 
 ## 🔗 Skill Chain
 

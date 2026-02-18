@@ -56,15 +56,23 @@ For each task WITHIN a batch:
 2. **Before writing code**, briefly explain what you're about to create and WHY:
    - *"Task 2 creates `kml_service.dart`. This service generates KML XML strings — it has NO network access. Here's why we keep it separate from SSH..."*
 3. Follow: Logic -> Implementation -> Verification.
-4. **After each task**, provide a 2-3 sentence summary of what changed:
+4. **After each task**, provide a 2-3 sentence summary of what changed **with full file paths**:
    - *"I created `kml_service.dart` with `generatePlacemark()` and `generateScreenOverlay()`. Both return raw KML strings. Notice how this service has zero imports from `ssh_service` — that's our layer boundary in action."*
+   ```
+   📁 Files changed:
+     ✅ Created: ~/.gemini/antigravity/scratch/LG-Task2-Demo/flutter_client/lib/services/kml_service.dart
+     ✏️ Modified: ~/.gemini/antigravity/scratch/LG-Task2-Demo/flutter_client/lib/main.dart (added provider)
+   ```
 5. Verify:
    - `flutter analyze` — zero errors
    - `dart format .` — consistent style
    - `flutter test` — all passing
    - Hot reload if app is running
+   - **Show the terminal commands:**
+     > *"🖥️ Terminal: `cd ~/.gemini/antigravity/scratch/LG-Task2-Demo/flutter_client && flutter analyze && dart format . && flutter test`"*
 6. Check Flutter-specific concerns: Provider usage, async error handling, SSH resource disposal.
 7. Commit: `feat: [task name]`
+   > *"🖥️ Terminal: `cd ~/.gemini/antigravity/scratch/LG-Task2-Demo && git add . && git commit -m 'feat: [task name]'`"*
 
 ⛔ **Within a 3-task batch, you still EXPLAIN each task as you go.** The student should never see 3 files appear silently. Narrate the work as a teacher would.
 
@@ -113,16 +121,30 @@ For each task WITHIN a batch:
 
 If an emulator is running (`flutter devices` shows a device):
 - Run the app: `flutter run -d <device-id>`
+- **Show the student how to run it themselves:**
+  > *"🖥️ To launch: `cd ~/.gemini/antigravity/scratch/LG-Task2-Demo/flutter_client && flutter run -d emulator-5554`"*
+  > *"Press `r` for hot reload, `R` for hot restart, `q` to quit."*
 - Ask the student to verify the new feature visually
 - Capture a screenshot: `adb exec-out screencap -p > docs/screenshots/batch_N.png`
+  > *"📸 Screenshot saved to: `~/.gemini/antigravity/scratch/LG-Task2-Demo/docs/screenshots/batch_N.png`"*
 - *"Does the screen look right? What would you change about the layout?"*
 
 ### Step 6: Final Review
 1. Full validation: `flutter analyze && flutter test && dart format --set-exit-if-changed .`
+   > *"🖥️ Terminal: `cd ~/.gemini/antigravity/scratch/LG-Task2-Demo/flutter_client && flutter analyze && flutter test && dart format --set-exit-if-changed .`"*
 2. Mark plan as complete.
+   > *"📝 Plan updated: `~/.gemini/antigravity/scratch/LG-Task2-Demo/docs/plans/<plan-file>.md` — all tasks ✅"*
 3. Show the student a summary: *"We've completed all [N] tasks from the plan. Here's what the app can do now: [summary]."*
-4. **Final comprehension check**: Ask one big-picture question — *"Trace the full data flow from the user tapping 'Visualize' to the KML appearing on the LG rig."*
-5. Hand to **Code Reviewer** (.agent/skills/lg-code-reviewer/SKILL.md).
+4. **Show all files created/modified across the entire plan:**
+   ```
+   📁 Complete file inventory:
+     ✅ Created: [list all new files with full paths]
+     ✏️ Modified: [list all modified files with full paths]
+     🖥️ To run the app: cd ~/.gemini/antigravity/scratch/LG-Task2-Demo/flutter_client && flutter run
+     📦 To build APK: cd ~/.gemini/antigravity/scratch/LG-Task2-Demo/flutter_client && flutter build apk --release
+   ```
+5. **Final comprehension check**: Ask one big-picture question — *"Trace the full data flow from the user tapping 'Visualize' to the KML appearing on the LG rig."*
+6. Hand to **Code Reviewer** (.agent/skills/lg-code-reviewer/SKILL.md).
 
 ## 🔗 Skill Chain
 

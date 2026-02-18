@@ -8,7 +8,46 @@ description: The complete 10-stage educational pipeline from security pre-flight
 ## Overview
 Executes the complete LG educational pipeline in order. This is the recommended workflow for students going through the full learning experience. The pipeline includes environment validation, security bookends, strict layer boundary enforcement, and automatic resume on interruption.
 
-**CRITICAL**: This pipeline is designed for the **Gemini Summer of Code 2026 — Agentic Programming Contest**. The generated app follows the `LG-<TaskName>` naming convention and is created in a **separate directory** from the starter kit.
+**CRITICAL**: This pipeline is designed for the **Gemini Summer of Code 2026 — Agentic Programming Contest**. The generated app follows the `LG-<TaskName>` naming convention and is created as a **sibling directory inside the Antigravity workspace** (not outside it).
+
+---
+
+## 📍 MANDATORY: Path Transparency
+
+> **Every file, directory, command, and output path MUST be shown to the student in chat.**
+> The student should NEVER have to ask "where is that file?" or "what command did you run?"
+
+**After every action, show:**
+- Full file paths for created/modified files
+- Terminal commands with working directory
+- Build output locations (APK path, screenshot path, etc.)
+- Git commands for manual verification
+- Emulator launch commands for manual testing
+
+Example after each task:
+```
+📁 Files changed:
+  ✅ Created: ~/.gemini/antigravity/scratch/LG-Task2-Demo/flutter_client/lib/services/ssh_service.dart
+  ✏️ Modified: ~/.gemini/antigravity/scratch/LG-Task2-Demo/flutter_client/lib/main.dart
+🖥️ To verify: cd ~/.gemini/antigravity/scratch/LG-Task2-Demo/flutter_client && flutter analyze
+```
+
+---
+
+## 🧠 MANDATORY: Conversational Brain
+
+> **Antigravity is ONE continuous intelligence, not a menu of skills.**
+> The agent seamlessly detects what the student needs and activates the right skill automatically.
+> The student should NEVER need to know skill names or manually request stages.
+
+**The agent MUST:**
+- Detect context and activate the appropriate skill without being asked
+- Use multiple skills within a single conversation turn when needed
+- Transition between skills naturally: "Let me check your code for security issues before we continue..."
+- ALWAYS explain what it's doing in plain language, not skill names
+- Feel like ONE mentor, not a skill directory
+
+**The agent announces skills for transparency** ("I'm using lg-exec to implement the SSH service") but the student never needs to REQUEST a skill.
 
 ---
 
@@ -137,7 +176,8 @@ Cross-cutting (active at ALL stages):
 ### Stage 1: Init
 **Skill**: `.agent/skills/lg-init/SKILL.md` + `.agent/skills/lg-flutter-init/SKILL.md`
 - **Enforce LG-<TaskName> naming convention** (e.g., `LG-Task2-Demo`)
-- **Create new app in a SEPARATE sibling directory** (NOT inside LGFlutterStarterKit)
+- **Create new app as a sibling inside the Antigravity workspace** (`~/.gemini/antigravity/scratch/LG-Task2-Demo/`)
+- **Add the new app to the IDE workspace** so student sees both repos side-by-side
 - Gather requirements (project name, screens, platforms, APIs) — one question at a time
 - **Recommend logo/assets** via `lg-nanobanana-sprite`
 - Copy starter kit scaffolding into new directory
@@ -145,6 +185,7 @@ Cross-cutting (active at ALL stages):
 - Scaffold directory structure with layered architecture
 - Install dependencies
 - Verify toolchain
+- **Show full paths for all created files and directories**
 - All subsequent stages operate in the NEW app directory
 
 > ⛔️ **Student Checkpoint**: *"The project is scaffolded. Explain: What is the relationship between the Flutter app on your phone and Google Earth on the LG rig?"*
@@ -300,3 +341,6 @@ Cross-cutting (active at ALL stages):
 - **Agent-driven planning and generation** — reproducible workflows
 - **Security by default** — secrets in secure storage, not source code
 - **Minimal and extensible skeleton** — easy to add new APIs and visualizations
+- **Path transparency** — every file, command, and output path shown explicitly in chat
+- **Conversational brain** — one continuous intelligence that seamlessly uses the right skill at every step
+- **Workspace co-location** — generated app lives alongside starter kit in the same IDE workspace
