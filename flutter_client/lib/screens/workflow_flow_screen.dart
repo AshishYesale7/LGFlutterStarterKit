@@ -655,13 +655,13 @@ class _WorkflowFlowScreenState extends State<WorkflowFlowScreen> {
 
   void _zoomIn() {
     final current = _transformCtrl.value.clone();
-    current.scaleByDouble(1.3, 1.3, 1.3, 1.0);
+    current.scale(1.3, 1.3, 1.3);
     _transformCtrl.value = current;
   }
 
   void _zoomOut() {
     final current = _transformCtrl.value.clone();
-    current.scaleByDouble(0.7, 0.7, 0.7, 1.0);
+    current.scale(0.7, 0.7, 0.7);
     _transformCtrl.value = current;
   }
 

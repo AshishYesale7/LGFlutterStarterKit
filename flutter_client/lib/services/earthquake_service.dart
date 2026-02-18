@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 /// Service for fetching earthquake data from the USGS API.
@@ -39,7 +40,8 @@ class EarthquakeService {
         }).toList();
       }
     } catch (e) {
-      print('Earthquake API error: $e');
+      // Error fetching earthquake data — caller should handle empty list
+      debugPrint('Earthquake API error: $e');
     }
     return [];
   }

@@ -1,14 +1,6 @@
-/// Represents the current state of the SSH connection.
-enum ConnectionStatus {
-  /// Not connected to any machine.
-  disconnected,
-
-  /// Attempting to establish connection.
-  connecting,
-
-  /// Successfully connected.
-  connected,
-
-  /// Connection failed or lost.
-  error,
-}
+/// Re-exports [ConnectionStatus] from the transport layer.
+///
+/// The canonical definition lives in [SSHService] to respect the
+/// 5-layer architecture (transport layer owns its own types).
+/// This file exists for backward compatibility.
+export 'package:flutter_client/services/ssh_service.dart' show ConnectionStatus;

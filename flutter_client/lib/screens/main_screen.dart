@@ -93,23 +93,37 @@ class _MainScreenState extends State<MainScreen> {
             ),
             const SizedBox(height: 16),
 
-            // Action buttons
+            // ─── 5 Core Task 2 Operations ──────────────────────────
             _buildActionButton(
-              'Fly to Lleida',
-              Icons.flight,
-              () => _executeAction(() => lgService.flyTo(
-                    latitude: 41.6176,
-                    longitude: 0.6200,
-                    altitude: 500,
-                  )),
-            ),
-            _buildActionButton(
-              'Show Logo',
+              'Send Logo',
               Icons.image,
-              () => _executeAction(() => lgService.showLogo()),
+              () => _executeAction(() => lgService.sendLogo()),
             ),
             _buildActionButton(
-              'Send KML',
+              'Send Pyramid',
+              Icons.change_history,
+              () => _executeAction(() => lgService.sendPyramid()),
+            ),
+            _buildActionButton(
+              'Fly to Home City',
+              Icons.flight,
+              () => _executeAction(() => lgService.flyToHomeCity()),
+            ),
+            _buildActionButton(
+              'Clean Logos',
+              Icons.layers_clear,
+              () => _executeAction(() => lgService.cleanLogos()),
+            ),
+            _buildActionButton(
+              'Clean KMLs',
+              Icons.clear_all,
+              () => _executeAction(() => lgService.cleanKMLs()),
+            ),
+            const Divider(height: 32),
+
+            // ─── Additional Operations ──────────────────────────────
+            _buildActionButton(
+              'Send KML Placemark',
               Icons.code,
               () => _executeAction(() => lgService.sendKMLPlacemark(
                     name: 'Lleida',
@@ -122,11 +136,6 @@ class _MainScreenState extends State<MainScreen> {
               'Reboot LG',
               Icons.restart_alt,
               () => _executeAction(() => lgService.rebootLG()),
-            ),
-            _buildActionButton(
-              'Clean KML',
-              Icons.clear_all,
-              () => _executeAction(() => lgService.cleanLogo()),
             ),
             _buildActionButton(
               'Disconnect',

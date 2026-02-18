@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_client/config.dart';
+import 'package:flutter_client/providers/settings_provider.dart';
 import 'package:flutter_client/services/lg_service.dart';
 
 class ConnectionScreen extends StatefulWidget {
@@ -11,12 +11,25 @@ class ConnectionScreen extends StatefulWidget {
 }
 
 class _ConnectionScreenState extends State<ConnectionScreen> {
-  final _hostController = TextEditingController(text: Config.lgHost);
-  final _portController = TextEditingController(text: Config.lgPort.toString());
-  final _userController = TextEditingController(text: Config.lgUser);
-  final _passController = TextEditingController(text: Config.lgPassword);
+  final _hostController = TextEditingController();
+  final _portController = TextEditingController();
+  final _userController = TextEditingController();
+  final _passController = TextEditingController();
   bool _isConnecting = false;
   String? _errorMessage;
+
+  @override
+  void initState() {
+    super.initState();
+    // Load persisted credentials from SettingsProvider (uses secure storage)
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final settings = context.read<SettingsProvider>();
+      _hostController.text = settings.host;
+      _portController.text = settings.port.toString();
+      _userController.text = settings.username;
+      _passController.text = settings.password;
+    });
+  }
 
   @override
   void dispose() {
@@ -34,10 +47,19 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
     });
 
     try {
+      // Persist credentials via secure storage before connecting
+      final settings = context.read<SettingsProvider>();
+      await settings.updateSettings(
+        host: _hostController.text,
+        port: int.tryParse(_portController.text) ?? settings.port,
+        username: _userController.text,
+        password: _passController.text,
+      );
+
       final lgService = context.read<LGService>();
       await lgService.connect(
         host: _hostController.text,
-        port: int.tryParse(_portController.text) ?? Config.lgPort,
+        port: int.tryParse(_portController.text) ?? settings.port,
         username: _userController.text,
         password: _passController.text,
       );

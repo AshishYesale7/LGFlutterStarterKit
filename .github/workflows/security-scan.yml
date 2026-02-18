@@ -101,7 +101,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: node_server
+        working-directory: server
 
     steps:
       - name: Checkout repository

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_client/services/lg_service.dart';
-import 'package:flutter_client/services/kml_service.dart';
 
 /// Orbit demo screen – lets students fly to a location and start
 /// a full 360° camera orbit around it on the Liquid Galaxy rig.
@@ -40,7 +39,6 @@ class _OrbitScreenState extends State<OrbitScreen> {
     if (!_formKey.currentState!.validate()) return;
 
     final lgService = context.read<LGService>();
-    final kmlService = KMLService();
 
     final lat = double.parse(_latController.text);
     final lng = double.parse(_lngController.text);
@@ -64,22 +62,12 @@ class _OrbitScreenState extends State<OrbitScreen> {
 
       setState(() => _statusMessage = 'Generating orbit KML…');
 
-      // Build and upload the orbit tour
-      final orbitKml = kmlService.generateOrbit(
+      // Build and upload the orbit tour via LGService
+      await lgService.sendOrbit(
         latitude: lat,
         longitude: lng,
         altitude: alt,
         range: range,
-        tilt: 60,
-        duration: 30,
-      );
-
-      // Upload via LGService's raw command execution
-      await lgService.executeRaw(
-        "echo '${orbitKml.replaceAll("'", "\\'")}' > /var/www/html/orbit.kml",
-      );
-      await lgService.executeRaw(
-        'echo "http://localhost/orbit.kml" >> /var/www/html/kmls.txt',
       );
 
       setState(() => _statusMessage = 'Orbit started! Duration ≈ 30 s');

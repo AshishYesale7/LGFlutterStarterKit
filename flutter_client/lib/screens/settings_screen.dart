@@ -53,31 +53,22 @@ class SettingsScreen extends StatelessWidget {
           Card(
             child: Column(
               children: [
-                // ignore: deprecated_member_use
                 RadioListTile<ThemeMode>(
                   title: const Text('System'),
                   value: ThemeMode.system,
-                  // ignore: deprecated_member_use
                   groupValue: themeProvider.themeMode,
-                  // ignore: deprecated_member_use
                   onChanged: (mode) => themeProvider.setThemeMode(mode!),
                 ),
-                // ignore: deprecated_member_use
                 RadioListTile<ThemeMode>(
                   title: const Text('Light'),
                   value: ThemeMode.light,
-                  // ignore: deprecated_member_use
                   groupValue: themeProvider.themeMode,
-                  // ignore: deprecated_member_use
                   onChanged: (mode) => themeProvider.setThemeMode(mode!),
                 ),
-                // ignore: deprecated_member_use
                 RadioListTile<ThemeMode>(
                   title: const Text('Dark'),
                   value: ThemeMode.dark,
-                  // ignore: deprecated_member_use
                   groupValue: themeProvider.themeMode,
-                  // ignore: deprecated_member_use
                   onChanged: (mode) => themeProvider.setThemeMode(mode!),
                 ),
               ],

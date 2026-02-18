@@ -103,5 +103,6 @@ class FlowEdgePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant FlowEdgePainter oldDelegate) =>
-      edges != oldDelegate.edges || nodeMap != oldDelegate.nodeMap;
+      edges.length != oldDelegate.edges.length ||
+      nodeMap.length != oldDelegate.nodeMap.length;
 }

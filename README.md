@@ -1,8 +1,287 @@
+
+
+[![wakatime](https://wakatime.com/badge/github/AshishYesale7/LGFlutterStarterKit.svg)](https://wakatime.com/badge/github/AshishYesale7/LGFlutterStarterKit)
+
 # LG Flutter Starter Kit
+
+> **Flutter starter kit for building Liquid Galaxy apps with tours, KML, external APIs, and AI-assisted workflows using Gemini.**
+
+---
+
+<a id="about-the-contest"></a>
+
+## 🏆 About the Contest
+
+This repository is my submission for the **Liquid Galaxy Agentic Programming Contest** — a competition focused on **Agentic Programming** and the **"AI tsunami"**. The challenge: build an Antigravity-powered environment that automates the development of Liquid Galaxy Flutter applications using Google's **Antigravity** framework with **Gemini** as the exclusive LLM.
+
+<a id="what-i-built"></a>
+
+### What I Built
+
+I built an **agentic system** — an Antigravity package with **33 specialized agent skills**, **5 architecture rules**, and **4 workflows** that can generate production-ready LG Flutter applications from scratch. The agent pipeline guides students through an 11-stage journey from environment setup to a deployed APK, enforcing best practices and verifying understanding at every checkpoint.
+
+<a id="deliverables"></a>
+
+### Deliverables
+
+| # | Deliverable | Description | Status |
+|---|-------------|-------------|--------|
+| 1 | **Starter Kit** | Flutter "skeleton" with LG best practices built in | ✅ `flutter_client/` |
+| 2 | **agent/ Folder** | 33 skills, 5 rules, 4 workflows — the core agentic system | ✅ `.agent/` |
+| 3 | **Demo Repository** | Sample app created entirely by the agent system | 📂 Separate repo |
+| 4 | **Video Demo** | Walkthrough of repository, agent skills, and resulting app | 🎥 Separate |
+| 5 | **Technical Documentation** | This README + comprehensive [`DOCUMENTATION/`](DOCUMENTATION/) folder | ✅ |
+
+<a id="demo-app"></a>
+
+### Demo App
+
+> **[LG-EarthQuake-Viz](https://github.com/AshishYesale7/LG-EarthQuake-Viz)** — A demo application built entirely using this starter kit and the Antigravity agent system. Visualizes real-time USGS earthquake data on a Liquid Galaxy rig with KML heatmaps, camera tours, and multi-screen overlays.
+
+---
+
+<a id="index"></a>
+
+## INDEX
+
+1. [About the Contest](#about-the-contest)  
+   1.1. [What I Built](#what-i-built)  
+   1.2. [Deliverables](#deliverables)  
+   1.3. [Demo App](#demo-app)  
+2. [Main Workflow](#main-workflow)  
+3. [Agentic Architecture](#agentic-architecture)  
+4. [Agent Skills Overview](#agent-skills-overview)  
+5. [CI/CD Pipeline](#cicd-pipeline)  
+6. [Key Features](#key-features)  
+7. [Getting Started with Antigravity](#getting-started)  
+   7.1. [Step-by-Step: From Clone to Running App](#step-by-step)  
+   7.2. [Prompts to Explore the Starter Kit](#prompts)  
+   7.3. [How GUIDE.md Powers the Agent](#guide-context)  
+8. [Installation](#installation)  
+9. [Running the Project](#running-the-project)  
+   9.1. [Standard Start (3-Screen Rig)](#standard-start)  
+   9.2. [Custom Rig Configuration](#custom-rig)  
+   9.3. [Screen Mapping (3-Screen Rig)](#screen-mapping)  
+   9.4. [Building for Release](#building-release)  
+   9.5. [Node.js Server (Optional)](#nodejs-server)  
+10. [Architecture Overview](#architecture-overview)  
+    10.1. [The Flutter App](#flutter-app)  
+    10.2. [The LG Rig](#lg-rig)  
+    10.3. [App → Rig Communication](#app-rig-comm)  
+    10.4. [The 5-Layer Import Matrix](#import-matrix)  
+11. [What Can You Build?](#what-can-you-build)  
+12. [App Screens & Controls](#app-screens-and-controls)  
+    12.1. [5 Core LG Operations (Task 2 Minimum)](#core-operations)  
+13. [Expert Agent Pipeline](#expert-agent-pipeline)  
+    13.1. [Conversational Auto-Chain](#auto-chain)  
+    13.2. [Full Skill Roster (33 Skills)](#skill-roster)  
+    13.3. [5 Enforced Architecture Rules](#arch-rules)  
+14. [Educational Notes](#educational-notes)  
+    14.1. [Professional Quality Tools](#quality-tools)  
+15. [Dependencies](#dependencies)  
+16. [References & Resources](#references)  
+17. [Future Work](#future-work)  
+    17.1. [Data Visualization](#fw-data-viz)  
+    17.2. [Educational Tours](#fw-tours)  
+    17.3. [Satellite Tracking](#fw-satellite)  
+    17.4. [AI-Powered Apps](#fw-ai)  
+    17.5. [Rig Management](#fw-rig)  
+18. [Acknowledgments](#acknowledgments)  
+19. [License](#license)  
+
+### Documentation & Community
+
+| Document | Description |
+|----------|-------------|
+| [Architecture](DOCUMENTATION/architecture.md) | 5-layer system design, import matrix, data flow diagrams |
+| [Service API Reference](DOCUMENTATION/service-api-reference.md) | Complete method signatures for all services |
+| [Setup & Configuration](DOCUMENTATION/setup-and-configuration.md) | Prerequisites, build overrides, secure storage, rig config |
+| [Agent System](DOCUMENTATION/agent-system.md) | 11-stage pipeline, 33 skills, auto-chain details |
+| [Screens & UI](DOCUMENTATION/screens-and-ui.md) | Every screen — purpose, route, widgets, behavior |
+| [CI/CD & Quality](DOCUMENTATION/cicd-and-quality.md) | GitHub Actions, static analysis, quality standards |
+| [Node.js Server](DOCUMENTATION/nodejs-server.md) | Companion server endpoints, WebSocket API |
+| [Repository Map](DOCUMENTATION/repository-map.md) | Complete annotated file tree |
+| [LG Development Guide](GUIDE.md) | Comprehensive Liquid Galaxy + Flutter guide (onboarding, KML, rig setup, best practices) |
+| [Code of Conduct](CODE_OF_CONDUCT.md) | Community standards and behavior expectations |
+| [Contributing](CONTRIBUTING.md) | How to contribute, code standards, PR checklist |
+| [Security Policy](SECURITY.md) | Vulnerability reporting and security practices |
+
+---
 
 A professional, production-grade starter kit for building **Liquid Galaxy** applications using **Flutter**, **Dart**, **SSH/KML**, and **Node.js**.
 
 This project provides everything you need to build, test, and deploy Flutter apps that interact with the Liquid Galaxy multi-screen Google Earth system — from earthquake visualizers and satellite trackers to guided tours and interactive dashboards. It ships with **Antigravity**, a 33-skill AI engineering mentor that teaches you the full stack while you build.
+
+<a id="main-workflow"></a>
+
+## 🔄 Main Workflow
+
+The end-to-end development flow from starter kit to deployed LG application:
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                        MAIN WORKFLOW                                │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐      │
+│  │  STARTER  │───▶│  AGENT   │───▶│  FLUTTER │───▶│    LG    │      │
+│  │   KIT     │    │ PIPELINE │    │   APP    │    │   RIG    │      │
+│  └──────────┘    └──────────┘    └──────────┘    └──────────┘      │
+│       │               │               │               │            │
+│  Template code   11-stage flow    Your custom     Multi-screen     │
+│  + services      + AI mentoring   LG application  Google Earth     │
+│  + architecture  + code review    + external API   visualization   │
+│                                   + KML tours                      │
+│                                                                     │
+│  ┌─────────────────────────────────────────────────────────────┐    │
+│  │  Developer Journey:                                         │    │
+│  │  1. Clone starter kit                                       │    │
+│  │  2. Run `lg-env-doctor` → validates environment             │    │
+│  │  3. Run `lg-init` → scaffolds new app from template         │    │
+│  │  4. Brainstorm → Plan → Build (agent-guided)                │    │
+│  │  5. Code review + security scan                             │    │
+│  │  6. Build APK → Deploy → Connect to LG rig                 │    │
+│  │  7. Quiz → Graduate 🎓                                      │    │
+│  └─────────────────────────────────────────────────────────────┘    │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+<a id="agentic-architecture"></a>
+
+## 🧠 Agentic Architecture
+
+The Antigravity agent system is organized into layers that separate concerns:
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                     AGENTIC ARCHITECTURE                            │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  ┌───────────────────────────────────────────────────────────────┐  │
+│  │  WORKFLOWS (Orchestration Layer)          .agent/workflows/   │  │
+│  │  ┌─────────────┐ ┌──────────────┐ ┌──────────┐ ┌──────────┐  │  │
+│  │  │full-pipeline │ │generate-app  │ │test-rig  │ │test-ios  │  │  │
+│  │  │  (11 stages) │ │(flutter init)│ │(flutter) │ │(emulator)│  │  │
+│  │  └──────┬───────┘ └──────┬───────┘ └────┬─────┘ └────┬─────┘  │  │
+│  └─────────┼────────────────┼──────────────┼────────────┼────────┘  │
+│            │                │              │            │           │
+│  ┌─────────▼────────────────▼──────────────▼────────────▼────────┐  │
+│  │  SKILLS (33 Specialized Agents)           .agent/skills/      │  │
+│  │                                                               │  │
+│  │  Pipeline:  env-doctor → shield → init → brainstorm →        │  │
+│  │             viz-architect → plan → exec → review → quiz       │  │
+│  │                                                               │  │
+│  │  Builders:  data-pipeline, ui-scaffolder, kml-craftsman,      │  │
+│  │             logic-builder, file-generator, ssh-controller     │  │
+│  │                                                               │  │
+│  │  Quality:   critical-advisor, tester, debugger                │  │
+│  │  DevOps:    github-agent, flutter-build, emulator-manager     │  │
+│  │  Teaching:  learning-resources, resume-pipeline                │  │
+│  └──────────────────────────┬────────────────────────────────────┘  │
+│                             │                                       │
+│  ┌──────────────────────────▼────────────────────────────────────┐  │
+│  │  RULES (5 Architecture Guards)            .agent/rules/       │  │
+│  │  ┌──────────────┐ ┌───────────────┐ ┌──────────────────────┐  │  │
+│  │  │lg-architecture│ │flutter-best-  │ │ layer-boundaries     │  │  │
+│  │  │(rig + SSH)    │ │practices      │ │ (5-layer enforcement)│  │  │
+│  │  └──────────────┘ └───────────────┘ └──────────────────────┘  │  │
+│  │  ┌──────────────┐ ┌───────────────┐                           │  │
+│  │  │kml-standards │ │dart-style     │   Enforced on EVERY      │  │
+│  │  │(KML 2.2)     │ │(Effective Dart)│   code generation       │  │
+│  │  └──────────────┘ └───────────────┘                           │  │
+│  └───────────────────────────────────────────────────────────────┘  │
+│                                                                     │
+│  ┌───────────────────────────────────────────────────────────────┐  │
+│  │  GUARDRAIL: Critical Advisor                                  │  │
+│  │  Active across ALL stages — blocks progress if student        │  │
+│  │  skips understanding. "Explain it or the pipeline stops."     │  │
+│  └───────────────────────────────────────────────────────────────┘  │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+<a id="agent-skills-overview"></a>
+
+## 🛠️ Agent Skills Overview
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    33 AGENT SKILLS BY CATEGORY                      │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  🔵 PIPELINE CORE (11 skills — the main 11-stage journey)          │
+│  ┌────────────┐ ┌────────┐ ┌──────┐ ┌────────────┐ ┌────────────┐ │
+│  │env-doctor  │→│shield  │→│init  │→│flutter-init│→│brainstormer│ │
+│  │(validate)  │ │(scan)  │ │(repo)│ │(flutter)   │ │(design)    │ │
+│  └────────────┘ └────────┘ └──────┘ └────────────┘ └────────────┘ │
+│  ┌────────────┐ ┌────────┐ ┌──────┐ ┌────────────┐ ┌────────────┐ │
+│  │viz-architect│→│plan-   │→│exec  │→│code-       │→│quiz-master │ │
+│  │(storyboard)│ │writer  │ │(build)│ │reviewer    │ │(graduate)  │ │
+│  └────────────┘ └────────┘ └──────┘ └────────────┘ └────────────┘ │
+│  + setup-guide                                                     │
+│                                                                     │
+│  🟢 ARCHITECTURE (7 skills — code generation)                      │
+│  data-pipeline · ui-scaffolder · kml-craftsman · kml-writer        │
+│  logic-builder · file-generator · ssh-controller                   │
+│                                                                     │
+│  🟡 QUALITY (4 skills — enforcement)                               │
+│  critical-advisor · tester · debugger · dependency-resolver        │
+│                                                                     │
+│  🔴 DEVOPS (5 skills — build & deploy)                             │
+│  github-agent · flutter-build · devops-agent                       │
+│  emulator-manager · demo-recorder                                  │
+│                                                                     │
+│  🟣 CONVERTERS (3 skills — transformation)                         │
+│  api-integrator · dart-converter · code-converter                  │
+│                                                                     │
+│  📚 TEACHING (3 skills — learning)                                 │
+│  learning-resources · resume-pipeline · nanobanana-sprite           │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+<a id="cicd-pipeline"></a>
+
+## ⚙️ CI/CD Pipeline
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                      CI/CD PIPELINE                                 │
+│                  3 GitHub Actions Workflows                         │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│  ┌─────────────────────────────────────────────────────────────┐    │
+│  │  1. flutter-ci.yml  (on every push & PR)                    │    │
+│  │     ┌──────────┐  ┌──────────┐  ┌──────────┐               │    │
+│  │     │ checkout │→ │ flutter  │→ │ flutter  │               │    │
+│  │     │ + setup  │  │ analyze  │  │  test    │               │    │
+│  │     └──────────┘  └──────────┘  └──────────┘               │    │
+│  │     Blocks merge if lint errors or test failures            │    │
+│  └─────────────────────────────────────────────────────────────┘    │
+│                                                                     │
+│  ┌─────────────────────────────────────────────────────────────┐    │
+│  │  2. flutter-build.yml  (on release tags)                    │    │
+│  │     ┌──────────┐  ┌──────────┐  ┌──────────┐               │    │
+│  │     │ checkout │→ │  build   │→ │ upload   │               │    │
+│  │     │ + setup  │  │   APK    │  │ artifact │               │    │
+│  │     └──────────┘  └──────────┘  └──────────┘               │    │
+│  │     Produces release APK for contest submission             │    │
+│  └─────────────────────────────────────────────────────────────┘    │
+│                                                                     │
+│  ┌─────────────────────────────────────────────────────────────┐    │
+│  │  3. security-scan.yml  (on push to main)                    │    │
+│  │     ┌──────────┐  ┌──────────┐  ┌──────────┐               │    │
+│  │     │ secret   │→ │ dep audit│→ │ Node.js  │               │    │
+│  │     │ scanning │  │ (pub)    │  │ npm audit│               │    │
+│  │     └──────────┘  └──────────┘  └──────────┘               │    │
+│  │     Scans for hardcoded secrets, vulnerable dependencies    │    │
+│  └─────────────────────────────────────────────────────────────┘    │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+<a id="key-features"></a>
 
 ## 🚀 Key Features
 
@@ -19,6 +298,138 @@ This project provides everything you need to build, test, and deploy Flutter app
 - **Node.js Companion Server**: Optional backend with Express + WebSocket for data processing, API proxying, and real-time communication.
 - **CI/CD Ready**: 3 GitHub Actions workflows — continuous integration, APK builds, and security scanning.
 
+<a id="getting-started"></a>
+
+## 🚀 Getting Started with Antigravity
+
+This section walks you through downloading this starter kit and using it with **Antigravity** (Google's agentic coding framework) to build your own Liquid Galaxy Flutter app.
+
+> 📚 **Reference**: The agent system uses [`GUIDE.md`](GUIDE.md) as its primary knowledge source for Liquid Galaxy concepts, KML management, rig architecture, Flutter best practices, and GSoC deliverables. Antigravity automatically reads this file for context when answering your questions.
+
+<a id="step-by-step"></a>
+
+### Step-by-Step: From Clone to Running App
+
+```
+Step 1 ─ Clone this starter kit
+│  git clone https://github.com/AshishYesale7/LGFlutterStarterKit.git
+│  cd LGFlutterStarterKit
+│
+Step 2 ─ Open in VS Code with Antigravity enabled
+│  code .
+│  (Make sure Gemini / Antigravity extension is active)
+│
+Step 3 ─ Run the Environment Doctor
+│  Prompt: "Run lg-env-doctor to check my setup"
+│  → Validates Flutter, Dart, Git, JDK, Android SDK, SSH
+│  → Blocks until all checks pass
+│
+Step 4 ─ Initialize your new app
+│  Prompt: "Run lg-init to create my app called EarthquakeViz"
+│  → Creates a new repo (LG-EarthquakeViz/) from the template
+│  → Runs flutter create, scaffolds architecture, inits Git
+│
+Step 5 ─ Brainstorm & Design
+│  Prompt: "Let's brainstorm — I want to visualize earthquake data"
+│  → Agent discusses data sources, KML strategies, screen layout
+│  → Outputs a design document in docs/plans/
+│
+Step 6 ─ Build with guided execution
+│  Prompt: "Start the execution phase"
+│  → Agent implements in batches of 2-3 tasks
+│  → Stops after each batch to verify your understanding
+│
+Step 7 ─ Review & Security scan
+│  Prompt: "Run code review and security scan"
+│  → Professional audit: SOLID, flutter analyze, dart format
+│  → Shield scans for hardcoded secrets
+│
+Step 8 ─ Build & Connect to LG rig
+│  cd LG-EarthquakeViz/
+│  flutter build apk --release
+│  → Install on Android phone, connect to your LG rig
+│
+Step 9 ─ Graduate!
+   Prompt: "Start the quiz"
+   → 5 questions covering SSH, KML, architecture, performance
+   → Pass = you understand what you built
+```
+
+<a id="prompts"></a>
+
+### Prompts to Explore the Starter Kit
+
+Use these prompts directly in the Antigravity chat to learn and build:
+
+#### 🔍 Understanding the Kit
+
+| Prompt | What It Does |
+|--------|--------------|
+| `"Explain the 5-layer architecture of this project"` | Agent walks through Presentation → Transport layers with examples from the codebase |
+| `"How does SSH communication work with the LG rig?"` | Agent explains SSHService, command execution, and `/tmp/query.txt` using GUIDE.md context |
+| `"Show me how KML files are generated and sent"` | Agent traces the flow from KMLService → SSHService → LG rig |
+| `"What is the master-slave architecture of Liquid Galaxy?"` | Agent explains using GUIDE.md — master node, slave screens, UDP sync |
+| `"Explain the service layer pattern in this kit"` | Agent shows LGService facade, why screens never touch SSH/KML directly |
+
+#### 🛠️ Building Your App
+
+| Prompt | What It Does |
+|--------|--------------|
+| `"Create a new screen that displays weather data on the LG rig"` | Agent scaffolds a screen + service + KML generation following architecture rules |
+| `"Add an API service that fetches ISS position from NASA"` | Agent creates the service, model, and wires it into the provider layer |
+| `"Generate a KML tour that orbits around 3 cities"` | Agent uses KMLService patterns to create a multi-stop animated tour |
+| `"Help me send a ScreenOverlay logo to the left slave screen"` | Agent explains and implements using sendLogo() with proper screen targeting |
+| `"Add a settings screen where users enter their LG rig IP"` | Agent extends SettingsProvider with flutter_secure_storage |
+
+#### 🧪 Testing & Quality
+
+| Prompt | What It Does |
+|--------|--------------|
+| `"Run flutter analyze and fix all warnings"` | Agent runs analysis and fixes lint issues following dart-style rules |
+| `"Write unit tests for KMLService"` | Agent generates tests for pure KML generation functions |
+| `"Check if my app follows the layer boundary rules"` | Agent scans imports and flags architecture violations |
+| `"Scan my code for hardcoded secrets"` | Agent runs lg-shield to find exposed passwords or API keys |
+
+#### 🎓 Learning LG Concepts
+
+| Prompt | What It Does |
+|--------|--------------|
+| `"What are the essential LG functions my app must implement?"` | Agent lists requirements from GUIDE.md — KML cleanup, camera sync, orbit, QR connect |
+| `"Explain KML coordinate order and common mistakes"` | Agent clarifies `longitude,latitude,altitude` order and why it matters |
+| `"How should I handle camera tilt and zoom for 3D views?"` | Agent explains 45° tilt, 2km altitude rule from the LG guide |
+| `"What are KML balloons and their limitations on LG?"` | Agent explains balloon rendering issues on legacy Google Earth |
+| `"Walk me through the GSoC deliverables checklist"` | Agent lists APK builds, documentation, worklog, and GO webstore from GUIDE.md |
+
+#### 🚀 Advanced Workflows
+
+| Prompt | What It Does |
+|--------|--------------|
+| `"Design a multi-screen visualization for satellite tracking"` | Agent runs viz-architect — storyboards, KML elements, performance budget |
+| `"Create a data pipeline from USGS API to KML overlay"` | Agent wires API → Model → KMLService → SSHService end-to-end |
+| `"Build an AI-powered tour generator using Gemini"` | Agent integrates Gemini API, generates waypoints, renders KML tours |
+| `"Set up my project for the GO webstore submission"` | Agent runs flutter-build, prepares APK, checks deliverable checklist |
+
+> 💡 **Tip**: You don't need to memorize these prompts. Just say **"ready"** after each pipeline stage and the agent automatically suggests the next step. The prompts above are for when you want to explore specific topics or skip ahead.
+
+<a id="guide-context"></a>
+
+### How [`GUIDE.md`](GUIDE.md) Powers the Agent
+
+The [`GUIDE.md`](GUIDE.md) file is a comprehensive Liquid Galaxy development guide covering:
+
+- **Onboarding** — GSoC bonding period, mentor meetings, environment setup (Windows & macOS)
+- **GitHub Methodology** — Branch strategy, PR workflow, commit conventions
+- **Liquid Galaxy Architecture** — Master-slave model, UDP communication, screen synchronization
+- **Essential LG Functions** — KML cleanup, camera sync, orbit controls, QR connection
+- **KML Management** — XML structure, placemarks, tours, overlays, balloon limitations
+- **Flutter Fundamentals** — Widgets, state, reactive programming, composition
+- **Best Practices** — Camera tilt/zoom, 3D views, data transmission, rig compatibility
+- **Deliverables** — APK builds, documentation, worklog, GO webstore
+
+When you ask the agent any question about Liquid Galaxy, KML, rig setup, or GSoC requirements, it pulls context directly from this file to give accurate, project-specific answers.
+
+<a id="installation"></a>
+
 ## 🛠️ Installation
 
 1. **Clone the repository**
@@ -28,7 +439,11 @@ This project provides everything you need to build, test, and deploy Flutter app
    flutter pub get
    ```
 
+<a id="running-the-project"></a>
+
 ## 🏁 Running the Project
+
+<a id="standard-start"></a>
 
 ### Standard Start (3-Screen Rig)
 
@@ -38,6 +453,8 @@ The default mode assumes a standard 3-screen Liquid Galaxy rig at `192.168.56.10
 cd flutter_client
 flutter run
 ```
+
+<a id="custom-rig"></a>
 
 ### Custom Rig Configuration
 
@@ -53,6 +470,8 @@ class Config {
 }
 ```
 
+<a id="screen-mapping"></a>
+
 ### Screen Mapping (3-Screen Rig)
 
 ```
@@ -67,6 +486,8 @@ class Config {
 - **Screen 3** (Left Slave): App logo displayed as `<ScreenOverlay>` KML
 - **Screen 2** (Right Slave): Additional overlays and legends
 
+<a id="building-release"></a>
+
 ### Building for Release
 
 ```bash
@@ -80,6 +501,8 @@ flutter build apk --release
 flutter build apk --dart-define=LG_HOST=192.168.56.101
 ```
 
+<a id="nodejs-server"></a>
+
 ### Node.js Server (Optional)
 
 ```bash
@@ -89,9 +512,13 @@ npm start
 # Server runs on http://localhost:3000
 ```
 
+<a id="architecture-overview"></a>
+
 ## 🏗️ Architecture Overview
 
 The project follows a **Client-to-Rig** model. Your Flutter app communicates with the LG rig over SSH, sending KML data and camera commands. Google Earth on the rig handles all multi-screen rendering.
+
+<a id="flutter-app"></a>
 
 ### 1. The Flutter App (`flutter_client/lib/`)
 
@@ -100,11 +527,15 @@ The project follows a **Client-to-Rig** model. Your Flutter app communicates wit
 - **Providers**: State management via `ChangeNotifier` + `MultiProvider`. Settings, themes, and connection state.
 - **Models**: Immutable domain data classes. Pure data — no I/O, no side effects.
 
+<a id="lg-rig"></a>
+
 ### 2. The LG Rig
 
 - **LG Master** (Screen 1): Receives SSH commands from your app. Writes KML files to `/var/www/html/kml/` and camera commands to `/tmp/query.txt`.
 - **Slave Screens**: Google Earth instances that poll the KML files and render synchronized visualizations across all screens automatically.
 - **No Code Runs on the Rig**: You don't deploy anything to the rig. You send KML over SSH, and Google Earth handles the rest.
+
+<a id="app-rig-comm"></a>
 
 ### 3. The "Magic" (App → Rig Communication)
 
@@ -120,6 +551,8 @@ User taps "FlyTo" in the app
 ```
 
 **This is the core concept every student must understand.** Your Flutter app sends data to the rig — Google Earth handles all multi-screen rendering.
+
+<a id="import-matrix"></a>
 
 ### 4. The 5-Layer Import Matrix
 
@@ -142,6 +575,8 @@ User taps "FlyTo" in the app
 
 Data flows **one direction**: API → Provider → Domain Model → KML Generator → SSH Transport → LG Rig
 
+<a id="what-can-you-build"></a>
+
 ## 📱 What Can You Build?
 
 This starter kit supports **any** type of Liquid Galaxy application:
@@ -157,6 +592,8 @@ This starter kit supports **any** type of Liquid Galaxy application:
 
 Browse [100+ past GSoC LG projects](https://github.com/LiquidGalaxyLAB) for inspiration.
 
+<a id="app-screens-and-controls"></a>
+
 ## 📲 App Screens & Controls
 
 | Screen | Purpose |
@@ -170,6 +607,8 @@ Browse [100+ past GSoC LG projects](https://github.com/LiquidGalaxyLAB) for insp
 
 All screens are starting points — extend, replace, or add new ones for your project.
 
+<a id="core-operations"></a>
+
 ### 5 Core LG Operations (Task 2 Minimum)
 
 | Operation | Service Method | Effect on Rig |
@@ -179,6 +618,8 @@ All screens are starting points — extend, replace, or add new ones for your pr
 | **FlyTo Home City** | `lgService.flyToHomeCity()` | Smooth camera flight to your coordinates |
 | **Clean Logos** | `lgService.cleanLogos()` | Remove overlays from slave screens |
 | **Clean KMLs** | `lgService.cleanKMLs()` | Clear all KML files from the rig |
+
+<a id="expert-agent-pipeline"></a>
 
 ## 🤖 Expert Agent Pipeline
 
@@ -204,6 +645,8 @@ Code Review → Shield (post) → Quiz (Finale)
 
 **⚠️ PROMINENT GUARDRAIL**: The **Critical Advisor** (`lg-critical-advisor`) is active throughout the entire journey. If you rush, skip explanations, or say "just build it" — it intervenes immediately. You must demonstrate understanding at every checkpoint.
 
+<a id="auto-chain"></a>
+
 ### Conversational Auto-Chain
 
 After each stage, the agent **automatically offers** the next one:
@@ -211,6 +654,8 @@ After each stage, the agent **automatically offers** the next one:
 > *"Project scaffolded! Now let's brainstorm features — what should your LG app visualize on Google Earth? Ready? 🧠"*
 
 No manual skill-hunting required. Say "ready" and the pipeline flows.
+
+<a id="skill-roster"></a>
 
 ### Full Skill Roster (33 Skills)
 
@@ -223,6 +668,8 @@ No manual skill-hunting required. Say "ready" and the pipeline flows.
 | **Converters** | `lg-api-integrator`, `lg-dart-converter`, `lg-code-converter` |
 | **Teaching** | `lg-learning-resources`, `lg-resume-pipeline`, `lg-nanobanana-sprite` |
 
+<a id="arch-rules"></a>
+
 ### 5 Enforced Architecture Rules
 
 | Rule | Enforces |
@@ -233,6 +680,8 @@ No manual skill-hunting required. Say "ready" and the pipeline flows.
 | `kml-standards.md` | Valid KML 2.2 structure, `lon,lat,alt` coordinate order, tour conventions |
 | `dart-style.md` | Effective Dart naming, `///` documentation, formatting standards |
 
+<a id="educational-notes"></a>
+
 ## 🎓 Educational Notes
 
 - **No Free Code**: The agent explains every architectural decision before writing code. If you can't explain it, the pipeline stops.
@@ -240,6 +689,8 @@ No manual skill-hunting required. Say "ready" and the pipeline flows.
 - **KML Coordinate Order**: Google Earth uses `longitude,latitude,altitude` — not `lat,lon`. Getting this wrong is the #1 beginner mistake.
 - **SSH Lifecycle**: Connections must be properly opened, verified, and disposed. The agent enforces `dispose()` methods on services to prevent resource leaks.
 - **Secure Storage**: Passwords and API keys **must** use `flutter_secure_storage` — never `SharedPreferences`. The Shield skill scans for this.
+
+<a id="quality-tools"></a>
 
 ### 🛠️ Professional Quality Tools
 
@@ -252,6 +703,8 @@ This starter kit comes pre-configured with the same tools used by professional F
 - **Provider + ChangeNotifier**: Google-recommended state management for medium-complexity apps.
 
 Students are expected to keep `flutter analyze` passing at all times!
+
+<a id="dependencies"></a>
 
 ## 📦 Dependencies
 
@@ -266,6 +719,8 @@ Students are expected to keep `flutter analyze` passing at all times!
 | `path_provider` | ^2.1.1 | File system access |
 | `web_socket_channel` | ^3.0.1 | WebSocket to Node.js server |
 
+<a id="references"></a>
+
 ## 🔗 Reference Implementations & Resources
 
 | Resource | Link |
@@ -279,6 +734,88 @@ Students are expected to keep `flutter analyze` passing at all times!
 | KML Reference (Google) | [developers.google.com](https://developers.google.com/kml/documentation/kmlreference) |
 | Flutter App Architecture (Google) | [docs.flutter.dev](https://docs.flutter.dev/app-architecture) |
 
+For detailed technical documentation, see the **[`DOCUMENTATION/`](DOCUMENTATION/)** folder — architecture deep dives, service API reference, setup guides, agent system docs, and more. Full listing in the [Index](#index) above.
+
+---
+
+<a id="future-work"></a>
+
+## 🔮 Future Work
+
+This starter kit is designed to help build **any kind** of Flutter-powered Liquid Galaxy application. Here's how each app category can benefit from future enhancements:
+
+<a id="fw-data-viz"></a>
+
+### 📊 Data Visualization
+
+| Enhancement | Description |
+|-------------|-------------|
+| **KML Heatmap Generator** | Built-in service to convert datasets (CSV, JSON, API) into KML heatmap overlays with configurable color gradients and intensity scaling |
+| **Real-Time Data Streaming** | WebSocket-based live data pipeline — push updates from APIs (USGS, OpenWeather, NASA) directly to KML on the rig without manual refresh |
+| **Multi-Layer Overlays** | Support stacking multiple data layers (e.g., earthquakes + fault lines + population density) on different slave screens simultaneously |
+| **Chart-to-KML Converter** | Transform Flutter charts (bar, line, pie) into `<ScreenOverlay>` KMLs rendered on LG slave screens as dashboard panels |
+
+<a id="fw-tours"></a>
+
+### 🗺️ Educational Tours
+
+| Enhancement | Description |
+|-------------|-------------|
+| **Tour Builder UI** | Drag-and-drop screen for creating multi-stop Google Earth tours — set waypoints, camera angles, dwell times, and narrative text |
+| **Narration Engine** | TTS integration to auto-narrate tour stops as the camera flies between locations on the rig |
+| **Pre-Built Tour Templates** | Ready-made tour packages (World Wonders, Solar System, Historical Battles, Ocean Exploration) that students can customize |
+| **Quiz-at-Waypoint** | Embed interactive quiz questions at tour stops — the rig pauses until the user answers correctly on the phone |
+
+<a id="fw-satellite"></a>
+
+### 🛰️ Satellite Tracking
+
+| Enhancement | Description |
+|-------------|-------------|
+| **TLE Parser Service** | Built-in Two-Line Element parser to convert CelesTrak/NASA orbital data into real-time KML satellite positions |
+| **Orbit Prediction KML** | Generate animated orbit paths showing past tracks and future predictions as KML `<gx:Track>` elements |
+| **Constellation Visualizer** | Render entire constellations (Starlink, GPS, Iridium) with color-coded altitude bands across multiple screens |
+| **ISS Live Tracker** | Pre-wired ISS tracking module with live crew info overlay and ground track KML — plug and play |
+
+<a id="fw-ai"></a>
+
+### 🤖 AI-Powered Apps
+
+| Enhancement | Description |
+|-------------|-------------|
+| **Gemini API Service** | Ready-to-use service class for calling Gemini — text generation, image analysis, and structured JSON output for KML creation |
+| **AI Itinerary Generator** | Describe a trip in natural language → Gemini generates waypoints → KMLService renders the tour on the rig automatically |
+| **Smart Data Enrichment** | Feed raw location data to Gemini for context (history, demographics, ecology) displayed as info balloons on the rig |
+| **Natural Language Rig Control** | Voice or text commands ("Fly to the Eiffel Tower and orbit at 500m") parsed by Gemini into LGService method calls |
+
+<a id="fw-rig"></a>
+
+### 🎛️ Rig Management
+
+| Enhancement | Description |
+|-------------|-------------|
+| **Health Dashboard** | Real-time monitoring of all rig screens — connection status, CPU/memory, Google Earth process health — displayed on the phone |
+| **Multi-Rig Support** | Manage multiple LG rigs from a single app instance — switch between rigs, broadcast KML to all, or target specific rigs |
+| **Scheduled Tasks** | Cron-style scheduler for automated rig operations — rotate demos every 10 minutes, clean KMLs at midnight, auto-relaunch GE |
+| **Remote Configuration** | Push config changes (screen count, resolution, network settings) to the rig over SSH without physically accessing the machines |
+
+
+<a id="acknowledgments"></a>
+
+## 🙏 Acknowledgments
+
+Special thanks to the Liquid Galaxy community and mentors who make this project possible:
+
+- **Lucia Fernandez** — For the [LG Master Web App](https://github.com/LiquidGalaxyLAB/LG-Master-Web-App), the reference implementation that established the service-layer patterns and KML communication protocols used throughout this starter kit.
+- **Victor Sanchez** — For mentoring the Liquid Galaxy project, driving the contest vision, and championing the integration of AI and agentic programming into the LG ecosystem.
+- **The Liquid Galaxy LAB Team** — For maintaining the open-source infrastructure, documentation, and community that supports 100+ GSoC projects.
+
+---
+
+<a id="license"></a>
+
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
+
+Copyright (c) 2026 Ashish Yesale.

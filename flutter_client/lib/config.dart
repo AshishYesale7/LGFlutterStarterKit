@@ -5,16 +5,29 @@
 class Config {
   // ─── LG Rig Connection ───────────────────────────────────────────────
   /// Default SSH host for the LG master machine.
-  static const String lgHost = '192.168.56.101';
+  /// Override at build time: `--dart-define=LG_HOST=10.0.0.1`
+  static const String lgHost = String.fromEnvironment(
+    'LG_HOST',
+    defaultValue: '192.168.56.101',
+  );
 
   /// Default SSH port.
-  static const int lgPort = 22;
+  static const int lgPort = int.fromEnvironment(
+    'LG_PORT',
+    defaultValue: 22,
+  );
 
   /// Default SSH username.
-  static const String lgUser = 'lg';
+  static const String lgUser = String.fromEnvironment(
+    'LG_USER',
+    defaultValue: 'lg',
+  );
 
   /// Default SSH password.
-  static const String lgPassword = 'lg';
+  static const String lgPassword = String.fromEnvironment(
+    'LG_PASSWORD',
+    defaultValue: 'lg',
+  );
 
   // ─── LG Rig Geometry ─────────────────────────────────────────────────
   /// Total number of screens in the LG rig.
@@ -34,6 +47,17 @@ class Config {
     // Screen 2 is always to the right of master
     return 2;
   }
+
+  // ─── Home City ────────────────────────────────────────────────────────
+  /// Home city latitude (used by flyToHomeCity).
+  /// Default: Lleida, Spain (LG Lab headquarters).
+  static const double homeCityLat = 41.6176;
+
+  /// Home city longitude.
+  static const double homeCityLng = 0.6200;
+
+  /// Home city name for display.
+  static const String homeCityName = 'Lleida';
 
   // ─── App Settings ────────────────────────────────────────────────────
   /// Application name displayed in UI.

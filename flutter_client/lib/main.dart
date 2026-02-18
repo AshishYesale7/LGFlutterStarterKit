@@ -8,13 +8,16 @@ import 'package:flutter_client/screens/connection_screen.dart';
 import 'package:flutter_client/screens/settings_screen.dart';
 import 'package:flutter_client/screens/help_screen.dart';
 import 'package:flutter_client/screens/workflow_flow_screen.dart';
+import 'package:flutter_client/services/lg_service.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => SettingsProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => LGService()),
       ],
       child: const LGStarterApp(),
     ),
