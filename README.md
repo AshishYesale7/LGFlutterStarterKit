@@ -1,21 +1,23 @@
 # LG Flutter Starter Kit
 
-A professional, production-grade starter kit for building high-performance **Liquid Galaxy** controller applications using **Flutter**, **Dart**, and **SSH/KML**.
+A professional, production-grade starter kit for building **Liquid Galaxy** applications using **Flutter**, **Dart**, **SSH/KML**, and **Node.js**.
 
-This project demonstrates how to build a phone-based remote control that commands a multi-screen Google Earth rig. It serves as a reference implementation for the **Controller-to-Rig** architecture used by all Liquid Galaxy apps, and ships with **Antigravity** — a 33-skill AI engineering mentor that teaches you while you build.
+This project provides everything you need to build, test, and deploy Flutter apps that interact with the Liquid Galaxy multi-screen Google Earth system — from earthquake visualizers and satellite trackers to guided tours and interactive dashboards. It ships with **Antigravity**, a 33-skill AI engineering mentor that teaches you the full stack while you build.
 
 ## 🚀 Key Features
 
-- **Controller-to-Rig Architecture**: Your Flutter app runs on a phone and controls a 3/5/7-screen Google Earth rig via SSH. Google Earth handles all multi-screen rendering — your app just sends KML and commands.
+- **Flutter + LG Integration**: Pre-wired Flutter app with SSH, KML generation, and LG rig communication out of the box. Connect your phone to a 3/5/7-screen Google Earth rig in minutes.
 - **Complete Service Layer**:
-  - **LG Service**: High-level facade — `sendLogo()`, `flyTo()`, `sendPyramid()`, `cleanKML()`
+  - **LG Service**: High-level facade — `sendLogo()`, `flyTo()`, `sendPyramid()`, `cleanKML()`, `orbit()`
   - **SSH Service**: Raw SSH command execution to the LG master machine via `dartssh2`
-  - **KML Service**: Stateless KML XML generator — placemarks, tours, overlays, 3D objects
+  - **KML Service**: Stateless KML XML generator — placemarks, tours, overlays, 3D objects, time animations
+  - **API Services**: Example data integrations (USGS earthquakes) ready for extension
 - **5-Layer Enforced Architecture**: Strict import boundaries between Presentation → Orchestration → Providers → KML → Transport. Violations are blocked automatically.
-- **Material 3 UI**: Modern Flutter design with light/dark themes, Provider state management, and responsive layouts.
+- **Material 3 UI**: Modern Flutter design with light/dark themes, Provider state management, responsive layouts, and an interactive workflow visualizer.
 - **Antigravity AI Mentor**: 33 agent skills, 5 architecture rules, 4 workflows — a conversational 11-stage pipeline that guides you from zero to deployed APK.
 - **Dynamic Rig Configuration**: Configurable for any screen count (3, 5, 7) via `config.dart`. Screen numbering, logo placement, and KML targeting adjust automatically.
-- **Node.js Companion Server**: Optional backend with Express + WebSocket for data processing and real-time communication.
+- **Node.js Companion Server**: Optional backend with Express + WebSocket for data processing, API proxying, and real-time communication.
+- **CI/CD Ready**: 3 GitHub Actions workflows — continuous integration, APK builds, and security scanning.
 
 ## 🛠️ Installation
 
@@ -89,11 +91,11 @@ npm start
 
 ## 🏗️ Architecture Overview
 
-The project follows a **Controller-to-Rig** model where the phone app is a remote control and Google Earth is the display.
+The project follows a **Client-to-Rig** model. Your Flutter app communicates with the LG rig over SSH, sending KML data and camera commands. Google Earth on the rig handles all multi-screen rendering.
 
 ### 1. The Flutter App (`flutter_client/lib/`)
 
-- **Screens**: Phone controller UI — Splash, Connection, Dashboard, Settings, Help. Users tap buttons, and the rig responds.
+- **Screens**: UI for rig interaction — Splash, Connection, Dashboard, Settings, Help, Workflow Visualizer. Actions trigger KML/SSH operations on the rig.
 - **Services**: All business logic. `LGService` is the facade that coordinates SSH + KML. Screens never touch SSH or KML directly.
 - **Providers**: State management via `ChangeNotifier` + `MultiProvider`. Settings, themes, and connection state.
 - **Models**: Immutable domain data classes. Pure data — no I/O, no side effects.
@@ -104,20 +106,20 @@ The project follows a **Controller-to-Rig** model where the phone app is a remot
 - **Slave Screens**: Google Earth instances that poll the KML files and render synchronized visualizations across all screens automatically.
 - **No Code Runs on the Rig**: You don't deploy anything to the rig. You send KML over SSH, and Google Earth handles the rest.
 
-### 3. The "Magic" (Phone → Rig Communication)
+### 3. The "Magic" (App → Rig Communication)
 
 ```
-User taps "FlyTo" on phone
+User taps "FlyTo" in the app
   → Screen dispatches action to LGService (facade)
   → LGService calls KMLService.generateFlyTo(lat, lon, alt)
   → KMLService returns a KML XML string (pure, no side effects)
   → LGService calls SSHService.execute("echo '$kml' > /tmp/query.txt")
   → SSH sends command to LG Master at 192.168.56.101:22
   → Google Earth reads /tmp/query.txt and flies the camera
-  → All 3 screens update simultaneously (Google Earth handles sync)
+  → All 3+ screens update simultaneously (Google Earth handles sync)
 ```
 
-**This is the core concept every student must understand.** The Flutter app never renders across multiple screens. Google Earth does that.
+**This is the core concept every student must understand.** Your Flutter app sends data to the rig — Google Earth handles all multi-screen rendering.
 
 ### 4. The 5-Layer Import Matrix
 
@@ -140,7 +142,22 @@ User taps "FlyTo" on phone
 
 Data flows **one direction**: API → Provider → Domain Model → KML Generator → SSH Transport → LG Rig
 
-## 📱 App Screens & Controls
+## 📱 What Can You Build?
+
+This starter kit supports **any** type of Liquid Galaxy application:
+
+| App Type | Example | Data Source |
+|----------|---------|-------------|
+| **Data Visualization** | Earthquake heatmaps, volcano activity, weather patterns | USGS, NASA, OpenWeather APIs |
+| **Educational Tours** | Historical city tours, museum walkthroughs, geography lessons | Static data, Wikipedia, custom |
+| **Satellite Tracking** | ISS tracker, Starlink constellation visualizer | NASA TLE, CelesTrak |
+| **AI-Powered** | AI travel itinerary generator, smart city explorer | Gemini API, OpenAI, custom ML |
+| **Rig Management** | Dashboard for controlling Google Earth navigation | Direct SSH commands |
+| **Contest Task 2** | Basic LG operations (logo, pyramid, flyTo, clean) | None (built-in) |
+
+Browse [100+ past GSoC LG projects](https://github.com/LiquidGalaxyLAB) for inspiration.
+
+## 📲 App Screens & Controls
 
 | Screen | Purpose |
 |--------|---------|
@@ -149,7 +166,9 @@ Data flows **one direction**: API → Provider → Domain Model → KML Generato
 | **Main Dashboard** | Action cards: FlyTo, Send Logo, Send Pyramid, Orbit, Clean |
 | **Settings** | Rig config, screen count, home city coordinates |
 | **Help/About** | Usage instructions and LG architecture overview |
-| **Workflow Flow** | Interactive n8n-style visualization of the agent pipeline |
+| **Workflow Flow** | Interactive n8n-style visualization of the 11-stage agent pipeline |
+
+All screens are starting points — extend, replace, or add new ones for your project.
 
 ### 5 Core LG Operations (Task 2 Minimum)
 
@@ -177,7 +196,7 @@ Code Review → Shield (post) → Quiz (Finale)
 4. **Brainstorm (`lg-brainstormer`)**: Collaborative design focusing on visual impact on the LG rig, data sources, and architectural tradeoffs.
 5. **Viz Architect (`lg-viz-architect`)**: Designs the multi-screen Google Earth experience — storyboards, KML elements, camera tours, performance budgets.
 6. **Plan (`lg-plan-writer`)**: Detailed implementation roadmap with 5-10 minute tasks and built-in educational checkpoints.
-7. **Data Pipeline + UI Scaffold (`lg-data-pipeline` + `lg-ui-scaffolder`)**: Wires API → Model → KML → SSH pipeline. Generates phone controller screens with Provider wiring.
+7. **Data Pipeline + UI Scaffold (`lg-data-pipeline` + `lg-ui-scaffolder`)**: Wires API → Model → KML → SSH pipeline. Generates Flutter screens with Provider wiring.
 8. **Execute (`lg-exec`)**: Guided implementation in batches of 2-3 tasks. Stops after every batch for a verification question. **Will not auto-continue.**
 9. **Code Review (`lg-code-reviewer`)**: Professional OSS-grade audit — SOLID, DRY, `flutter analyze`, `dart format`, 80%+ test coverage.
 10. **Security Post-Flight (`lg-shield`)**: Final scan on completed code. Blocks graduation if critical issues found.
@@ -251,7 +270,7 @@ Students are expected to keep `flutter analyze` passing at all times!
 
 | Resource | Link |
 |----------|------|
-| Lucia's LG Master Web App (reference controller) | [GitHub](https://github.com/LiquidGalaxyLAB/LG-Master-Web-App) |
+| Lucia's LG Master Web App (reference implementation) | [GitHub](https://github.com/LiquidGalaxyLAB/LG-Master-Web-App) |
 | All Liquid Galaxy Lab Projects (100+ GSoC repos) | [GitHub](https://github.com/LiquidGalaxyLAB) |
 | GSoC 2026 Ideas Page | [liquidgalaxy.eu](https://www.liquidgalaxy.eu/2025/11/GSoC2026.html) |
 | LG Mobile Applications Showcase | [liquidgalaxy.eu](https://www.liquidgalaxy.eu/2018/06/mobile-applications.html) |
