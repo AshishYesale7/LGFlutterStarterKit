@@ -199,3 +199,11 @@ Produces KML composition code (Dart methods) and any new KML templates.
 ## Handoff
 Passes composed KML code to `lg-data-pipeline` for integration into the
 transport flow, and to `lg-code-reviewer` for quality checks.
+
+## 🔗 Skill Chain
+
+After the KML composition is crafted and the student understands the visual design, **automatically offer the next stage**:
+
+> *"KML composition is looking stunning! The multi-layer design will really pop on the video wall. Let's get this reviewed for code quality and KML correctness. Ready for the Code Review? 🔍"*
+
+If student says "ready" → activate `.agent/skills/lg-code-reviewer/SKILL.md`.

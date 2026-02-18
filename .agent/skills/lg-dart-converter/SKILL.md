@@ -285,11 +285,44 @@ class JsonModelAnalyzer {
 - [ ] Special characters in XML properly escaped or wrapped in `CDATA`
 - [ ] Output validated against target schema
 
+## ⛔ Student Interaction Checkpoints
+
+### After Each Conversion — Compare and Contrast
+
+⛔ **STOP and WAIT** — Present the original format and the converted Dart output side-by-side, then ask:
+> *"Compare the original data format with the Dart version. What information was preserved? What was added or restructured? Why?"*
+
+Wait for the student's answer. Evaluate:
+- ✅ **Correct**: Acknowledge their understanding, proceed.
+- ⚠️ **Partially correct**: Point out the specific transformation they missed (e.g., coordinate order change, type mapping).
+- ❌ **Wrong**: Walk through the conversion step by step.
+
+### Coordinate Conversion — Predict the Output
+
+⛔ **STOP and WAIT** — For coordinate conversions, ask:
+> *"If I give you the coordinates 41.3851°N, 2.1734°E — what will the KML `<coordinates>` element look like? Remember KML's ordering rule."*
+
+This is **critical** — the #1 KML bug is swapped lat/lon. Do NOT proceed until the student gets this right.
+
+### Model Generation — Explain the Structure
+
+⛔ **STOP and WAIT** — After generating a Dart model, ask:
+> *"Why does the model use `final` fields and a `const` constructor? What principle does this follow?"*
+
 ## Handoff
 
 After conversion, hand to the appropriate skill:
 - If KML was generated -> **lg-kml-writer** for refinement
 - If Dart model was generated -> **lg-file-generator** for file creation
 - If data is ready for display -> **lg-ssh-controller** for rig deployment
+
+## 🔗 Skill Chain
+
+After the conversion is verified and the student understands the output, **automatically offer the next stage**:
+
+> *"Data conversion complete! The output is now clean Dart ready for integration. Want me to generate the file and wire it into the project? Or shall we review the code first? 📁"*
+
+If student wants file generation → activate `.agent/skills/lg-file-generator/SKILL.md`.
+If student wants review → activate `.agent/skills/lg-code-reviewer/SKILL.md`.
 
 ```

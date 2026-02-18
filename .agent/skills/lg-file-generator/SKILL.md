@@ -253,3 +253,11 @@ lib/modules/<module_name>/
 ## Handoff
 
 After file generation, return to the calling workflow or use **lg-exec** (.agent/skills/lg-exec/SKILL.md) for implementation.
+
+## 🔗 Skill Chain
+
+After the file is generated and the student can explain its role in the architecture, **automatically offer the next stage**:
+
+> *"File generated and wired into the project! Now let's execute the implementation plan and build out the feature. Ready to start coding? 🚀"*
+
+If student says "ready" → activate `.agent/skills/lg-exec/SKILL.md`.

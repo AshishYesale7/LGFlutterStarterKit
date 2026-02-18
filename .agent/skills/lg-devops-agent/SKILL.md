@@ -183,5 +183,50 @@ echo "APK installed. Launch the app on the device."
 - **Docker SSH for testing**: https://hub.docker.com/r/linuxserver/openssh-server
 - For deeper study → **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md)
 
+## ⛔ Student Interaction Checkpoints
+
+### After CI/CD Setup — Understand the Pipeline
+
+⛔ **STOP and WAIT** — After setting up GitHub Actions, ask:
+> *"Look at the flutter-ci.yml workflow we just created. Can you describe what happens step-by-step when you push code to the `main` branch?"*
+
+Wait for the student's answer. Evaluate:
+- ✅ **Correct**: They understand the CI pipeline flow (checkout → deps → analyze → format → test → coverage).
+- ⚠️ **Partially correct**: Highlight the steps they missed.
+- ❌ **Wrong**: Walk through the YAML step by step. Link to **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md).
+
+### Docker Setup — Predict Behavior
+
+⛔ **STOP and WAIT** — After Docker mock rig setup, present multiple choice:
+> *"What does port 2222 map to in the Docker container? If I SSH to `localhost:2222`, what am I connecting to?"*
+> A) The LG master's Google Earth instance
+> B) A mock SSH server simulating the LG rig
+> C) The Flutter app's debug server
+
+### Deployment — Build Strategy
+
+⛔ **STOP and WAIT** — Before deploying, ask:
+> *"Why do we use `--split-per-abi` when building the release APK? What are the trade-offs of splitting vs. a fat APK?"*
+
+## 📋 Doc Save
+
+After CI/CD setup is complete, save a summary:
+
+**Save to:** `docs/reviews/YYYY-MM-DD-cicd-setup.md`
+
+Include:
+- CI pipeline configuration summary
+- Docker setup status
+- Deployment scripts created
+- Any environment-specific notes
+
 ## Handoff
 After DevOps setup → return to calling skill (typically `lg-exec` or `lg-flutter-build`).
+
+## 🔗 Skill Chain
+
+After CI/CD and deployment configuration is complete, **automatically offer the next stage**:
+
+> *"DevOps pipeline is configured! CI will run on every push and PRs will get automatic Flutter analysis. Ready to build the release APK? 🏗️"*
+
+If student says "ready" → activate `.agent/skills/lg-flutter-build/SKILL.md`.

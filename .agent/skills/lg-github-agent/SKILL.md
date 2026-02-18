@@ -224,5 +224,40 @@ CONTRIBUTING.md       # How to contribute
 - **Open Source Guides**: https://opensource.guide/
 - For deeper study → **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md)
 
+## ⛔ Student Interaction Checkpoints
+
+### After Repo Creation — Branching Strategy
+
+⛔ **STOP and WAIT** — After creating the repository, ask:
+> *"We just created the repo. Now, what branching strategy should we use? Can you explain the difference between `main`, `develop`, and `feature/` branches? When would you create a PR?"*
+
+Wait for the student's answer. Evaluate:
+- ✅ **Correct**: They understand Git flow (feature → develop → main).
+- ⚠️ **Partially correct**: Walk through the branch table above.
+- ❌ **Wrong**: Link to **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md) for Git/GitHub fundamentals.
+
+### Conventional Commits — Practice
+
+⛔ **STOP and WAIT** — Present a scenario:
+> *"You just added a new KML orbit feature. Write the commit message using conventional commit format. What type prefix would you use?"*
+
+Multiple choice:
+> A) `fix(kml): add orbit tour generation`
+> B) `feat(kml): add orbit tour generation`
+> C) `chore(kml): add orbit tour generation`
+
+### PR Workflow — Trace the Process
+
+⛔ **STOP and WAIT** — Ask:
+> *"Trace the lifecycle of a feature from branch creation to merge. What checks must pass before merging?"*
+
 ## Handoff
 After GitHub setup → return to the original workflow.
+
+## 🔗 Skill Chain
+
+After the repository is configured and the student understands the Git workflow, **automatically offer to return to the calling skill**:
+
+> *"GitHub repo is set up with CI, templates, and branch protection! Let's continue with the project initialization. Ready to go back? 🚀"*
+
+If student says "ready" → activate `.agent/skills/lg-init/SKILL.md` (return to calling workflow).

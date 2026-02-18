@@ -168,6 +168,12 @@ Summary: 8 PASS | 1 WARN | 2 MISSING | 1 SKIP
 
 ## Phase 3: Decision Gate
 
+⛔ **STOP and WAIT** — After presenting the health report, pause and ask:
+> *"Here's your environment status. Any tools you're unsure about? Do you understand why each tool is needed for LG development?"*
+
+If the student has questions → explain the role of each tool briefly.
+If the student says "all good" → proceed to the decision gate below.
+
 | Result | Action |
 |--------|--------|
 | All PASS | Proceed to pipeline Stage 0 (Shield pre-flight) |

@@ -319,5 +319,48 @@ flutter test --reporter expanded
 - **Mockito for Dart**: https://pub.dev/packages/mockito
 - For deeper study → **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md)
 
+## ⛔ Student Interaction Checkpoints
+
+### After Generating Tests — Predict Outcomes
+
+⛔ **STOP and WAIT** — After generating the test file, ask:
+> *"Before we run these tests, predict: which tests do you think will pass and which might fail? Why?"*
+
+Wait for the student's prediction. Then run the tests and compare results.
+
+### After Running Tests — Analyze Failures
+
+If any test fails:
+⛔ **STOP and WAIT** — Ask:
+> *"This test failed. Read the error message. Can you explain what the test expected vs. what it got? What needs to change — the test or the code?"*
+
+Do NOT fix the test for them. Guide them to the fix.
+
+### Coverage Discussion — Trace Exercise
+
+⛔ **STOP and WAIT** — After all tests pass, ask:
+> *"Looking at our test coverage targets, which component is most critical to test thoroughly and why? What's the risk of shipping untested KML generation?"*
+
+## 📋 Doc Save — Test Report (CRITICAL)
+
+After all tests are written and pass, save a test report:
+
+**Save to:** `docs/reviews/YYYY-MM-DD-test-report.md`
+
+Include:
+- Test suite summary (total tests, pass/fail counts)
+- Coverage percentages per component
+- Any known gaps or TODO tests
+- Flaky test notes (if any)
+- Command to reproduce: `cd flutter_client && flutter test --coverage`
+
 ## Handoff
 After tests written → `lg-code-reviewer` for review. Tests must pass before any release.
+
+## 🔗 Skill Chain
+
+After tests are written, passing, and the student can explain the test strategy, **automatically offer the next stage**:
+
+> *"All tests passing! Coverage looks solid. Let's do a professional code review to make sure everything is OSS-ready. Ready for the Code Review? 🔍"*
+
+If student says "ready" → activate `.agent/skills/lg-code-reviewer/SKILL.md`.

@@ -126,5 +126,41 @@ String generateFlyTo({
 }
 ```
 
+## ⛔ Student Interaction Checkpoints
+
+### After Conversion — Understanding Check
+
+Before applying any converted code, **STOP and engage the student**:
+
+⛔ **STOP and WAIT** — Ask:
+> *"Before I apply this conversion, can you explain what the original code does? What will change in the Dart version?"*
+
+Wait for the student's answer. Evaluate:
+- ✅ **Correct**: Acknowledge, then proceed with the conversion.
+- ⚠️ **Partially correct**: Guide them — highlight the key pattern change (e.g., `Promise` → `Future`, `EventEmitter` → `ChangeNotifier`).
+- ❌ **Wrong or "I don't know"**: Walk through the original code line by line. Link to **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md).
+
+### After Applying — Trace Exercise
+
+⛔ **STOP and WAIT** — Ask:
+> *"Trace the data flow in this converted Dart code. Where does the input come in, how is it transformed, and where does the output go?"*
+
+Do NOT proceed to verification until the student can trace the flow.
+
+### Pattern Comparison
+
+Present the original and converted code side-by-side, then ask:
+> *"What are the 2-3 biggest differences between the original and the Dart version? Which Dart feature improves on the original?"*
+
+⛔ **STOP and WAIT** for the student's answer before moving on.
+
 ## Handoff
 After conversion → `lg-code-reviewer` for quality review.
+
+## 🔗 Skill Chain
+
+After the conversion is applied and the student can explain the Dart version, **automatically offer the next stage**:
+
+> *"Conversion complete! You clearly understand the Dart patterns now. Let's run a code review to make sure the converted code meets LG quality standards. Ready for the Code Review? 🔍"*
+
+If student says "ready" → activate `.agent/skills/lg-code-reviewer/SKILL.md`.

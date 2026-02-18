@@ -436,4 +436,12 @@ Guide:
 - **Still failing** → `.agent/skills/lg-debugger/SKILL.md` for advanced troubleshooting.
 - **Student confused about WHY** → `.agent/skills/lg-critical-advisor/SKILL.md` for educational coaching.
 
+## 🔗 Skill Chain
+
+After all missing tools are installed and verified, **automatically offer to re-run the environment check**:
+
+> *"All tools installed! Let's re-run the Environment Doctor to confirm everything passes clean. Ready for verification? ✅"*
+
+If student says "ready" → activate `.agent/skills/lg-env-doctor/SKILL.md` (re-run health check).
+
 ````

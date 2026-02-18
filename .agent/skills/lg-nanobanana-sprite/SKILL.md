@@ -82,9 +82,38 @@ Used in earthquake visualizer apps:
 
 ---
 
+## ⛔ Student Interaction Checkpoints
+
+### After Asset Generation — Dimensions and Transparency
+
+⛔ **STOP and WAIT** — After generating the asset, ask:
+> *"Why did we generate at 512×512 minimum? What happens if you use a 64×64 icon on a Liquid Galaxy video wall that's 5760×1080 across 3 screens?"*
+
+Wait for the student's answer.
+
+### Background Removal — Understand the Technique
+
+⛔ **STOP and WAIT** — After processing the image, ask:
+> *"Why do we use a bright neon green (#00FF00) background instead of asking the AI to generate a transparent PNG? What is chroma keying, and where else is it used?"*
+
+This is a "predict what happens" exercise — let them reason about why AI models struggle with alpha channels.
+
+### KML Integration — Trace the Pipeline
+
+⛔ **STOP and WAIT** — Ask:
+> *"Trace the full asset pipeline: from the text prompt → generated image → processed PNG → hosted URL → KML `<Icon>` element → Google Earth display. What could go wrong at each step?"*
+
 ## Verification Checklist
 - [ ] Is the object centered in the generated image?
 - [ ] Is the green background completely removed (no "halo" effect)?
 - [ ] Does the asset render correctly in Google Earth Pro (desktop preview)?
 - [ ] Is the resolution high enough for the Liquid Galaxy video wall (512px+ for icons)?
 - [ ] Is the asset hosted at a URL accessible by the LG rig?
+
+## 🔗 Skill Chain
+
+After the asset is generated, processed, and the student understands the pipeline, **automatically offer to return to initialization**:
+
+> *"Asset generation complete! The icon is processed and ready for KML integration. Let's continue setting up the project. Ready to go back? 🎨"*
+
+If student says "ready" → activate `.agent/skills/lg-init/SKILL.md` (asset generation phase complete).

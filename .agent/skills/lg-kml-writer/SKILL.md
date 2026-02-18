@@ -223,3 +223,11 @@ String buildLogoOverlay({
 ## Handoff
 
 After KML generation → **lg-ssh-controller** (.agent/skills/lg-ssh-controller/SKILL.md) for rig upload, then **lg-code-reviewer** (.agent/skills/lg-code-reviewer/SKILL.md) for quality checks.
+
+## 🔗 Skill Chain
+
+After KML is generated, validated, and the student understands coordinate order and color format, **automatically offer the next stage**:
+
+> *"KML is generated and validated! Now let's send it to the LG rig via SSH. Ready to see it on Google Earth? 🚀"*
+
+If student says "ready" → activate `.agent/skills/lg-ssh-controller/SKILL.md`.

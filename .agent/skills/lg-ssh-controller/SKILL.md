@@ -161,3 +161,11 @@ class SSHService extends ChangeNotifier {
 ## Handoff
 
 After SSH service implementation → **lg-kml-writer** (.agent/skills/lg-kml-writer/SKILL.md) for KML generation, then **lg-code-reviewer** (.agent/skills/lg-code-reviewer/SKILL.md) for quality check.
+
+## 🔗 Skill Chain
+
+After the SSH service is implemented and the student understands the connection lifecycle, **automatically offer the next stage**:
+
+> *"SSH communication is wired up! The app can now talk to the LG rig securely. Let's get this reviewed for error handling and resource cleanup. Ready for the Code Review? 🔍"*
+
+If student says "ready" → activate `.agent/skills/lg-code-reviewer/SKILL.md`.

@@ -318,10 +318,47 @@ flutter test          # Tests still pass?
 flutter build apk     # Builds successfully? (Android)
 ```
 
+## ⛔ Student Interaction Checkpoints
+
+### After Diagnosing — Explain Before Fixing
+
+⛔ **STOP and WAIT** — After identifying the dependency issue, ask:
+> *"I found the issue: [describe the conflict/error]. Before I fix it — can you explain why this version conflict happens? What does it mean when two packages depend on different versions of the same library?"*
+
+Wait for the student's answer. Evaluate:
+- ✅ **Correct**: Great, they understand semantic versioning and transitive dependencies.
+- ⚠️ **Partially correct**: Explain the dependency graph concept — Package A needs X v1, Package B needs X v2.
+- ❌ **Wrong or "just fix it"**: Trigger **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md). Understanding dependency resolution is essential.
+
+### After Fixing — Predict the Verification
+
+⛔ **STOP and WAIT** — Before running verification, ask:
+> *"I'm about to run `flutter pub get` and `flutter analyze`. What do you expect to see? Will there be any warnings?"*
+
+Let the student predict the outcome, then run the command so they can compare.
+
+### Nuclear Options — Understand the Escalation
+
+If escalating to Level 2+ cleanup, present multiple choice:
+> *"We need to clear more caches. Which of these is the most aggressive?"*
+> A) `flutter clean`
+> B) Deleting `.dart_tool/`
+> C) Deleting `pubspec.lock`
+
+⛔ **STOP and WAIT** — Let them pick and explain their reasoning.
+
 ## Handoff
 
 - **Fixed** → Return to the pipeline stage that triggered the error. Use `.agent/skills/lg-resume-pipeline/SKILL.md`.
 - **Still broken** → Escalate to `.agent/skills/lg-debugger/SKILL.md` for deeper diagnosis.
 - **Student doesn't understand** → `.agent/skills/lg-critical-advisor/SKILL.md` for educational coaching on dependency management.
+
+## 🔗 Skill Chain
+
+After the dependency issue is resolved and verified, **automatically offer to resume the interrupted pipeline**:
+
+> *"Dependencies resolved! All packages are compatible and `flutter analyze` passes clean. Let's pick up where we left off. Ready to resume? 🔄"*
+
+If student says "ready" → activate `.agent/skills/lg-resume-pipeline/SKILL.md`.
 
 ````

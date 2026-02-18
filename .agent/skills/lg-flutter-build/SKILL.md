@@ -188,10 +188,53 @@ git commit -m "build: release artifacts for [platforms]"
 - **Flutter web deployment**: https://docs.flutter.dev/deployment/web
 - For deeper study → **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md)
 
+## ⛔ Student Interaction Checkpoints
+
+### After Build Succeeds — Platform Understanding
+
+⛔ **STOP and WAIT** — After a successful build, ask:
+> *"What platform-specific considerations exist for LG rig deployment? Why do we build with `--split-per-abi` instead of a single fat APK?"*
+
+Wait for the student's answer. Evaluate:
+- ✅ **Correct**: They understand ABI splitting reduces APK size per architecture.
+- ⚠️ **Partially correct**: Explain that different devices use different CPU architectures (arm64, armeabi, x86_64) and a split build is smaller.
+- ❌ **Wrong**: Walk through the build output — show the different APK files and their sizes.
+
+### Pre-Build — Predict Issues
+
+⛔ **STOP and WAIT** — Before starting the build, ask:
+> *"Before we build, what do you think could go wrong? What pre-build checks should we run and why?"*
+
+### Post-Build — Artifact Awareness
+
+⛔ **STOP and WAIT** — After artifacts are generated, ask:
+> *"Where are the build artifacts stored? If you wanted to install this APK on a physical device, what command would you use?"*
+
+## 📋 Doc Save
+
+After a successful build, save a build report:
+
+**Save to:** `docs/reviews/YYYY-MM-DD-build-report.md`
+
+Include:
+- Build date, Flutter version, commit hash
+- Platforms built (Android, Web, Linux)
+- APK sizes per ABI
+- Any warnings from `flutter analyze`
+- Test results summary
+
 ## Handoff
 
 After successful build, ask:
 - "Would you like to deploy to a test device?"
 - "Ready for a Code Review?" -> Hand to **lg-code-reviewer**
+
+## 🔗 Skill Chain
+
+After the build succeeds and the student understands the artifacts, **automatically offer the next stage**:
+
+> *"Build complete! APK is ready for deployment. Let's capture some demo evidence — screenshots and recordings of the running app for your submission. Ready to record? 📸"*
+
+If student says "ready" → activate `.agent/skills/lg-demo-recorder/SKILL.md`.
 
 ```

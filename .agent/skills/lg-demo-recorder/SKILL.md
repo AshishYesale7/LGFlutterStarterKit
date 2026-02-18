@@ -195,3 +195,11 @@ The student MUST capture evidence of each Task 2 requirement:
 - **App not running** → `.agent/skills/lg-emulator-manager/SKILL.md` to launch emulator first
 - **ffmpeg missing** → `.agent/skills/lg-setup-guide/SKILL.md` for install guidance
 - **Need more testing** → `.agent/skills/lg-tester/SKILL.md` for automated tests
+
+## 🔗 Skill Chain
+
+After demo evidence is captured and committed, **automatically offer the next stage**:
+
+> *"Demo evidence is captured and committed! Screenshots, recordings, and GIFs are ready for your submission. Time for the final quiz to validate your understanding of the entire project. Ready for graduation? 🎓"*
+
+If student says "ready" → activate `.agent/skills/lg-quiz-master/SKILL.md`.

@@ -258,3 +258,12 @@ If the student proposes putting SSH calls or KML generation directly in a widget
 ## Handoff
 
 After logic design, use **lg-file-generator** (.agent/skills/lg-file-generator/SKILL.md) to create the files, then **lg-exec** (.agent/skills/lg-exec/SKILL.md) for implementation.
+
+## 🔗 Skill Chain
+
+After the logic layer is designed and the student understands the state management and data flow patterns, **automatically offer the next stage**:
+
+> *"Logic layer is designed! State management, SSH lifecycle, and data pipeline are all mapped out. Let's generate the files and start building. Ready? 📁"*
+
+If student wants file generation → activate `.agent/skills/lg-file-generator/SKILL.md`.
+If student wants to jump to execution → activate `.agent/skills/lg-exec/SKILL.md`.

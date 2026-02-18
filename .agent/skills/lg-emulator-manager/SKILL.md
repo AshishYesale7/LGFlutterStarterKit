@@ -93,7 +93,35 @@ xcrun simctl io booted recordVideo docs/recordings/demo.mp4
 flutter test integration_test/app_test.dart -d <device-id>
 ```
 
+## ⛔ Student Interaction Checkpoints
+
+### After Launching Emulator — Verify App Functionality
+
+⛔ **STOP and WAIT** — After the app is running on the emulator, ask:
+> *"The app is running! Navigate through the screens and tell me: Does the splash screen appear? Can you reach the connection screen? What do you see on the home dashboard?"*
+
+Wait for the student to verify each screen visually.
+
+### After Screenshots — Quality Check
+
+⛔ **STOP and WAIT** — After capturing screenshots, ask:
+> *"Look at the screenshots we just captured. Are there any UI issues you notice — text overflow, alignment problems, missing icons? What would you improve for the demo?"*
+
+### Visual Testing — Predict Behavior
+
+⛔ **STOP and WAIT** — Before running integration tests, ask:
+> *"If we run the integration test now, what screens will it navigate through? What assertions do you think it will check?"*
+
 ## Handoff
 - **Screenshots captured** → return to `lg-exec` or `lg-demo-recorder`
 - **Visual issue found** → `lg-debugger` for troubleshooting
 - **App won't run** → `lg-dependency-resolver` for build errors
+
+## 🔗 Skill Chain
+
+After the emulator is running and the app has been visually verified, **automatically offer the next stage**:
+
+> *"App is running and verified on the emulator! Want to capture demo evidence for your submission, or continue executing plan tasks? 📸"*
+
+If student wants demo evidence → activate `.agent/skills/lg-demo-recorder/SKILL.md`.
+If student wants to continue building → activate `.agent/skills/lg-exec/SKILL.md`.

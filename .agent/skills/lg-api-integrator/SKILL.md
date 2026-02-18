@@ -206,4 +206,12 @@ Future<String> apiToKml({
 
 After integration, hand to **lg-kml-writer** (.agent/skills/lg-kml-writer/SKILL.md) to generate the KML visualization, then **lg-ssh-controller** (.agent/skills/lg-ssh-controller/SKILL.md) to send to the rig.
 
+## 🔗 Skill Chain
+
+After the API is integrated, tested, and the student understands the caching/error strategy, **automatically offer the next stage**:
+
+> *"API integration complete! Data is flowing and cached properly. Now let's transform this data into KML that will look stunning on the LG rig. Ready for KML generation? 🌍"*
+
+If student says "ready" → activate `.agent/skills/lg-kml-writer/SKILL.md`.
+
 ```

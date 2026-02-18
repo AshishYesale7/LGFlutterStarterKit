@@ -129,5 +129,53 @@ ssh lg@192.168.1.100 "killall googleearth-bin; sleep 2; /opt/google/earth/pro/go
 - **LG rig setup/troubleshooting**: https://github.com/LiquidGalaxyLAB/liquid-galaxy/wiki
 - For deeper study → **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md)
 
+## ⛔ Student Interaction Checkpoints
+
+### After Diagnosing — Explain Root Cause
+
+⛔ **STOP and WAIT** — After identifying the bug, ask:
+> *"I've found the root cause: [describe the issue]. Before I apply the fix — can you explain in your own words WHY this bug happens? What's the underlying principle being violated?"*
+
+Wait for the student's answer. Evaluate:
+- ✅ **Correct**: They understand the root cause (e.g., lat/lon swap, missing `notifyListeners()`, no timeout).
+- ⚠️ **Partially correct**: Guide them deeper — ask them to trace the data flow through the affected layers.
+- ❌ **Wrong or "just fix it"**: Trigger **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md). Debugging IS learning.
+
+### Before Applying Fix — Predict the Change
+
+⛔ **STOP and WAIT** — Ask:
+> *"I'm about to change [file/method]. What do you think the fix looks like? Describe the change before I show you the code."*
+
+Let the student attempt to describe the fix, then show the actual code.
+
+### After Fix — Verify Understanding
+
+⛔ **STOP and WAIT** — After applying and verifying the fix, ask:
+> *"How would you prevent this type of bug in the future? Should we add a test for this case?"*
+
+## 📋 Doc Save — Debug Session
+
+For systemic issues, save to `docs/tech-debt.md` (already existing).
+
+Additionally, save debug session context:
+
+**Save to:** `docs/aimentor/YYYY-MM-DD-debug-session.md`
+
+Include:
+- Bug description and symptoms
+- Root cause analysis
+- Fix applied (with file paths)
+- Lessons learned
+- Prevention strategy (test added? pattern documented?)
+
 ## Handoff
 After fix → `lg-code-reviewer` for verification that the fix is clean.
+
+## 🔗 Skill Chain
+
+After the fix is applied, verified, and the student understands the root cause, **automatically offer the next stage**:
+
+> *"Bug squashed and verified! You traced the root cause like a pro. Want to resume the pipeline where we left off, or run a code review on the fix? 🐛→✅"*
+
+If student wants to resume → activate `.agent/skills/lg-resume-pipeline/SKILL.md`.
+If student wants review → activate `.agent/skills/lg-code-reviewer/SKILL.md`.
