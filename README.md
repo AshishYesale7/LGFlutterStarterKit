@@ -281,4 +281,4 @@ Students are expected to keep `flutter analyze` passing at all times!
 
 ## 📄 License
 
-This project is part of the Liquid Galaxy GSoC initiative.
+This project is licensed under the [MIT License](LICENSE).
