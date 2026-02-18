@@ -35,6 +35,11 @@ class _MainScreenState extends State<MainScreen> {
         centerTitle: true,
         actions: [
           IconButton(
+            icon: const Icon(Icons.account_tree),
+            tooltip: 'Antigravity Workflow',
+            onPressed: () => Navigator.pushNamed(context, '/workflow'),
+          ),
+          IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () => Navigator.pushNamed(context, '/settings'),
           ),

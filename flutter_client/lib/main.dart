@@ -7,6 +7,7 @@ import 'package:flutter_client/screens/main_screen.dart';
 import 'package:flutter_client/screens/connection_screen.dart';
 import 'package:flutter_client/screens/settings_screen.dart';
 import 'package:flutter_client/screens/help_screen.dart';
+import 'package:flutter_client/screens/workflow_flow_screen.dart';
 
 void main() {
   runApp(
@@ -48,6 +49,7 @@ class LGStarterApp extends StatelessWidget {
         '/main': (context) => const MainScreen(),
         '/settings': (context) => const SettingsScreen(),
         '/help': (context) => const HelpScreen(),
+        '/workflow': (context) => const WorkflowFlowScreen(),
       },
     );
   }
