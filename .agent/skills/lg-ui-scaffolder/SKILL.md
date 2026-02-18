@@ -12,6 +12,8 @@ KML, or opens SSH connections**.
 
 **Announce:** "UI Scaffolder activated. Generating controller screens for the LG rig."
 
+**⚠️ PROMINENT GUARDRAIL**: The **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md) and **LG Shield** (.agent/skills/lg-shield/SKILL.md) are active at all times. If the student can't trace a tap from UI to rig, STOP and invoke the Critical Advisor.
+
 ## When to Invoke
 - After `lg-plan-writer` defines the screens and interactions.
 - After `lg-viz-architect` maps phone actions to rig responses.
@@ -153,3 +155,11 @@ For each screen generated:
 ## Handoff
 Passes generated screens to `lg-code-reviewer` for quality review and
 `lg-shield` for boundary validation.
+
+## 🔗 Skill Chain
+
+After screens are generated and the student passes the checkpoint, **automatically offer the next stage**:
+
+> *"Screens are scaffolded and you can trace the UI-to-service flow! Now let's execute the full implementation plan in batches. Ready to start coding the features? ⚙️"*
+
+If student says "ready" → activate `.agent/skills/lg-exec/SKILL.md`.

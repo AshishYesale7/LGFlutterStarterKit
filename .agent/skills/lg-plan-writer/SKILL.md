@@ -7,7 +7,7 @@ description: Creates detailed implementation plans for LG Flutter features with 
 
 Third step: **Init -> Brainstorm -> Plan -> Execute -> Review -> Quiz (Finale)**.
 
-**GUARDRAIL**: If the student fails Educational Verification, call **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md).
+**⚠️ PROMINENT GUARDRAIL**: If the student fails Educational Verification, call **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md). The **LG Shield** (.agent/skills/lg-shield/SKILL.md) is also always active.
 
 **Save plans to:** `docs/plans/YYYY-MM-DD-<feature-name>-plan.md`
 
@@ -67,3 +67,11 @@ Before handing to the executor, ask:
 - For deeper study → **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md)
 
 "Plan saved to `docs/plans/<file>.md`. Ready for implementation? Using **Plan Executer** (.agent/skills/lg-exec/SKILL.md)."
+
+## 🔗 Skill Chain
+
+After the plan is written and the student passes the checkpoint, **automatically offer the next stage**:
+
+> *"Plan is saved and you clearly understand the service-layer architecture! Now let's start building. We'll begin by wiring the data pipeline and scaffolding the UI. Ready to code? 🚀"*
+
+If student says "ready" → activate `.agent/skills/lg-data-pipeline/SKILL.md` first, then `.agent/skills/lg-ui-scaffolder/SKILL.md`, then `.agent/skills/lg-exec/SKILL.md` for batch execution.

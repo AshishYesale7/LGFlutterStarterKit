@@ -10,6 +10,8 @@ Manages the end-to-end data transformation pipeline:
 
 **Announce:** "Data Pipeline skill activated. Building the clean path from API data to LG visualization."
 
+**⚠️ PROMINENT GUARDRAIL**: The **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md) and **LG Shield** (.agent/skills/lg-shield/SKILL.md) are active at all times. If the student can't explain why we separate API providers from KML generation, STOP and invoke the Critical Advisor.
+
 ## The Pipeline Contract
 
 Every data visualization in an LG app follows this exact flow:
@@ -174,3 +176,11 @@ For each new API integration, produces:
 ## Handoff
 Passes generated code to `lg-code-reviewer` for quality checks and to
 `lg-shield` for boundary validation.
+
+## 🔗 Skill Chain
+
+After the data pipeline is wired and the student passes the checkpoint, **automatically offer the next stage**:
+
+> *"Data pipeline is solid! Clean contracts from API to KML. Now let's scaffold the Flutter screens that will use these services. Ready for the UI Scaffolder? 📱"*
+
+If student says "ready" → activate `.agent/skills/lg-ui-scaffolder/SKILL.md`.

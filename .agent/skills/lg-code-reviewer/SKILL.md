@@ -10,6 +10,8 @@ Fifth step in the pipeline: **Init -> Brainstorm -> Plan -> Execute -> Review ->
 
 **Announce at start:** "I'm starting a professional Code Review for the [Feature Name] implementation."
 
+**⚠️ PROMINENT GUARDRAIL**: The **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md) and **LG Shield** (.agent/skills/lg-shield/SKILL.md) are active at all times. DO NOT auto-fix issues — guide the student to fix them.
+
 ## The Review Process
 
 ### 1. Holistic Quality Check
@@ -102,3 +104,11 @@ If REVISIONS NEEDED, hand back to Plan Writer or Executer. Feature is not "Compl
 Once APPROVED:
 - Commit: `chore: final polish after code review`
 - Hand to **Quiz Master** (.agent/skills/lg-quiz-master/SKILL.md)
+
+## 🔗 Skill Chain
+
+After the review is APPROVED and the student understands all findings, **automatically offer the next stage**:
+
+> *"Code review APPROVED! Your code is clean, secure, and well-architected. Before we graduate, let's run a Security Post-Flight scan, then it's time for the **Liquid Galaxy Quiz Show** finale! Ready? 🎤"*
+
+If student says "ready" → activate `.agent/skills/lg-shield/SKILL.md` (post-flight mode), then `.agent/skills/lg-quiz-master/SKILL.md`.

@@ -10,6 +10,8 @@ when any skill produces or modifies code.
 
 **Announce:** "Shield scan initiated. Checking security posture and layer boundaries."
 
+**⚠️ PROMINENT GUARDRAIL**: The **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md) is active at all times. Security issues are NON-NEGOTIABLE — the pipeline BLOCKS until all BLOCK-level findings are resolved.
+
 ## Automated Checks
 
 ### 1. Secret Detection
@@ -89,3 +91,17 @@ Produces a `shield-report.md` in `docs/reviews/`:
 ## Blockers: [list]
 ## Warnings: [list]
 ```
+
+## 🔗 Skill Chain
+
+### Pre-Flight (Stage 0) → Init
+After a clean pre-flight scan, **automatically offer the next stage**:
+> *"Security pre-flight is clean — no secrets, no boundary violations! Let's initialize your LG project. Ready to set up your app?"*
+
+If student says "ready" → activate `.agent/skills/lg-init/SKILL.md`.
+
+### Post-Flight (Stage 9) → Quiz
+After a clean post-flight scan:
+> *"Security post-flight passed! Your code is clean and secure. Ready for the **Liquid Galaxy Quiz Show** finale? 🎬"*
+
+If student says "ready" → activate `.agent/skills/lg-quiz-master/SKILL.md`.

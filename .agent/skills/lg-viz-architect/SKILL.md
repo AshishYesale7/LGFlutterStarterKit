@@ -11,6 +11,8 @@ will see and feel* on the multi-screen Google Earth display.
 
 **Announce:** "Viz Architect activated. Let's design the experience people will see on the rig."
 
+**⚠️ PROMINENT GUARDRAIL**: The **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md) and **LG Shield** (.agent/skills/lg-shield/SKILL.md) are active at all times. If the student can't explain the phone-to-rig interaction model, STOP and invoke the Critical Advisor.
+
 ## When to Invoke
 - After `lg-brainstormer` selects a concept.
 - Before `lg-plan-writer` creates implementation tasks.
@@ -133,3 +135,11 @@ Produces a `viz-design.md` document in `docs/plans/`:
 ## Handoff
 Passes the visualization design to `lg-plan-writer` for task breakdown and to
 `lg-kml-craftsman` for artistic KML composition.
+
+## 🔗 Skill Chain
+
+After the visualization design is complete and the student passes the interaction checkpoint, **automatically offer the next stage**:
+
+> *"Visualization design is locked in! We know what the rig will display and how the camera moves. Now let's break this into a step-by-step implementation plan. Ready to write the plan? 📝"*
+
+If student says "ready" → activate `.agent/skills/lg-plan-writer/SKILL.md`.

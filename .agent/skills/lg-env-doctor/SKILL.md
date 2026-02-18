@@ -12,7 +12,7 @@ This skill is the **first thing that runs** before any pipeline stage. It detect
 
 **Announce at start:** "Running Environment Doctor — checking your machine for all required tools..."
 
-**GUARDRAIL**: The **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md) is active. If the student wants to skip setup, the advisor intervenes — you cannot build an LG app without the correct toolchain.
+**⚠️ PROMINENT GUARDRAIL**: The **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md) is active at all times. If the student wants to skip setup or rushes through without understanding the toolchain, the advisor **WILL** intervene.
 
 ## Phase 0: Detect Host OS
 
@@ -180,6 +180,15 @@ Summary: 8 PASS | 1 WARN | 2 MISSING | 1 SKIP
 - **All clear** → Continue to `lg-shield` (pre-flight) or `lg-init` (Stage 1).
 - **Missing required tools** → Hand off to `.agent/skills/lg-setup-guide/SKILL.md` with the list of missing tools and the detected OS.
 - **After setup completes** → Hand off to `.agent/skills/lg-resume-pipeline/SKILL.md` to continue from the interrupted stage.
+
+## 🔗 Skill Chain
+
+Once all required tools PASS, **automatically offer the next stage**:
+
+> *"Environment looks great! All required tools are installed and verified. Next up: I'll run a **Security Pre-Flight scan** using `lg-shield` to make sure we're starting with a clean slate. Ready?"*
+
+If the student says "ready" or "yes" → activate `.agent/skills/lg-shield/SKILL.md`.
+If the student has questions → answer them, then re-offer the transition.
 
 ## Quick Run (Single Command)
 

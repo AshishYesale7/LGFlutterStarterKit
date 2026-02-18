@@ -9,6 +9,8 @@ description: The Finale. A TV-show style quiz with 5 questions to evaluate learn
 
 **Announce:** "Welcome to 'Who Wants to be a Liquid Galaxy Engineer?'! 5 high-stakes questions. Are you ready?"
 
+**⚠️ PROMINENT GUARDRAIL**: The **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md) and **LG Shield** (.agent/skills/lg-shield/SKILL.md) are active. If 3+ questions are missed, invoke the Critical Advisor for a structured study session.
+
 ## Rules
 
 ### One Question at a Time
@@ -89,3 +91,16 @@ Use the topic map from `.agent/skills/lg-learning-resources/SKILL.md`:
 
 ## Guardrail
 3+ wrong answers -> **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md) + **Learning Resources** (.agent/skills/lg-learning-resources/SKILL.md) for a structured study plan before retry.
+
+## 🔗 Skill Chain
+
+After the quiz is complete and the student passes (≥3 correct), **automatically offer graduation**:
+
+> *"🎉 Congratulations! You've graduated as a Liquid Galaxy Engineer! Your app is built, reviewed, and deployed. Let's capture a demo recording and build the release APK. Ready for the final deliverables? 🚀"*
+
+If student says "ready" → activate `.agent/skills/lg-demo-recorder/SKILL.md` for screenshots/video, then `flutter build apk --release`.
+
+If starting a new feature:
+> *"Want to add another feature to your app? Let's brainstorm! Ready? 🧠"*
+
+If student says "ready" → activate `.agent/skills/lg-brainstormer/SKILL.md` for the next feature cycle.

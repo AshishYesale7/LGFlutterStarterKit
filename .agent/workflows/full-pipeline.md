@@ -21,6 +21,50 @@ Executes the complete LG educational pipeline in order. This is the recommended 
 
 ---
 
+## 🔗 CONVERSATIONAL AUTO-CHAIN (CRITICAL)
+
+**The agent MUST automatically offer the next pipeline stage at the end of every skill.**
+The student should NEVER have to manually ask "now do the review" or "now do the quiz."
+
+Each skill ends with a **Skill Chain Handoff** — an explicit conversational offer:
+
+```
+Env Doctor  → "Environment looks good! Ready for the Security Pre-Flight scan?"
+Shield Pre  → "Security scan clean! Let's initialize your project. Ready?"
+Init        → "Project scaffolded! Ready to brainstorm your first feature?"
+Brainstorm  → "Design documented! Ready to map the visualization experience?"
+Viz Arch    → "Storyboard ready! Ready to write the implementation plan?"
+Plan Writer → "Plan saved! Ready to start coding? I'll begin with Task 1."
+Data Pipe   → "Pipeline wired! Ready to scaffold the UI screens?"
+UI Scaffold → "Screens generated! Ready to execute the remaining plan tasks?"
+Exec        → "Implementation complete! Ready for a professional Code Review?"
+Review      → "Code APPROVED! Ready for the Liquid Galaxy Quiz Show finale?"
+Shield Post → (runs automatically before Quiz)
+Quiz Master → "Congratulations! 🎓 Ready to start your next LG project?"
+```
+
+**RULE**: The agent announces which skill it's activating at the START of each stage:
+> "I'm using the lg-brainstormer skill to explore your app design."
+
+And offers the next skill at the END:
+> "Design complete! I'll use the lg-plan-writer skill next. Ready to create the implementation plan?"
+
+This creates a **natural conversational flow** where the student always knows:
+1. What just happened
+2. What happens next
+3. They have a chance to ask questions before moving on
+
+**The student only needs to say "yes" / "ready" / ask a question.** They should never need to know skill names or manually request stages.
+
+---
+
+## ⚠️ PROMINENT GUARDRAIL: Critical Advisor
+
+The **Critical Advisor** (`.agent/skills/lg-critical-advisor/SKILL.md`) is active at **ALL** stages.
+Every skill MUST reference it prominently. If the student rushes, goes silent, or fails verification, the advisor intervenes IMMEDIATELY.
+
+---
+
 ## The 11 Stages
 
 ```
@@ -52,6 +96,8 @@ Cross-cutting (active at ALL stages):
 - **BLOCKS pipeline if required tools are missing**
 - Saves checkpoint to `docs/pipeline-checkpoint.yaml` via `.agent/skills/lg-resume-pipeline/SKILL.md`
 
+> 🔗 **Skill Chain**: *"Environment looks good! All tools are PASS. Let's run a Security Pre-Flight scan to make sure we're starting clean. Ready?"*
+
 ### Stage 0: Security Pre-Flight
 **Skill**: `.agent/skills/lg-shield/SKILL.md`
 - Scan for hardcoded secrets, exposed API keys
@@ -59,6 +105,8 @@ Cross-cutting (active at ALL stages):
 - Verify `flutter_secure_storage` present if app handles credentials
 - Check layer boundary compliance on existing code
 - **BLOCKS pipeline if critical issues found**
+
+> 🔗 **Skill Chain**: *"Security scan is clean — no secrets exposed, boundaries intact. Let's initialize your project! Ready to set up your LG app?"*
 
 ### Stage 1: Init
 **Skill**: `.agent/skills/lg-init/SKILL.md` + `.agent/skills/lg-flutter-init/SKILL.md`
@@ -75,6 +123,8 @@ Cross-cutting (active at ALL stages):
 
 > ⛔️ **Student Checkpoint**: *"The project is scaffolded. Explain: What is the relationship between the Flutter app on your phone and Google Earth on the LG rig?"*
 
+> 🔗 **Skill Chain** (after checkpoint passes): *"Great understanding! Now let's brainstorm what your app will do. Ready to explore the idea?"*
+
 ### Stage 2: Brainstorm
 **Skill**: `.agent/skills/lg-brainstormer/SKILL.md`
 - Explore the idea collaboratively
@@ -86,6 +136,8 @@ Cross-cutting (active at ALL stages):
 
 > ⛔️ **Student Checkpoint**: *"Describe the data flow in your own words: where does data come from, how becomes KML, how reaches Google Earth?"*
 
+> 🔗 **Skill Chain** (after checkpoint passes): *"Excellent data flow understanding! Now let's design the visual experience — what people will actually SEE on the rig. Ready?"*
+
 ### Stage 3: Visualization Design
 **Skill**: `.agent/skills/lg-viz-architect/SKILL.md`
 - Design the multi-screen experience storyboard
@@ -93,6 +145,8 @@ Cross-cutting (active at ALL stages):
 - Define phone-to-rig interaction mapping
 - Set performance budget (max placemarks, KML size, tour duration)
 - Document in `docs/plans/`
+
+> 🔗 **Skill Chain**: *"Visualization storyboard is ready! Now let's break it into concrete tasks. Ready for the implementation plan?"*
 
 ### Stage 4: Plan
 **Skill**: `.agent/skills/lg-plan-writer/SKILL.md`
@@ -103,6 +157,8 @@ Cross-cutting (active at ALL stages):
 
 > ⛔️ **Student Checkpoint**: *"Before we start coding — why does SSH logic belong in a service and not in a widget? What principle is that?"*
 
+> 🔗 **Skill Chain** (after checkpoint passes): *"Plan saved! Let's start building. I'll set up the data pipeline first, then scaffold the UI. Ready to code?"*
+
 ### Stage 5: Data Pipeline Setup
 **Skill**: `.agent/skills/lg-data-pipeline/SKILL.md`
 - Define provider contracts for external APIs
@@ -110,11 +166,15 @@ Cross-cutting (active at ALL stages):
 - Wire API -> Domain -> KML -> Transport flow
 - Validate boundary compliance
 
+> 🔗 **Skill Chain**: *"Data pipeline is wired! Now let's build the screens and KML art. Ready for the UI?"*
+
 ### Stage 6: UI Scaffolding + KML Crafting
 **Skills**: `.agent/skills/lg-ui-scaffolder/SKILL.md` + `.agent/skills/lg-kml-craftsman/SKILL.md`
 - Generate controller screens (no network/KML/SSH imports in UI)
 - Compose artistic KML visualizations (3D extrusions, time animations, tours)
 - Wire screens to services via Provider
+
+> 🔗 **Skill Chain**: *"Screens and KML compositions are scaffolded! Ready to start executing the full plan in batches?"*
 
 ### Stage 7: Execute
 **Skill**: `.agent/skills/lg-exec/SKILL.md`
@@ -129,6 +189,8 @@ Cross-cutting (active at ALL stages):
 
 > ⛔️ **Student Checkpoint (per batch)**: Verification question about what was just built. See lg-exec for the full interaction protocol.
 
+> 🔗 **Skill Chain** (after all batches): *"All tasks implemented! Ready for a professional Code Review?"*
+
 ### Stage 8: Review
 **Skill**: `.agent/skills/lg-code-reviewer/SKILL.md`
 - Holistic quality check (SOLID, DRY, naming, widget decomposition)
@@ -137,12 +199,16 @@ Cross-cutting (active at ALL stages):
 - Write review report
 - If REVISIONS NEEDED -> return to Stage 7
 
+> 🔗 **Skill Chain** (if APPROVED): *"Code review APPROVED! Let me run the final security scan, then we'll move to the Quiz Show finale. Ready?"*
+
 ### Stage 9: Security Post-Flight
 **Skill**: `.agent/skills/lg-shield/SKILL.md`
 - Re-run full security and boundary scan on final code
 - Verify no regressions from execution phase
 - Generate shield report in `docs/reviews/`
 - **BLOCKS graduation if critical issues found**
+
+> 🔗 **Skill Chain**: *"Security post-flight passed! You've built and secured a complete LG app. Ready for the Liquid Galaxy Quiz Show? 🎬"*
 
 ### Stage 10: Quiz & Graduation
 **Skill**: `.agent/skills/lg-quiz-master/SKILL.md`
@@ -152,6 +218,8 @@ Cross-cutting (active at ALL stages):
 - **Capture demo evidence** via `lg-demo-recorder` (screenshots, screen recording, GIF)
 - Generate graduation report with links to learning resources
 - If 3+ wrong -> Critical Advisor coaching session + Learning Resources
+
+> 🔗 **Skill Chain** (after graduation): *"🎓 Congratulations! You've completed the full Liquid Galaxy Pipeline! Ready to start your next project? I can initialize a new LG app anytime."*
 
 ## Cross-Cutting: Critical Advisor
 **Skill**: `.agent/skills/lg-critical-advisor/SKILL.md`

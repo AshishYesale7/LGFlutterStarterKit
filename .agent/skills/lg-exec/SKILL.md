@@ -8,7 +8,7 @@ description: Use when you have a written implementation plan (from lg-plan-write
 ## Overview
 Fourth step in the pipeline: **Init -> Brainstorm -> Plan -> Execute -> Review -> Quiz (Finale)**.
 
-**GUARDRAIL**: If the student stops participating or just says "Go on," trigger the **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md).
+**⚠️ PROMINENT GUARDRAIL**: If the student stops participating or just says "Go on," trigger the **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md). The **LG Shield** (.agent/skills/lg-shield/SKILL.md) is also always active.
 
 **Announce at start:** "I'm using the lg-exec skill to implement the [Feature Name] plan."
 
@@ -104,6 +104,14 @@ If an emulator is running (`flutter devices` shows a device):
 3. Show the student a summary: *"We've completed all [N] tasks from the plan. Here's what the app can do now: [summary]."*
 4. **Final comprehension check**: Ask one big-picture question — *"Trace the full data flow from the user tapping 'Visualize' to the KML appearing on the LG rig."*
 5. Hand to **Code Reviewer** (.agent/skills/lg-code-reviewer/SKILL.md).
+
+## 🔗 Skill Chain
+
+After all plan tasks are executed and the student passes the final comprehension check, **automatically offer the next stage**:
+
+> *"All tasks implemented and verified! You traced the full data flow from tap to rig. Now let's do a professional code review to make sure everything is OSS-ready. Ready for the Code Review? 🔍"*
+
+If student says "ready" → activate `.agent/skills/lg-code-reviewer/SKILL.md`.
 
 ## When to Stop
 - Blocker encountered

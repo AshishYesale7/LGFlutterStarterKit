@@ -7,7 +7,7 @@ description: Helps students bootstrap a new Liquid Galaxy Flutter project. Enfor
 
 First step in the pipeline: **Init -> Brainstorm -> Plan -> Execute -> Review -> Quiz (Finale)**.
 
-**GUARDRAIL**: The **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md) and **LG Shield** (.agent/skills/lg-shield/SKILL.md) are always active.
+**⚠️ PROMINENT GUARDRAIL**: The **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md) and **LG Shield** (.agent/skills/lg-shield/SKILL.md) are always active. If the student rushes or can't explain the LG architecture, STOP and invoke the Critical Advisor.
 
 ---
 
@@ -217,3 +217,11 @@ Explain these to the student:
 6. **Ask the student**: *"The project is scaffolded. Before we brainstorm features, can you explain: What is the relationship between the Flutter app on your phone and Google Earth on the LG rig?"*
 7. If the student cannot answer, link to **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md) — Architecture topic.
 8. Hand to **Brainstormer** (.agent/skills/lg-brainstormer/SKILL.md).
+
+## 🔗 Skill Chain
+
+After scaffolding is complete and the student passes the checkpoint, **automatically offer the next stage**:
+
+> *"Project scaffolded and committed! You clearly understand the Controller-to-Rig model. Now let's brainstorm features — what should your LG app visualize on Google Earth? Ready to brainstorm? 🧠"*
+
+If student says "ready" → activate `.agent/skills/lg-brainstormer/SKILL.md`.

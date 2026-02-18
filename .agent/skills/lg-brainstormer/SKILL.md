@@ -9,7 +9,7 @@ description: 'You MUST use this before any creative work - creating features, bu
 
 Help turn ideas into fully formed designs and specs through natural collaborative dialogue. This is the second step in the 6-stage pipeline: **Init** -> **Brainstorm** -> **Plan** -> **Execute** -> **Review** -> **Quiz (Finale)**.
 
-**GUARDRAIL**: If the student is agreeing too easily without asking "How" or "Why", you **MUST** trigger the **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md).
+**⚠️ PROMINENT GUARDRAIL**: If the student is agreeing too easily without asking "How" or "Why", you **MUST** trigger the **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md). The LG Shield (.agent/skills/lg-shield/SKILL.md) is also always active.
 
 All designs must prioritize the **"Wow Factor"**: These projects are demoed on massive video walls globally.
 
@@ -80,7 +80,7 @@ Before moving to implementation, ask the student:
 
 **Implementation:**
 - Ask: "Ready to set up for implementation?"
-- Use **Plan Writer** (.agent/skills/lg-plan-writer/SKILL.md) to create task list.
+- Use **Viz Architect** (.agent/skills/lg-viz-architect/SKILL.md) to design the visual experience.
 
 ## Key Principles
 - **Visual Impact** — must be impressive on massive Google Earth displays
@@ -96,3 +96,11 @@ Before moving to implementation, ask the student:
 - **GSoC 2026 Ideas**: https://www.liquidgalaxy.eu/2025/11/GSoC2026.html
 - **LG Mobile Applications**: https://www.liquidgalaxy.eu/2018/06/mobile-applications.html
 - For deeper study → **lg-learning-resources** (.agent/skills/lg-learning-resources/SKILL.md)
+
+## 🔗 Skill Chain
+
+After the design is documented and the student passes the checkpoint, **automatically offer the next stage**:
+
+> *"Great brainstorming session! The design is documented. Now let's design the visualization experience — what will people actually SEE on the multi-screen rig? Ready for the Viz Architect? 🎨"*
+
+If student says "ready" → activate `.agent/skills/lg-viz-architect/SKILL.md`.
