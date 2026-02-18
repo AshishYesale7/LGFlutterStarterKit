@@ -2,9 +2,6 @@
 	"folders": [
 		{
 			"path": "."
-		},
-		{
-			"path": "../LG-Task2-Controller"
 		}
 	],
 	"settings": {}
