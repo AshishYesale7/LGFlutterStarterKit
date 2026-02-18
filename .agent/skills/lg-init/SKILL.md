@@ -72,7 +72,17 @@ LG-<TaskName>
 
 ## Phase 0: Repository Setup
 
-### Step 1: Determine Project Location
+### ⛔ WITHIN-PHASE INTERACTION RULES
+
+> **DO NOT silently create the project directory and all files.**
+> Explain WHAT you're about to create and WHY before doing it.
+> Pause after each significant step for student acknowledgment.
+
+### Step 1: Explain and Confirm Project Location
+
+**First, explain to the student what will happen:**
+> *"I'm going to create your LG app in a SEPARATE directory next to the starter kit — not inside it. The starter kit stays untouched as a reference. Here's the directory structure:"*
+
 ```bash
 # The starter kit location
 STARTER_KIT=$(pwd)   # e.g., /Users/user/.gemini/antigravity/scratch/LGFlutterStarterKit
@@ -83,6 +93,10 @@ APP_NAME="LG-Task2-Demo"   # Must follow LG-<TaskName> convention
 APP_DIR="$PARENT_DIR/$APP_NAME"
 ```
 
+Ask: *"The new project will live at `[path]`. This keeps your starter kit separate from your app code. Does this make sense to you? Any questions about why we use sibling directories?"*
+
+⛔ **STOP and WAIT** for the student's response.
+
 ### Step 2: Create the New App Directory
 ```bash
 mkdir -p "$APP_DIR"
@@ -90,6 +104,10 @@ cd "$APP_DIR"
 ```
 
 ### Step 3: Copy Starter Kit Scaffolding
+
+**Explain what's being copied:**
+> *"I'm copying the Flutter client template, docs structure, GitHub workflows, and server as a starting point. I'll walk you through the structure after."*
+
 ```bash
 # Copy the Flutter client as a starting point
 cp -r "$STARTER_KIT/flutter_client" "$APP_DIR/flutter_client"
@@ -109,6 +127,13 @@ cp -r "$STARTER_KIT/server" "$APP_DIR/server" 2>/dev/null || true
 # Create fresh README and DEVELOPMENT_LOG
 touch README.md DEVELOPMENT_LOG.md
 ```
+
+**After copying, explain the structure:**
+> *"Here's what we just created: `flutter_client/` is your main app code, `docs/` is where plans and reviews go, `server/` is the Node.js backend. Each folder has a specific purpose."*
+
+Ask: *"Can you guess which folder your SSH service code will go in? Which folder will your screen widgets live in?"*
+
+⛔ **STOP and WAIT** for the student's answer. This confirms they understand the project structure.
 
 ### Step 4: Initialize Git
 ```bash
@@ -171,6 +196,10 @@ Hand off to `.agent/skills/lg-github-agent/SKILL.md` to:
 
 ## Phase 2: Scaffolding
 
+**First, explain the layered architecture:**
+
+> *"Your Flutter app uses a layered architecture — each folder has a specific responsibility. Let me walk you through it:"*
+
 ```
 flutter_client/lib/
 ├── main.dart         # Provider setup, entry point
@@ -183,23 +212,62 @@ flutter_client/lib/
 └── modules/          # Feature modules
 ```
 
+Ask: *"Looking at this structure — which folder do you think handles SSH communication to the rig? Which folder should NEVER import SSH or KML code directly?"*
+
+⛔ **STOP and WAIT** for the student's answer. This tests layer boundary understanding early.
+
 ### Actions:
 1. Create missing directories + `test/`, `assets/`.
 2. `flutter pub get`
 3. `flutter doctor`
 4. If platforms missing: `flutter create --platforms=android,ios,linux,macos .`
 
+**After running the commands**, report the results and ask:
+> *"Flutter is set up. `flutter doctor` shows [summary]. Any issues you notice that we should fix before moving on?"*
+
+⛔ **STOP and WAIT.**
+
 ## Phase 3: Configuration
-Update `config.dart` with LG connection defaults. Update `pubspec.yaml` with:
-- `provider`, `http`, `dartssh2`, `xml`, `path_provider`, `shared_preferences`
 
-## Phase 4: Golden Rules
+**Explain before configuring:**
+> *"Now I'll set up the LG rig connection defaults in `config.dart` and add the packages we need in `pubspec.yaml`. These packages are:"*
+> - `provider` — State management (UI reads state from providers)
+> - `http` — API calls for external data
+> - `dartssh2` — SSH to communicate with the LG rig master
+> - `xml` — KML generation and parsing
+> - `path_provider` — Local file storage
+> - `shared_preferences` — User settings persistence
 
-Explain these to the student:
+Ask: *"Can you guess which of these packages our SSH service will use? And which one will the KML service use? (Hint: think about layer boundaries)"*
 
-1. **App is Controller** — Flutter app runs on the phone, controls the LG rig via SSH.
-2. **Google Earth is Display** — KML renders across all rig screens automatically.
-3. **Service Layer** — All SSH/KML/API logic in services, not in widgets.
+⛔ **STOP and WAIT.** This validates the student understands which service uses which dependency.
+
+Update `config.dart` with LG connection defaults. Update `pubspec.yaml` with the listed packages.
+
+## Phase 4: Golden Rules (CONVERSATIONAL — NOT A LECTURE)
+
+⛔ **DO NOT dump all 3 rules in one message.** Present each rule as a conversation:
+
+**Rule 1 — App is Controller:**
+> *"The most important concept: your Flutter app is a REMOTE CONTROL. It runs on your phone. Google Earth runs on the rig. Your app sends COMMANDS, the rig DISPLAYS."*
+
+Ask: *"If the app is just a remote control, what does the app NOT need to do? What heavy lifting does Google Earth handle?"*
+
+⛔ **STOP and WAIT.**
+
+**Rule 2 — Google Earth is Display:**
+> *"When you send a KML file to the rig, Google Earth automatically renders it across ALL screens. You don't need to manage multi-screen layout — Google Earth does that for you."*
+
+Ask: *"So if we want something to appear on the left screen vs. the center screen — how do we control that? (Hint: it's about which slave file you write to)"*
+
+⛔ **STOP and WAIT.**
+
+**Rule 3 — Service Layer:**
+> *"All SSH, KML, and API logic lives in the `services/` folder — NEVER in widgets or screens. This is called separation of concerns."*
+
+Ask: *"Why is this important? What would go wrong if we put SSH code directly in a button's onPressed handler?"*
+
+⛔ **STOP and WAIT.**
 
 **Reference Architecture**: [LG Master Web App](https://github.com/LiquidGalaxyLAB/LG-Master-Web-App) by Lucia — the reference implementation for all LG controller apps.
 

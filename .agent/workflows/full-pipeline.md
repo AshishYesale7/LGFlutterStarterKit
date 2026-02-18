@@ -21,6 +21,32 @@ Executes the complete LG educational pipeline in order. This is the recommended 
 
 ---
 
+## ⛔️ MANDATORY: Within-Stage Conversational Interaction
+
+> **The agent MUST also interact with the student DURING each stage — not just between stages.**
+> Every skill has internal interaction points marked with ⛔.
+> The agent must present content ONE SECTION AT A TIME and ask questions after each section.
+
+### The One-Section-Per-Message Rule
+
+**During any stage, the agent MUST NOT:**
+- ❌ Generate a complete plan, design, or walkthrough in one message
+- ❌ Present multiple approaches without pausing between them
+- ❌ Create multiple files silently without explaining each
+- ❌ Ask multiple verification questions in a single message
+- ❌ End a message with just "Ready?" — must ask a thought-provoking question
+
+**During any stage, the agent MUST:**
+- ✅ Present ONE logical section per message (one task, one approach, one step, one concept)
+- ✅ End every content message with a specific, engagement-requiring question
+- ✅ Wait for the student to respond before presenting the next section
+- ✅ Explain WHAT it's about to create and WHY before creating files
+- ✅ Narrate code changes like a teacher working alongside the student
+
+**This transforms the agent from a "content dumper" into a "teaching conversationalist."**
+
+---
+
 ## 🔗 CONVERSATIONAL AUTO-CHAIN (CRITICAL)
 
 **The agent MUST automatically offer the next pipeline stage at the end of every skill.**
@@ -145,6 +171,9 @@ Cross-cutting (active at ALL stages):
 - Define phone-to-rig interaction mapping
 - Set performance budget (max placemarks, KML size, tour duration)
 - Document in `docs/plans/`
+- ⛔ **WITHIN-STAGE**: Present ONE storyboard moment at a time. Discuss each before moving on. Present each step (1-6) as a separate conversation turn.
+
+> ⛔️ **Student Checkpoint**: *"Which phone action maps to which rig response? Trace one interaction end-to-end."*
 
 > 🔗 **Skill Chain**: *"Visualization storyboard is ready! Now let's break it into concrete tasks. Ready for the implementation plan?"*
 
@@ -165,6 +194,9 @@ Cross-cutting (active at ALL stages):
 - Create domain models (immutable, no side effects)
 - Wire API -> Domain -> KML -> Transport flow
 - Validate boundary compliance
+- ⛔ **WITHIN-STAGE**: Explain each domain model BEFORE creating it. Ask the student to predict what fields and types the model needs.
+
+> ⛔️ **Student Checkpoint**: *"Walk me through the data flow: which file fetches from the API, which file holds the model, and which file generates the KML?"*
 
 > 🔗 **Skill Chain**: *"Data pipeline is wired! Now let's build the screens and KML art. Ready for the UI?"*
 
@@ -173,6 +205,9 @@ Cross-cutting (active at ALL stages):
 - Generate controller screens (no network/KML/SSH imports in UI)
 - Compose artistic KML visualizations (3D extrusions, time animations, tours)
 - Wire screens to services via Provider
+- ⛔ **WITHIN-STAGE**: Show screen layout design BEFORE creating each screen. Build ONE screen at a time and discuss each.
+
+> ⛔️ **Student Checkpoint**: *"Looking at the home screen — which Provider does it listen to, and what action does each button trigger?"*
 
 > 🔗 **Skill Chain**: *"Screens and KML compositions are scaffolded! Ready to start executing the full plan in batches?"*
 
@@ -198,6 +233,9 @@ Cross-cutting (active at ALL stages):
 - LG-specific audit (KML validity, SSH lifecycle, service layer boundaries)
 - Write review report
 - If REVISIONS NEEDED -> return to Stage 7
+- ⛔ **WITHIN-STAGE**: Present ONE category of review findings at a time (architecture, then style, then tests, then LG-specific). Discuss fixes before applying them.
+
+> ⛔️ **Student Checkpoint**: *"Which review finding do you think is most critical to fix first, and why?"*
 
 > 🔗 **Skill Chain** (if APPROVED): *"Code review APPROVED! Let me run the final security scan, then we'll move to the Quiz Show finale. Ready?"*
 

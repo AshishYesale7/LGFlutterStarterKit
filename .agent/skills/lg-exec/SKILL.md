@@ -45,31 +45,50 @@ Fourth step in the pipeline: **Init -> Brainstorm -> Plan -> Execute -> Review -
 1. Read the plan file in `docs/plans/`.
 2. Identify architectural questions.
 3. Ensure names/structures follow Dart/Flutter conventions.
-4. Raise concerns before starting.
+4. **Present the plan overview to the student** — summarize total tasks, batching strategy, and estimated time.
+5. Ask: *"Here's the plan: [N] tasks split into batches of 2-3. Before we start — looking at Task 1, what layer of the architecture do you think it lives in?"*
+6. ⛔ **STOP and WAIT** for the student's response before starting any code.
 
 ### Step 2: Execute Batch (2-3 tasks MAX)
 
-For each task:
+For each task WITHIN a batch:
 1. Mark as `in_progress`.
-2. Follow: Logic -> Implementation -> Verification.
-3. Explain why this task matters architecturally.
-4. Verify:
+2. **Before writing code**, briefly explain what you're about to create and WHY:
+   - *"Task 2 creates `kml_service.dart`. This service generates KML XML strings — it has NO network access. Here's why we keep it separate from SSH..."*
+3. Follow: Logic -> Implementation -> Verification.
+4. **After each task**, provide a 2-3 sentence summary of what changed:
+   - *"I created `kml_service.dart` with `generatePlacemark()` and `generateScreenOverlay()`. Both return raw KML strings. Notice how this service has zero imports from `ssh_service` — that's our layer boundary in action."*
+5. Verify:
    - `flutter analyze` — zero errors
    - `dart format .` — consistent style
    - `flutter test` — all passing
    - Hot reload if app is running
-5. Check Flutter-specific concerns: Provider usage, async error handling, SSH resource disposal.
-6. Commit: `feat: [task name]`
+6. Check Flutter-specific concerns: Provider usage, async error handling, SSH resource disposal.
+7. Commit: `feat: [task name]`
 
-### Step 3: Educational Report + Mandatory Pause
+⛔ **Within a 3-task batch, you still EXPLAIN each task as you go.** The student should never see 3 files appear silently. Narrate the work as a teacher would.
 
-Per batch, present the report:
-- **What was built**: Summary of the 2-3 tasks completed.
-- **Verification**: Output of `flutter analyze` and `flutter test`.
-- **Engineering Principles**: Which principle was applied (e.g., SRP, DRY).
-- **Visual Check**: Wow Factor assessment — how will this look on Google Earth?
-- **Checklist**: Update `docs/plans/` status.
-- **Learning Journal**: Append to `docs/learning-journal.md`.
+### Step 3: Educational Report — Presented Incrementally
+
+⛔ **DO NOT dump the entire report in one message.** Present it in stages:
+
+**First message — What Was Built:**
+- Summarize the 2-3 tasks completed in this batch.
+- Show `flutter analyze` and `flutter test` output.
+- Ask: *"Before I explain the engineering principles — can you tell me which principle we applied in this batch?"*
+- ⛔ **STOP and WAIT** for the student's guess.
+
+**Second message — Engineering Principles + Visual Check:**
+- Acknowledge their answer, correct if needed.
+- Explain the principle that was applied (e.g., SRP, DRY).
+- Wow Factor assessment — how will this look on Google Earth?
+- Ask: *"How do you think this will look on the rig? What's your mental picture?"*
+- ⛔ **STOP and WAIT.**
+
+**Third message — Checklist + Journal:**
+- Update `docs/plans/` status.
+- Append to `docs/learning-journal.md`.
+- Transition to the verification question (Step 4).
 
 ### Step 4: ⛔️ STOP — Student Interaction Checkpoint
 

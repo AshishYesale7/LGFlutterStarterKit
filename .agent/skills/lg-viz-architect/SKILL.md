@@ -20,6 +20,15 @@ will see and feel* on the multi-screen Google Earth display.
 
 ## Design Workflow
 
+### ⛔ WITHIN-STAGE INTERACTION RULES (NON-NEGOTIABLE)
+
+> **Each step below is a SEPARATE conversation turn.**
+> You MUST stop and wait for the student after EACH step.
+> DO NOT generate Steps 1-6 in one message.
+> DO NOT move to the next step until the student engages with the current one.
+
+---
+
 ### Step 1 — Data Inventory
 Identify the data source and its shape:
 
@@ -32,32 +41,48 @@ Volume: ~20-200 events per query
 
 Ask: *"What story does this data tell? What patterns should be visible on a panoramic display?"*
 
-### Step 2 — Experience Storyboard
-Design the rig experience as a sequence of visual moments:
+⛔ **STOP and WAIT** for the student's answer before proceeding to Step 2.
 
+---
+
+### Step 2 — Experience Storyboard (ONE MOMENT AT A TIME)
+
+Design the rig experience as a sequence of visual moments. **Present ONE moment at a time:**
+
+**First, present Moment 1:**
 ```
 Moment 1: Cold Open
   → Camera starts at global view (altitude 15,000 km)
   → All earthquake placemarks fade in simultaneously
   → Color-coded by magnitude (green → yellow → red)
+```
 
+Ask: *"Close your eyes and picture this on a 3-screen rig. What do you see on the center screen? What about the side screens? Does this opening moment grab attention?"*
+
+⛔ **STOP and WAIT.** Discuss Moment 1 before presenting Moment 2.
+
+**Then present Moment 2:**
+```
 Moment 2: Focus Dive
   → Camera flies to the strongest recent earthquake
   → Balloon opens with detail (magnitude, depth, location)
   → Neighboring quakes visible in peripheral screens
-
-Moment 3: Orbit Reveal
-  → 360° orbit around the epicenter
-  → Tilt at 60° for terrain perspective
-  → Duration: 36 steps × 1.2s = ~43 seconds
-
-Moment 4: Regional Survey
-  → Camera pulls back to regional view
-  → Tour auto-advances through top-5 quakes
-  → Each stop holds for 5 seconds
 ```
 
+Ask: *"How long should this camera flight take? What information is most important in the balloon popup?"*
+
+⛔ **STOP and WAIT.**
+
+**Continue one moment at a time** through all storyboard moments (typically 3-5 total). After each moment, ask the student to visualize it and provide feedback.
+
+**After all moments are presented and discussed**, ask: *"Looking at the full storyboard — does the narrative flow make sense? Would you reorder any moments?"*
+
+⛔ **STOP and WAIT.**
+
+---
+
 ### Step 3 — KML Element Mapping
+
 Map each moment to specific KML elements:
 
 | Moment | KML Element | Template |
@@ -69,7 +94,14 @@ Map each moment to specific KML elements:
 | App logo | `<ScreenOverlay>` on right-most slave | `logo_slave.kml.tmpl` |
 | Time animation | `<TimeStamp>` or `<TimeSpan>` on placemarks | Custom |
 
+Ask: *"Do you know what a `<gx:FlyTo>` element does vs. a `<LookAt>`? Which KML element do you think will be most important for our app?"*
+
+⛔ **STOP and WAIT.** If the student doesn't know KML elements, explain them before continuing. Link to **lg-learning-resources** if needed.
+
+---
+
 ### Step 4 — Multi-Screen Awareness
+
 Design for the panoramic layout:
 
 - **Center screen (master)**: Primary focus — the main KML visualization.
@@ -78,7 +110,14 @@ Design for the panoramic layout:
 - **Camera tilt**: Use 50°–70° tilt so terrain fills peripheral screens dramatically.
 - **Heading**: Consider slight heading offsets per screen for immersive panorama.
 
+Ask: *"What content should go on the side screens vs. the center? Should the side screens show the same data at a different angle, or different data entirely?"*
+
+⛔ **STOP and WAIT.**
+
+---
+
 ### Step 5 — Interaction Design
+
 Map phone controller actions to rig responses:
 
 | Phone Action | Rig Response |
@@ -90,7 +129,14 @@ Map phone controller actions to rig responses:
 | Tap "Clear" | Remove all KML overlays |
 | Pull-to-refresh | Re-fetch API, regenerate KML |
 
+Ask: *"Which of these interactions is most important for your app? Are there any phone actions you want to add or remove?"*
+
+⛔ **STOP and WAIT.** Let the student shape the interaction design before finalizing.
+
+---
+
 ### Step 6 — Performance Constraints
+
 Document limits for the target rig:
 
 | Constraint | Guideline |
@@ -101,6 +147,10 @@ Document limits for the target rig:
 | Orbit steps | 24–72 (10°–15° per step) |
 | Tour hold time | 3–8 seconds per stop |
 | ScreenOverlay image size | < 500 KB PNG |
+
+Ask: *"Why do you think we set a limit of ~500 placemarks? What happens to Google Earth if we send too many?"*
+
+⛔ **STOP and WAIT.** This is a teaching moment about performance — ensure the student understands WHY these limits exist.
 
 ## Output
 Produces a `viz-design.md` document in `docs/plans/`:

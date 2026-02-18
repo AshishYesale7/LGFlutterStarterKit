@@ -46,23 +46,62 @@ Browse these for inspiration — they are all real GSoC Liquid Galaxy projects:
 
 ## The Process
 
-**Understanding the idea:**
+### ⛔ WITHIN-STAGE INTERACTION RULES (NON-NEGOTIABLE)
+
+> **Every section below is a SEPARATE conversation turn.**
+> You MUST stop and wait for the student's response after each section.
+> DO NOT present the next section until the student has engaged with the current one.
+> DO NOT combine "Understanding" + "Exploring" + "Presenting" into one message.
+
+---
+
+**Phase 1 — Understanding the idea:**
 - Check current project state (files, docs, commits).
-- Ask questions one at a time.
+- Ask questions **one at a time**.
 - Prefer multiple choice when possible.
 - Focus on: purpose, data source, visual impact on Google Earth, success criteria.
 - **LG Context**: Which data to visualize? (Earthquakes, satellites, volcanoes, education, historic sites, etc.)
 
-**Exploring approaches:**
-- Propose 2-3 approaches with trade-offs.
-- Lead with recommended option.
-- **LG Trade-offs**: API polling vs static data, KML placemarks vs tours, dartssh2 lifecycle, on-demand vs cached visualization.
+⛔ **STOP after each question.** Wait for the answer before asking the next question. Do NOT ask 2+ questions in one message.
 
-**Presenting the design:**
-- Break into 200-300 word sections.
-- Highlight design patterns in each section.
-- Ask validation after each section.
-- Cover: architecture, data pipeline, KML strategy, visual impact on LG, testing (`flutter test`).
+---
+
+**Phase 2 — Exploring approaches (ONE AT A TIME):**
+
+1. Present **Approach 1** (recommended) with its trade-offs.
+2. Ask: *"What do you think about this approach? Any concerns? Or should I show you an alternative?"*
+3. ⛔ **STOP and WAIT** for the student's reaction.
+4. If they want to see more → present **Approach 2** with trade-offs.
+5. Ask: *"How does this compare to the first approach in your mind? Which feels more natural for your use case?"*
+6. ⛔ **STOP and WAIT.**
+7. If needed → present **Approach 3**.
+8. Let the student choose. Discuss WHY they chose it.
+
+**NEVER dump all 2-3 approaches in a single message. Present them one at a time.**
+
+---
+
+**Phase 3 — Presenting the design (SECTION BY SECTION):**
+
+Break the design into 200-300 word sections. For EACH section:
+
+1. Present ONE section (architecture, OR data pipeline, OR KML strategy, OR visual impact, OR testing).
+2. Highlight design patterns in that section.
+3. Ask a validation question specific to that section:
+   - Architecture: *"Why did we choose this service layer structure?"*
+   - Data Pipeline: *"What happens if the API goes down? How does this design handle it?"*
+   - KML Strategy: *"Which KML element will create the most visual impact on the rig?"*
+   - Visual Impact: *"Describe what you picture on the center screen vs. the side screens."*
+   - Testing: *"What's the most important thing to test in this design?"*
+4. ⛔ **STOP and WAIT** for the student's answer.
+5. **Only after they respond** → present the NEXT section.
+
+**Anti-Patterns (NEVER DO THESE):**
+- ❌ Present the complete design in one message then ask "does this look good?"
+- ❌ Present all approaches in one message then ask "which do you prefer?"
+- ❌ Ask 2+ questions in a single message during the understanding phase
+- ❌ Skip validation questions to save time
+- ❌ Accept "yes" or "looks good" as sufficient engagement — ask WHY
 
 ## After the Design
 
@@ -72,11 +111,21 @@ Browse these for inspiration — they are all real GSoC Liquid Galaxy projects:
 - Include "Learning Objectives" section.
 - Commit to git.
 
-**Student Checkpoint (MANDATORY):**
-Before moving to implementation, ask the student:
+**Student Checkpoint (MANDATORY — ONE QUESTION AT A TIME):**
+
+Before moving to implementation:
+
+⛔ **First**, ask:
 - *"In your own words, describe the data flow: where does the data come from, how does it become KML, and how does it reach Google Earth?"*
+- **Wait for the answer.** Evaluate. If wrong, teach and re-ask.
+
+⛔ **Only after they answer correctly**, ask:
 - *"What's the most visually impressive part of this design on the LG rig?"*
-- **Wait for answers. DO NOT auto-continue.**
+- **Wait for the answer.** Evaluate.
+
+**DO NOT ask both questions in a single message. DO NOT auto-continue.**
+
+If the student says "just move on" or shows no engagement → trigger **Critical Advisor** (.agent/skills/lg-critical-advisor/SKILL.md).
 
 **Implementation:**
 - Ask: "Ready to set up for implementation?"
