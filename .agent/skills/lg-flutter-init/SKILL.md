@@ -190,13 +190,18 @@ class Config {
 
 ### `flutter_client/pubspec.yaml`
 
-Core LG dependencies:
-- `provider` (state management)
-- `http` (REST API calls)
-- `dartssh2` (SSH to LG rig)
-- `xml` (KML XML generation)
-- `path_provider` (file system access)
-- `shared_preferences` (persistent connection settings)
+Core LG dependencies (verified versions in `demo/DEPENDENCIES.md`):
+- `dartssh2` ^2.9.0+2 (SSH to LG rig — pure Dart, recommended)
+- `xml` ^6.3.0 (KML XML generation)
+- `google_maps_flutter` ^2.10.1 (in-app map for location picking)
+- `provider` ^6.1.1 (state management)
+- `shared_preferences` ^2.5.3 (persistent connection settings)
+- `flutter_secure_storage` ^9.0.0 (encrypted password storage)
+- `path_provider` ^2.1.5 (file system access for KML)
+- `http` ^1.2.0 (REST API calls)
+- `web_socket_channel` ^3.0.1 (WebSocket for Node.js server)
+
+**📋 REFERENCE**: `demo/DEPENDENCIES.md` has the full plugin stack, platform matrix, and ready-to-use `pubspec.yaml` template.
 
 ---
 

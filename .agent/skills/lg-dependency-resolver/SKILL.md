@@ -272,6 +272,42 @@ flutter pub get
 
 ---
 
+---
+
+## Category 5: Known Good Plugin Stack for LG Apps
+
+**Reference**: `demo/DEPENDENCIES.md` in the starter kit contains the verified plugin versions from a working LG Task 2 demo.
+
+### Verified Core Plugins
+
+| Package | Version | Purpose |
+|---------|---------|--------|
+| `google_maps_flutter` | `^2.10.1` | In-app map view for location picking |
+| `dartssh2` | `^2.9.0+2` | SSH to LG rig master (pure Dart, recommended) |
+| `ssh2` | `^2.2.3` | SSH alternative (native build, used in older LG apps) |
+| `shared_preferences` | `^2.5.3` | Persistent connection settings |
+| `path_provider` | `^2.1.5` | File system paths for KML temp files |
+| `provider` | `^6.1.1` | State management |
+| `xml` | `^6.3.0` | KML generation & parsing |
+| `http` | `^1.2.0` | REST API calls |
+| `flutter_secure_storage` | `^9.0.0` | Encrypted password storage |
+| `web_socket_channel` | `^3.0.1` | WebSocket for Node.js server |
+
+### Platform Compatibility
+
+| Plugin | Android | iOS | macOS | Linux | Web |
+|--------|---------|-----|-------|-------|-----|
+| `google_maps_flutter` | ✅ | ✅ | — | — | ✅ |
+| `ssh2` / `dartssh2` | ✅ | ✅ | — | — | — |
+| `path_provider` | ✅ | ✅ | ✅ | ✅ | — |
+| `shared_preferences` | ✅ | ✅ | ✅ | ✅ | ✅ |
+
+**Key**: SSH and Google Maps are mobile-only — LG controller apps target Android/iOS primarily.
+
+When a student hits dependency issues, **check their versions against this table first** — mismatched versions are the #1 cause of build failures.
+
+---
+
 ## Post-Fix Verification
 
 After applying any fix, always run:

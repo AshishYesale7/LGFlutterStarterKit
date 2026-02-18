@@ -275,18 +275,23 @@ Ask: *"Looking at this structure — which folder do you think handles SSH commu
 
 **Explain before configuring:**
 > *"Now I'll set up the LG rig connection defaults in `config.dart` and add the packages we need in `pubspec.yaml`. These packages are:"*
-> - `provider` — State management (UI reads state from providers)
-> - `http` — API calls for external data
-> - `dartssh2` — SSH to communicate with the LG rig master
+> - `dartssh2` — SSH to communicate with the LG rig master (pure Dart)
 > - `xml` — KML generation and parsing
-> - `path_provider` — Local file storage
-> - `shared_preferences` — User settings persistence
+> - `google_maps_flutter` — In-app map for location picking and flyTo targets
+> - `provider` — State management (UI reads state from providers)
+> - `shared_preferences` — Persistent connection settings (rig IP, port, user)
+> - `flutter_secure_storage` — Encrypted password storage
+> - `path_provider` — File system access for KML temp files
+> - `http` — API calls for external data
+> - `web_socket_channel` — WebSocket for Node.js server
+
+**📋 REFERENCE**: See `demo/DEPENDENCIES.md` in the starter kit for the full verified plugin stack with exact versions, platform compatibility matrix, and a ready-to-use `pubspec.yaml` template.
 
 Ask: *"Can you guess which of these packages our SSH service will use? And which one will the KML service use? (Hint: think about layer boundaries)"*
 
 ⛔ **STOP and WAIT.** This validates the student understands which service uses which dependency.
 
-Update `config.dart` with LG connection defaults. Update `pubspec.yaml` with the listed packages.
+Update `config.dart` with LG connection defaults. Update `pubspec.yaml` using the versions from `demo/DEPENDENCIES.md`.
 
 ## Phase 4: Golden Rules (CONVERSATIONAL — NOT A LECTURE)
 
