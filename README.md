@@ -54,7 +54,7 @@ I built an **agentic system** — an Antigravity package with **33 specialized a
 5. [CI/CD Pipeline](#cicd-pipeline)  
 6. [Key Features](#key-features)  
 7. [Getting Started with Antigravity](#getting-started)  
-   7.1. [Step-by-Step: From Clone to Running App](#step-by-step)  
+   7.1. [Step-by-Step: From Install to Running App](#step-by-step)  
    7.2. [Prompts to Explore the Starter Kit](#prompts)  
    7.3. [How GUIDE.md Powers the Agent](#guide-context)  
 8. [Installation](#installation)  
@@ -302,58 +302,280 @@ The Antigravity agent system is organized into layers that separate concerns:
 
 ## 🚀 Getting Started with Antigravity
 
-This section walks you through downloading this starter kit and using it with **Antigravity** (Google's agentic coding framework) to build your own Liquid Galaxy Flutter app.
+This section walks you through installing **Antigravity**, cloning this starter kit, and using the AI agent system to build your own Liquid Galaxy Flutter app — all from inside the Antigravity application.
 
 > 📚 **Reference**: The agent system uses [`GUIDE.md`](GUIDE.md) as its primary knowledge source for Liquid Galaxy concepts, KML management, rig architecture, Flutter best practices, and GSoC deliverables. Antigravity automatically reads this file for context when answering your questions.
 
 <a id="step-by-step"></a>
 
-### Step-by-Step: From Clone to Running App
+### Step-by-Step: From Install to Running App
+
+---
+
+#### 📥 Phase 1 — Install Antigravity
 
 ```
-Step 1 ─ Clone this starter kit
-│  git clone https://github.com/AshishYesale7/LGFlutterStarterKit.git
-│  cd LGFlutterStarterKit
-│
-Step 2 ─ Open in VS Code with Antigravity enabled
-│  code .
-│  (Make sure Gemini / Antigravity extension is active)
-│
-Step 3 ─ Run the Environment Doctor
-│  Prompt: "Run lg-env-doctor to check my setup"
-│  → Validates Flutter, Dart, Git, JDK, Android SDK, SSH
-│  → Blocks until all checks pass
-│
-Step 4 ─ Initialize your new app
-│  Prompt: "Run lg-init to create my app called EarthquakeViz"
-│  → Creates a new repo (LG-EarthquakeViz/) from the template
-│  → Runs flutter create, scaffolds architecture, inits Git
-│
-Step 5 ─ Brainstorm & Design
-│  Prompt: "Let's brainstorm — I want to visualize earthquake data"
-│  → Agent discusses data sources, KML strategies, screen layout
-│  → Outputs a design document in docs/plans/
-│
-Step 6 ─ Build with guided execution
-│  Prompt: "Start the execution phase"
-│  → Agent implements in batches of 2-3 tasks
-│  → Stops after each batch to verify your understanding
-│
-Step 7 ─ Review & Security scan
-│  Prompt: "Run code review and security scan"
-│  → Professional audit: SOLID, flutter analyze, dart format
-│  → Shield scans for hardcoded secrets
-│
-Step 8 ─ Build & Connect to LG rig
-│  cd LG-EarthquakeViz/
-│  flutter build apk --release
-│  → Install on Android phone, connect to your LG rig
-│
-Step 9 ─ Graduate!
-   Prompt: "Start the quiz"
-   → 5 questions covering SSH, KML, architecture, performance
-   → Pass = you understand what you built
+┌─────────────────────────────────────────────────────────────────┐
+│  STEP 1: Download Antigravity                                   │
+│                                                                 │
+│  Visit:  https://goo.gle/gemini-code-assist-antigravity         │
+│                                                                 │
+│  Antigravity is a standalone desktop application powered by     │
+│  Google Gemini. It provides:                                    │
+│    • An AI chat interface for conversational coding             │
+│    • Background agents that run tasks autonomously              │
+│    • Full terminal, file editor, and workspace management       │
+│    • Built-in Git integration                                   │
+│                                                                 │
+│  Download → Install → Launch the Antigravity app                │
+└─────────────────────────────────────────────────────────────────┘
 ```
+
+> 💡 **What is Antigravity?** It's Google's agentic coding application — think of it as an AI-powered IDE that can read your entire project, run terminal commands, edit files, and guide you through complex development tasks using Gemini.
+
+---
+
+#### 📂 Phase 2 — Clone the Starter Kit
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  STEP 2: Clone LGFlutterStarterKit inside Antigravity           │
+│                                                                 │
+│  Open the Antigravity chat and type:                            │
+│                                                                 │
+│  💬 "Clone the repo                                             │
+│      github.com/AshishYesale7/LGFlutterStarterKit               │
+│      and open it as my workspace"                               │
+│                                                                 │
+│  The agent will:                                                │
+│    ✅ Clone the repo into Antigravity's scratch directory       │
+│    ✅ Open the workspace with all files visible                 │
+│    ✅ Detect the .agent/ folder (33 skills, 5 rules)            │
+│    ✅ Load GUIDE.md as context for LG-specific questions        │
+│                                                                 │
+│  Your workspace will look like:                                 │
+│  ~/.gemini/antigravity/scratch/                                 │
+│  └── LGFlutterStarterKit/                                      │
+│      ├── .agent/          ← 33 skills + 5 rules + 4 workflows  │
+│      ├── flutter_client/  ← Starter Flutter app template        │
+│      ├── server/          ← Node.js WebSocket server            │
+│      ├── demo/            ← Verified plugin stack reference     │
+│      ├── GUIDE.md         ← LG development guide (agent reads)  │
+│      └── README.md        ← You are here!                      │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+#### 🤖 Phase 3 — Meet the Agent System
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  STEP 3: Explore the Antigravity Chat + Background Agents       │
+│                                                                 │
+│  Antigravity has TWO ways to interact with the AI:              │
+│                                                                 │
+│  ┌───────────────────────────────────────────────────┐          │
+│  │  💬 CHAT (Interactive)                            │          │
+│  │  ─────────────────────────────────────────────    │          │
+│  │  Type prompts in the chat panel.                  │          │
+│  │  The agent responds conversationally.             │          │
+│  │  Use for: questions, brainstorming, reviews,      │          │
+│  │  learning LG concepts, quick edits.               │          │
+│  │                                                   │          │
+│  │  Example:                                         │          │
+│  │  💬 "Explain how SSH works with the LG rig"       │          │
+│  │  💬 "What KML elements do I need for a flyTo?"    │          │
+│  └───────────────────────────────────────────────────┘          │
+│                                                                 │
+│  ┌───────────────────────────────────────────────────┐          │
+│  │  🔄 BACKGROUND AGENTS (Autonomous)                │          │
+│  │  ─────────────────────────────────────────────    │          │
+│  │  Agents run in the background — they read files,  │          │
+│  │  execute terminal commands, edit code, run tests,  │          │
+│  │  and commit changes WITHOUT blocking you.          │          │
+│  │                                                   │          │
+│  │  Use for: scaffolding entire features, running     │          │
+│  │  builds, code reviews, security scans, test gen.  │          │
+│  │                                                   │          │
+│  │  Example:                                         │          │
+│  │  💬 "Run lg-init to create my LG-EarthquakeViz    │          │
+│  │      app in a new repo"                           │          │
+│  │  → Agent runs in background: creates dir, copies  │          │
+│  │    template, runs flutter create, inits Git,      │          │
+│  │    sets up GitHub repo — while you keep working.  │          │
+│  └───────────────────────────────────────────────────┘          │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+#### ⚙️ Phase 4 — Set Up Your Environment
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  STEP 4: Run the Environment Doctor                             │
+│                                                                 │
+│  💬 "Run lg-env-doctor to check my setup"                       │
+│                                                                 │
+│  The agent validates your entire dev environment:               │
+│                                                                 │
+│    ✅ Flutter SDK installed & on PATH                           │
+│    ✅ Dart SDK version >=3.0.0                                  │
+│    ✅ Git configured with user.name & user.email                │
+│    ✅ JDK 17+ for Android builds                                │
+│    ✅ Android SDK with platform-tools                           │
+│    ✅ SSH client available (for LG rig communication)           │
+│                                                                 │
+│  ❌ If anything fails → the agent tells you exactly             │
+│     how to fix it before continuing.                            │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+#### 🏗️ Phase 5 — Create Your App
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  STEP 5: Initialize a new LG app from the starter kit           │
+│                                                                 │
+│  💬 "Run lg-init to create my app called EarthquakeViz"         │
+│                                                                 │
+│  The agent (running in background) will:                        │
+│                                                                 │
+│    1️⃣  Ask your project name → enforces LG-<TaskName> format   │
+│    2️⃣  Create a NEW sibling directory:                          │
+│        ~/.gemini/antigravity/scratch/                            │
+│        ├── LGFlutterStarterKit/    (template — untouched)       │
+│        └── LG-EarthquakeViz/       (YOUR new app)               │
+│                                                                 │
+│    3️⃣  Copy scaffolding from the starter kit                    │
+│    4️⃣  Run flutter create --platforms=android                   │
+│    5️⃣  Install dependencies from demo/DEPENDENCIES.md           │
+│    6️⃣  Configure LG rig connection in config.dart               │
+│    7️⃣  Init Git + create GitHub repo                            │
+│    8️⃣  Open BOTH repos side-by-side in the workspace            │
+│                                                                 │
+│  ⛔ The agent STOPS at checkpoints to verify you understand     │
+│     the architecture before moving forward.                     │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+#### 🧠 Phase 6 — Brainstorm, Design & Build
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  STEP 6-7: The agent guides you through the full pipeline       │
+│                                                                 │
+│  💬 "Let's brainstorm — I want to visualize earthquake data"    │
+│  ┌──────────────────────────────────────────────────────┐       │
+│  │  BRAINSTORM → The agent discusses data sources,      │       │
+│  │  KML strategies, screen layouts, and user flows.     │       │
+│  │  Outputs: docs/plans/<date>-design.md                │       │
+│  └──────────────────────────────────────────────────────┘       │
+│                           ↓                                     │
+│  💬 "Start the execution phase"                                 │
+│  ┌──────────────────────────────────────────────────────┐       │
+│  │  EXECUTE → Background agent implements features in    │       │
+│  │  batches of 2-3 tasks. After each batch:             │       │
+│  │    • Shows what was built                             │       │
+│  │    • Asks you to explain what the code does           │       │
+│  │    • Only proceeds if you demonstrate understanding   │       │
+│  └──────────────────────────────────────────────────────┘       │
+│                           ↓                                     │
+│  💬 "Run code review and security scan"                         │
+│  ┌──────────────────────────────────────────────────────┐       │
+│  │  REVIEW → Professional audit: SOLID compliance,       │       │
+│  │  flutter analyze, dart format, layer boundary check.  │       │
+│  │  Shield scans for hardcoded secrets & credentials.    │       │
+│  └──────────────────────────────────────────────────────┘       │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+#### 📱 Phase 7 — Build, Connect & Deploy
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  STEP 8: Build the release APK                                  │
+│                                                                 │
+│  💬 "Build my app for release"                                  │
+│                                                                 │
+│  The agent runs the full build pipeline:                        │
+│    flutter analyze              ← Zero errors required          │
+│    dart format --set-exit-if-changed .   ← Clean formatting     │
+│    flutter build apk --release --split-per-abi                  │
+│                                                                 │
+│  Output: LG-EarthquakeViz-arm64-v8a-release.apk                │
+│                                                                 │
+│  Install on your Android phone → connect to LG rig → done! 📡  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+#### 🎓 Phase 8 — Prove You Understand
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  STEP 9: Graduate!                                              │
+│                                                                 │
+│  💬 "start the quiz"                                            │
+│                                                                 │
+│  The agent asks 5 questions covering:                           │
+│    ❓ SSH rig communication                                      │
+│    ❓ KML structure & Google Earth rendering                      │
+│    ❓ 5-layer architecture & import boundaries                    │
+│    ❓ Provider state management                                   │
+│    ❓ Performance & multi-screen considerations                   │
+│                                                                 │
+│  Pass = you understand what you built (not just what AI wrote)  │
+│                                                                 │
+│  📋 Quiz report saved to: docs/reviews/<date>-quiz-report.md   │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+#### 🔁 How Antigravity + LGFlutterStarterKit Work Together
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                                                                 │
+│   ANTIGRAVITY APP                  LGFlutterStarterKit          │
+│   ┌─────────────┐                 ┌──────────────────┐          │
+│   │             │   reads from    │                  │          │
+│   │  💬 Chat    │◄───────────────►│  .agent/         │          │
+│   │  Interface  │   skills &      │  ├── skills/     │          │
+│   │             │   rules         │  ├── rules/      │          │
+│   └──────┬──────┘                 │  └── workflows/  │          │
+│          │                        │                  │          │
+│   ┌──────▼──────┐   reads for     │  GUIDE.md        │          │
+│   │             │   LG context    │  (LG knowledge   │          │
+│   │  🔄 Back-   │◄──────────────►│   base)          │          │
+│   │  ground     │                 │                  │          │
+│   │  Agents     │   uses as       │  flutter_client/ │          │
+│   │             │   template      │  (starter code)  │          │
+│   └──────┬──────┘                 │                  │          │
+│          │                        │  demo/           │          │
+│          │         uses verified   │  (plugin stack)  │          │
+│          │◄────────versions───────│                  │          │
+│          ▼                        └──────────────────┘          │
+│   ┌─────────────┐                                               │
+│   │ YOUR NEW    │   Created as sibling directory                │
+│   │ LG APP      │   ~/.gemini/antigravity/scratch/LG-<Name>/   │
+│   │ (separate   │   Own Git repo, own GitHub, own APK          │
+│   │  repo)      │                                               │
+│   └─────────────┘                                               │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+> 💡 **Key Insight**: The starter kit is **never modified**. It serves as a read-only template and knowledge base. Antigravity reads the `.agent/` skills, `GUIDE.md`, and `demo/` references to create and guide YOUR app in a separate directory.
 
 <a id="prompts"></a>
 
