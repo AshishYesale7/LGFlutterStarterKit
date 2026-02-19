@@ -1,7 +1,4 @@
 
-
-[![wakatime](https://wakatime.com/badge/github/AshishYesale7/LGFlutterStarterKit.svg)](https://wakatime.com/badge/github/AshishYesale7/LGFlutterStarterKit)
-
 # LG Flutter Starter Kit
 
 > **Flutter starter kit for building Liquid Galaxy apps with tours, KML, external APIs, and AI-assisted workflows using Gemini.**
