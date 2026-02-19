@@ -7,7 +7,7 @@
 
 <a id="about-the-contest"></a>
 
-## 🏆 About the Contest
+## About the Contest
 
 This repository is my submission for the **Liquid Galaxy Agentic Programming Contest** — a competition focused on **Agentic Programming** and the **"AI tsunami"**. The challenge: build an Antigravity-powered environment that automates the development of Liquid Galaxy Flutter applications using Google's **Antigravity** framework with **Gemini** as the exclusive LLM.
 
@@ -112,7 +112,7 @@ This project provides everything you need to build, test, and deploy Flutter app
 
 <a id="main-workflow"></a>
 
-## 🔄 Main Workflow
+##  Main Workflow
 
 The end-to-end development flow from starter kit to deployed LG application:
 
@@ -147,7 +147,7 @@ The end-to-end development flow from starter kit to deployed LG application:
 
 <a id="agentic-architecture"></a>
 
-## 🧠 Agentic Architecture
+## Agentic Architecture
 
 The Antigravity agent system is organized into layers that separate concerns:
 
@@ -241,7 +241,7 @@ The Antigravity agent system is organized into layers that separate concerns:
 
 <a id="cicd-pipeline"></a>
 
-## ⚙️ CI/CD Pipeline
+##  CI/CD Pipeline
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -281,7 +281,7 @@ The Antigravity agent system is organized into layers that separate concerns:
 
 <a id="key-features"></a>
 
-## 🚀 Key Features
+##  Key Features
 
 - **Flutter + LG Integration**: Pre-wired Flutter app with SSH, KML generation, and LG rig communication out of the box. Connect your phone to a 3/5/7-screen Google Earth rig in minutes.
 - **Complete Service Layer**:
@@ -298,11 +298,11 @@ The Antigravity agent system is organized into layers that separate concerns:
 
 <a id="getting-started"></a>
 
-## 🚀 Getting Started with Antigravity
+##  Getting Started with Antigravity
 
 This section walks you through installing **Antigravity**, cloning this starter kit, and using the AI agent system to build your own Liquid Galaxy Flutter app — all from inside the Antigravity application.
 
-> 📚 **Reference**: The agent system uses [`GUIDE.md`](GUIDE.md) as its primary knowledge source for Liquid Galaxy concepts, KML management, rig architecture, Flutter best practices, and GSoC deliverables. Antigravity automatically reads this file for context when answering your questions.
+>  **Reference**: The agent system uses [`GUIDE.md`](GUIDE.md) as its primary knowledge source for Liquid Galaxy concepts, KML management, rig architecture, Flutter best practices, and GSoC deliverables. Antigravity automatically reads this file for context when answering your questions.
 
 <a id="step-by-step"></a>
 
@@ -310,7 +310,7 @@ This section walks you through installing **Antigravity**, cloning this starter 
 
 ---
 
-#### 📥 Phase 1 — Install Antigravity
+####  Phase 1 — Install Antigravity
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -329,7 +329,7 @@ This section walks you through installing **Antigravity**, cloning this starter 
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-> 💡 **What is Antigravity?** It's Google's agentic coding application — think of it as an AI-powered IDE that can read your entire project, run terminal commands, edit files, and guide you through complex development tasks using Gemini.
+>  **What is Antigravity?** It's Google's agentic coding application — think of it as an AI-powered IDE that can read your entire project, run terminal commands, edit files, and guide you through complex development tasks using Gemini.
 
 ---
 
@@ -573,7 +573,7 @@ This section walks you through installing **Antigravity**, cloning this starter 
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-> 💡 **Key Insight**: The starter kit is **never modified**. It serves as a read-only template and knowledge base. Antigravity reads the `.agent/` skills, `GUIDE.md`, and `demo/` references to create and guide YOUR app in a separate directory.
+>  **Key Insight**: The starter kit is **never modified**. It serves as a read-only template and knowledge base. Antigravity reads the `.agent/` skills, `GUIDE.md`, and `demo/` references to create and guide YOUR app in a separate directory.
 
 <a id="prompts"></a>
 
@@ -581,7 +581,7 @@ This section walks you through installing **Antigravity**, cloning this starter 
 
 Use these prompts directly in the Antigravity chat to learn and build:
 
-#### 🔍 Understanding the Kit
+####  Understanding the Kit
 
 | Prompt | What It Does |
 |--------|--------------|
@@ -591,7 +591,7 @@ Use these prompts directly in the Antigravity chat to learn and build:
 | `"What is the master-slave architecture of Liquid Galaxy?"` | Agent explains using GUIDE.md — master node, slave screens, UDP sync |
 | `"Explain the service layer pattern in this kit"` | Agent shows LGService facade, why screens never touch SSH/KML directly |
 
-#### 🛠️ Building Your App
+####  Building Your App
 
 | Prompt | What It Does |
 |--------|--------------|
@@ -601,7 +601,7 @@ Use these prompts directly in the Antigravity chat to learn and build:
 | `"Help me send a ScreenOverlay logo to the left slave screen"` | Agent explains and implements using sendLogo() with proper screen targeting |
 | `"Add a settings screen where users enter their LG rig IP"` | Agent extends SettingsProvider with flutter_secure_storage |
 
-#### 🧪 Testing & Quality
+####  Testing & Quality
 
 | Prompt | What It Does |
 |--------|--------------|
@@ -610,7 +610,7 @@ Use these prompts directly in the Antigravity chat to learn and build:
 | `"Check if my app follows the layer boundary rules"` | Agent scans imports and flags architecture violations |
 | `"Scan my code for hardcoded secrets"` | Agent runs lg-shield to find exposed passwords or API keys |
 
-#### 🎓 Learning LG Concepts
+####  Learning LG Concepts
 
 | Prompt | What It Does |
 |--------|--------------|
@@ -620,7 +620,7 @@ Use these prompts directly in the Antigravity chat to learn and build:
 | `"What are KML balloons and their limitations on LG?"` | Agent explains balloon rendering issues on legacy Google Earth |
 | `"Walk me through the GSoC deliverables checklist"` | Agent lists APK builds, documentation, worklog, and GO webstore from GUIDE.md |
 
-#### 🚀 Advanced Workflows
+####  Advanced Workflows
 
 | Prompt | What It Does |
 |--------|--------------|
@@ -814,7 +814,7 @@ Browse [100+ past GSoC LG projects](https://github.com/LiquidGalaxyLAB) for insp
 
 <a id="app-screens-and-controls"></a>
 
-## 📲 App Screens & Controls
+##  App Screens & Controls
 
 | Screen | Purpose |
 |--------|---------|
@@ -863,7 +863,7 @@ Code Review → Shield (post) → Quiz (Finale)
 10. **Security Post-Flight (`lg-shield`)**: Final scan on completed code. Blocks graduation if critical issues found.
 11. **Quiz (`lg-quiz-master`)**: The "TV Show" finale! 5 high-stakes questions covering SSH pipelines, KML constructs, engineering principles, performance, and architecture.
 
-**⚠️ PROMINENT GUARDRAIL**: The **Critical Advisor** (`lg-critical-advisor`) is active throughout the entire journey. If you rush, skip explanations, or say "just build it" — it intervenes immediately. You must demonstrate understanding at every checkpoint.
+** PROMINENT GUARDRAIL**: The **Critical Advisor** (`lg-critical-advisor`) is active throughout the entire journey. If you rush, skip explanations, or say "just build it" — it intervenes immediately. You must demonstrate understanding at every checkpoint.
 
 <a id="auto-chain"></a>
 
@@ -902,7 +902,7 @@ No manual skill-hunting required. Say "ready" and the pipeline flows.
 
 <a id="educational-notes"></a>
 
-## 🎓 Educational Notes
+##  Educational Notes
 
 - **No Free Code**: The agent explains every architectural decision before writing code. If you can't explain it, the pipeline stops.
 - **Service Layer Pattern**: All SSH, KML, and API logic lives in services — never in screens or widgets. This matches how [Lucia's LG Master Web App](https://github.com/LiquidGalaxyLAB/LG-Master-Web-App) structures the reference implementation.
@@ -912,7 +912,7 @@ No manual skill-hunting required. Say "ready" and the pipeline flows.
 
 <a id="quality-tools"></a>
 
-### 🛠️ Professional Quality Tools
+###  Professional Quality Tools
 
 This starter kit comes pre-configured with the same tools used by professional Flutter teams:
 
@@ -926,7 +926,7 @@ Students are expected to keep `flutter analyze` passing at all times!
 
 <a id="dependencies"></a>
 
-## 📦 Dependencies
+##  Dependencies
 
 | Package | Version | Purpose |
 |---------|---------|---------|
@@ -941,7 +941,7 @@ Students are expected to keep `flutter analyze` passing at all times!
 
 <a id="references"></a>
 
-## 🔗 Reference Implementations & Resources
+##  Reference Implementations & Resources
 
 | Resource | Link |
 |----------|------|
@@ -960,13 +960,13 @@ For detailed technical documentation, see the **[`DOCUMENTATION/`](DOCUMENTATION
 
 <a id="future-work"></a>
 
-## 🔮 Future Work
+##  Future Work
 
 This starter kit is designed to help build **any kind** of Flutter-powered Liquid Galaxy application. Here's how each app category can benefit from future enhancements:
 
 <a id="fw-data-viz"></a>
 
-### 📊 Data Visualization
+###  Data Visualization
 
 | Enhancement | Description |
 |-------------|-------------|
@@ -977,7 +977,7 @@ This starter kit is designed to help build **any kind** of Flutter-powered Liqui
 
 <a id="fw-tours"></a>
 
-### 🗺️ Educational Tours
+###  Educational Tours
 
 | Enhancement | Description |
 |-------------|-------------|
@@ -988,7 +988,7 @@ This starter kit is designed to help build **any kind** of Flutter-powered Liqui
 
 <a id="fw-satellite"></a>
 
-### 🛰️ Satellite Tracking
+###  Satellite Tracking
 
 | Enhancement | Description |
 |-------------|-------------|
@@ -999,7 +999,7 @@ This starter kit is designed to help build **any kind** of Flutter-powered Liqui
 
 <a id="fw-ai"></a>
 
-### 🤖 AI-Powered Apps
+###  AI-Powered Apps
 
 | Enhancement | Description |
 |-------------|-------------|
@@ -1010,7 +1010,7 @@ This starter kit is designed to help build **any kind** of Flutter-powered Liqui
 
 <a id="fw-rig"></a>
 
-### 🎛️ Rig Management
+###  Rig Management
 
 | Enhancement | Description |
 |-------------|-------------|
@@ -1022,7 +1022,7 @@ This starter kit is designed to help build **any kind** of Flutter-powered Liqui
 
 <a id="acknowledgments"></a>
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 Special thanks to the Liquid Galaxy community and mentors who make this project possible:
 
@@ -1034,7 +1034,7 @@ Special thanks to the Liquid Galaxy community and mentors who make this project 
 
 <a id="license"></a>
 
-## 📄 License
+##  License
 
 This project is licensed under the [MIT License](LICENSE).
 
