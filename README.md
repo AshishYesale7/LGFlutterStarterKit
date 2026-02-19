@@ -28,7 +28,7 @@ I built an **agentic system** — an Antigravity package with **33 specialized a
 |---|-------------|-------------|--------|
 | 1 | **Starter Kit** | Flutter "skeleton" with LG best practices built in | `flutter_client/` |
 | 2 | **agent/ Folder** | 33 skills, 5 rules, 4 workflows — the core agentic system |  `.agent/` |
-| 3 | **Demo Repository** | Sample app created entirely by the agent system | 📂 Separate repo |
+| 3 | **Demo Repository** | Sample app created entirely by the agent system | 📂 [Separate repo](https://github.com/AshishYesale7/LG-Task-2-controller-Demo/) |
 | 4 | **Video Demo** | Walkthrough of repository, agent skills, and resulting app | 🎥 Separate |
 | 5 | **Technical Documentation** | This README + comprehensive [`DOCUMENTATION/`](DOCUMENTATION/) folder |  |
 
@@ -37,7 +37,7 @@ I built an **agentic system** — an Antigravity package with **33 specialized a
 ### Demo App
 
 
-> **[LG-Task2-Controller](https://github.com/AshishYesale7/LG-Task2-Controller)** — A demo application built entirely using this starter kit and the Antigravity agent system. Visualizes real-time USGS earthquake data on a Liquid Galaxy rig with KML heatmaps, camera tours, and multi-screen overlays.
+> **[LG-Task2-Controller](https://github.com/AshishYesale7/LG-Task-2-controller-Demo/releases)** — A demo application built entirely using this starter kit and the Antigravity agent system. Visualizes real-time USGS earthquake data on a Liquid Galaxy rig with KML heatmaps, camera tours, and multi-screen overlays.
 
 ---
 
