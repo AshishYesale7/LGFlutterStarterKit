@@ -16,14 +16,14 @@ Thank you for your interest in contributing! This project is the starter templat
 
 ## Code of Conduct
 
-This project follows the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Report unacceptable behavior to **ashishyesale7@gmail.com**.
+This project follows the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Report unacceptable behavior to **ashishyesale007@gmail.com**.
 
 ## Getting Started
 
 1. **Fork** the repository on GitHub
 2. **Clone** your fork locally:
    ```bash
-   git clone https://github.com/<your-username>/LGFlutterStarterKit.git
+   git clone https://github.com/AshishYesale7/LGFlutterStarterKit.git
    cd LGFlutterStarterKit
    ```
 3. **Create a branch** for your changes:
