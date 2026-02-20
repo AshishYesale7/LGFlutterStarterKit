@@ -653,7 +653,11 @@ When you ask the agent any question about Liquid Galaxy, KML, rig setup, or GSoC
 ## 🛠️ Installation
 
 1. **Clone the repository**
-2. **Install dependencies**:
+  ```bash
+   git clone https://github.com/AshishYesale7/LGFlutterStarterKit.git
+   cd LGFlutterStarterKit
+   ```
+3. **Install dependencies**:
    ```bash
    cd flutter_client
    flutter pub get
