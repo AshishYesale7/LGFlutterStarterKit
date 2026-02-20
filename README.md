@@ -24,7 +24,7 @@ I built an **agentic system** — an Antigravity package with **33 specialized a
 | # | Deliverable | Description | Status |
 |---|-------------|-------------|--------|
 | 1 | **Starter Kit** | Flutter "skeleton" with LG best practices built in | `flutter_client/` |
-| 2 | **agent/ Folder** | 33 skills, 5 rules, 4 workflows — the core agentic system |  `.agent/` |
+| 2 | **agent/ Folder** | 33 skills, 5 rules, 4 workflows — the core agentic system |  [`.agent/`](agent/) |
 | 3 | **Demo Repository** | Sample app created entirely by the agent system | 📂 [Separate repo](https://github.com/AshishYesale7/LG-Task-2-controller-Demo/) |
 | 4 | **Video Demo** | Walkthrough of repository, agent skills, and resulting app | 🎥 [Separate](https://drive.google.com/drive/folders/1uDfGWf18ZrRjqCtSQCITzh7SdfkQAbgQ) |
 | 5 | **Technical Documentation** | This README + comprehensive [`DOCUMENTATION/`](DOCUMENTATION/) folder |  |
