@@ -13,7 +13,7 @@ If you discover a security vulnerability in this project, please report it respo
 
 ### How to Report
 
-1. **Email**: Send a detailed report to **ashishyesale7@gmail.com**
+1. **Email**: Send a detailed report to **ashishyesale007@gmail.com**
 2. **Subject line**: `[SECURITY] LGFlutterStarterKit — <brief description>`
 3. **Include**:
    - Description of the vulnerability
