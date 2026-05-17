@@ -6,7 +6,10 @@
 ---
 
 <a id="about-the-contest"></a>
-<a href="https://drive.google.com/drive/folders/1uDfGWf18ZrRjqCtSQCITzh7SdfkQAbgQ"> <h2>Reference Video and Demo App </h2> </a>
+
+<h2> <a href="https://drive.google.com/drive/folders/1uDfGWf18ZrRjqCtSQCITzh7SdfkQAbgQ"> Reference Video and Demo App </a> </h2> 
+ 
+
 ## About the Contest
 
 This repository is my submission for the **Liquid Galaxy Agentic Programming Contest** — a competition focused on **Agentic Programming** and the **"AI tsunami"**. The challenge: build an Antigravity-powered environment that automates the development of Liquid Galaxy Flutter applications using Google's **Antigravity** framework with **Gemini** as the exclusive LLM.
